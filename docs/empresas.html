@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Empresas — Reforestall</title>
+
+  <meta
+    name="description"
+    content="Integrá la compensación trazable de CO₂ de Reforestall en tu empresa, generá ingresos adicionales y contribuí a la plantación de árboles y la creación de empleo."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <style>
+
+    /* =========================================================
+       ENCABEZADO
+    ========================================================= */
+
+    .page-header {
+      position: relative;
+      padding: 130px 0 90px;
+      overflow: hidden;
+      color: var(--paper);
+      isolation: isolate;
+    }
+
+    .page-header-photo {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+    }
+
+    .page-header-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .page-header-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+
+      background:
+        linear-gradient(
+          100deg,
+          rgba(15, 22, 9, 0.94) 0%,
+          rgba(15, 22, 9, 0.76) 36%,
+          rgba(15, 22, 9, 0.35) 68%,
+          rgba(15, 22, 9, 0.14) 100%
+        );
+    }
+
+    .page-header h1 {
+      max-width: 760px;
+      margin-top: 16px;
+      font-size: clamp(36px, 4.8vw, 58px);
+      line-height: 1.08;
+    }
+
+    .page-header p {
+      max-width: 590px;
+      margin-top: 20px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: rgba(244, 241, 230, 0.78);
+    }
+
+    .header-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--amber-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .header-label::before {
+      width: 7px;
+      height: 7px;
+      content: "";
+      background: var(--amber-light);
+      border-radius: 50%;
+    }
+
+
+    /* =========================================================
+       BENEFICIOS PARA EMPRESAS
+    ========================================================= */
+
+    .company-benefits {
+      padding: 105px 0;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(112, 145, 74, 0.12),
+          transparent 34%
+        ),
+        var(--paper);
+    }
+
+    .benefits-heading {
+      max-width: 850px;
+      margin: 0 auto 56px;
+      text-align: center;
+    }
+
+    .benefits-eyebrow {
+      display: inline-block;
+      margin-bottom: 15px;
+
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--moss-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .benefits-heading h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .benefits-heading p {
+      max-width: 690px;
+      margin: 18px auto 0;
+      font-size: 16.5px;
+      line-height: 1.7;
+      color: var(--ink-dim);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .benefit-card {
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+      min-height: 450px;
+      padding: 40px 32px 30px;
+      overflow: hidden;
+
+      text-align: center;
+
+      background: #ffffff;
+      border: 1px solid rgba(41, 62, 31, 0.1);
+      border-radius: 18px;
+
+      box-shadow:
+        0 18px 45px rgba(23, 38, 17, 0.07),
+        0 3px 8px rgba(23, 38, 17, 0.04);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .benefit-card::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+
+      height: 4px;
+      content: "";
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--moss-light),
+          var(--amber-light)
+        );
+
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(78, 111, 52, 0.25);
+
+      box-shadow:
+        0 25px 60px rgba(23, 38, 17, 0.12),
+        0 5px 12px rgba(23, 38, 17, 0.05);
+    }
+
+    .benefit-card:hover::before {
+      opacity: 1;
+    }
+
+    .benefit-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 150px;
+      height: 125px;
+      margin: 0 auto 26px;
+    }
+
+    .benefit-icon svg {
+      width: 100%;
+      height: 100%;
+
+      stroke: var(--moss-light);
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .benefit-card h3 {
+      margin-bottom: 14px;
+      font-size: 21px;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .benefit-card p {
+      flex-grow: 1;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--ink-dim);
+    }
+
+    .benefit-tag {
+      display: inline-flex;
+      align-self: center;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 32px;
+      margin-top: 25px;
+      padding: 7px 13px;
+
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--moss-light);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+
+      background: rgba(77, 112, 52, 0.08);
+      border: 1px solid rgba(77, 112, 52, 0.13);
+      border-radius: 999px;
+    }
+
+    .benefits-message {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 34px;
+
+      margin-top: 40px;
+      padding: 31px 35px;
+
+      background: var(--paper-dim);
+      border: 1px solid var(--line-light);
+      border-radius: 14px;
+    }
+
+    .benefits-message p {
+      max-width: 750px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink-dim);
+    }
+
+    .benefits-message strong {
+      color: var(--ink);
+    }
+
+    .benefits-message .btn {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+
+    /* =========================================================
+       CÓMO FUNCIONA
+    ========================================================= */
+
+    .integration-section {
+      padding: 100px 0;
+      background: var(--forest-950);
+      color: var(--paper);
+    }
+
+    .integration-heading {
+      max-width: 750px;
+      margin-bottom: 54px;
+    }
+
+    .integration-heading span {
+      display: inline-block;
+      margin-bottom: 14px;
+
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--amber-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .integration-heading h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.12;
+      color: var(--paper);
+    }
+
+    .integration-heading p {
+      max-width: 620px;
+      margin-top: 17px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(244, 241, 230, 0.65);
+    }
+
+    .integration-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .integration-step {
+      padding: 28px 24px;
+
+      background: rgba(244, 241, 230, 0.045);
+      border: 1px solid rgba(244, 241, 230, 0.11);
+      border-radius: 14px;
+    }
+
+    .integration-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 39px;
+      height: 39px;
+      margin-bottom: 22px;
+
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--forest-950);
+
+      background: var(--amber-light);
+      border-radius: 50%;
+    }
+
+    .integration-step h3 {
+      margin-bottom: 10px;
+      font-size: 17px;
+      line-height: 1.35;
+      color: var(--paper);
+    }
+
+    .integration-step p {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: rgba(244, 241, 230, 0.56);
+    }
+
+
+    /* =========================================================
+       CONVOCATORIA
+    ========================================================= */
+
+    .open-invite {
+      padding: 46px;
+
+      background: var(--paper-dim);
+      border: 1px solid var(--line-light);
+      border-radius: var(--radius-lg);
+    }
+
+    .open-invite h3 {
+      max-width: 650px;
+      font-size: clamp(24px, 2.8vw, 32px);
+      line-height: 1.2;
+    }
+
+    .open-invite p {
+      max-width: 650px;
+      margin-top: 15px;
+
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: var(--ink-dim);
+    }
+
+    .open-invite .btn {
+      margin-top: 27px;
+    }
+
+
+    /* =========================================================
+       CONTACTO
+    ========================================================= */
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+
+      padding: 52px;
+
+      color: var(--paper);
+      background: var(--forest-950);
+      border-radius: var(--radius-lg);
+    }
+
+    .contact-panel h2 {
+      font-size: clamp(25px, 3vw, 34px);
+      line-height: 1.2;
+      color: var(--paper);
+    }
+
+    .contact-intro {
+      max-width: 420px;
+      margin-top: 16px;
+
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(244, 241, 230, 0.65);
+    }
+
+    .contact-highlight {
+      max-width: 420px;
+      margin-top: 25px;
+      padding: 17px 18px;
+
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: rgba(244, 241, 230, 0.72);
+
+      background: rgba(244, 241, 230, 0.06);
+      border: 1px solid rgba(244, 241, 230, 0.11);
+      border-radius: 10px;
+    }
+
+    .contact-highlight strong {
+      color: var(--amber-light);
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 8px;
+
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(244, 241, 230, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+
+      font-family: var(--font-body);
+      font-size: 14.5px;
+      color: var(--paper);
+
+      background: rgba(244, 241, 230, 0.06);
+      border: 1px solid var(--line-dark);
+      border-radius: 8px;
+      outline: none;
+
+      transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      background: rgba(244, 241, 230, 0.09);
+      border-color: var(--amber-light);
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(244, 241, 230, 0.36);
+    }
+
+    .contact-form select option {
+      color: #1e2918;
+      background: #ffffff;
+    }
+
+    .contact-form textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .contact-note {
+      margin-top: 11px;
+      font-size: 12px;
+      color: rgba(244, 241, 230, 0.45);
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1000px) {
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+        max-width: 650px;
+        margin: 0 auto;
+      }
+
+      .benefit-card {
+        min-height: auto;
+      }
+
+      .benefits-message {
+        max-width: 650px;
+        margin-right: auto;
+        margin-left: auto;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .integration-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+    @media (max-width: 760px) {
+
+      .page-header {
+        padding: 105px 0 70px;
+      }
+
+      .page-header-scrim {
+        background:
+          linear-gradient(
+            90deg,
+            rgba(15, 22, 9, 0.93) 0%,
+            rgba(15, 22, 9, 0.76) 70%,
+            rgba(15, 22, 9, 0.52) 100%
+          );
+      }
+
+      .company-benefits {
+        padding: 78px 0;
+      }
+
+      .benefits-heading {
+        margin-bottom: 40px;
+        text-align: left;
+      }
+
+      .integration-section {
+        padding: 78px 0;
+      }
+
+      .integration-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .open-invite {
+        padding: 31px;
+      }
+
+      .contact-panel {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 35px;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .benefit-card {
+        padding: 31px 24px 27px;
+      }
+
+      .benefit-icon {
+        width: 125px;
+        height: 105px;
+      }
+
+      .benefits-message {
+        padding: 26px;
+      }
+
+      .benefits-message .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .contact-panel {
+        padding: 27px 22px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       NAVEGACIÓN
+  ======================================================== -->
+
+  <nav class="site-nav">
+    <div class="wrap">
+
+      <a href="index.html" class="nav-brand">
+        <span class="dot"></span>
+        Reforestall
+      </a>
+
+      <div class="nav-links">
+
+  <a
+    href="index.html"
+    data-page="index.html"
+  >
+    Inicio
+  </a>
+
+  <a
+    href="compensar.html"
+    data-page="compensar.html"
+  >
+    Quiero compensar
+  </a>
+
+  <a
+    href="empresas.html"
+    data-page="empresas.html"
+  >
+    Empresas
+  </a>
+
+  <a
+    href="participaciones.html"
+    data-page="participaciones.html"
+  >
+    Participaciones
+  </a>
+
+  <a
+    href="mi-impacto.html"
+    data-page="mi-impacto.html"
+  >
+    Mi impacto
+  </a>
+
+</div>
+
+      <div class="nav-cta">
+
+        <a
+          href="#contacto"
+          class="btn btn-solid"
+          style="padding: 11px 20px; font-size: 13.5px;"
+        >
+          Hablemos
+        </a>
+
+        <button
+          class="nav-toggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <span class="l1"></span>
+          <span class="l2"></span>
+          <span class="l3"></span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- =======================================================
+       ENCABEZADO
+  ======================================================== -->
+
+  <header class="page-header">
+
+    <div class="page-header-photo">
+      <img
+        src="images/vivero-pinos.jpg"
+        alt="Plantines creciendo en un vivero"
+      >
+    </div>
+
+    <div class="page-header-scrim"></div>
+
+    <div class="wrap">
+
+      <span class="header-label">
+        Reforestall para empresas
+      </span>
+
+      <h1>
+        Tu actividad ya tiene una huella.
+        Le damos un destino positivo y trazable.
+      </h1>
+
+      <p>
+        Integrá la compensación de CO₂ en la experiencia de tus clientes,
+        generá un nuevo ingreso para tu empresa y contribuí a la plantación
+        de árboles y a la creación de trabajo en viveros.
+      </p>
+
+    </div>
+  </header>
+
+
+  <!-- =======================================================
+       BENEFICIOS
+  ======================================================== -->
+
+  <section class="company-benefits">
+    <div class="wrap">
+
+      <div class="benefits-heading reveal">
+
+        <span class="benefits-eyebrow">
+          Beneficios para tu empresa
+        </span>
+
+        <h2>
+          Tu empresa crece mientras genera un impacto positivo
+        </h2>
+
+        <p>
+          Reforestall permite incorporar la compensación de CO₂
+          directamente dentro de un servicio o proceso de compra,
+          sin que la empresa tenga que asumir el costo directo
+          de la plantación.
+        </p>
+
+      </div>
+
+
+      <div class="benefits-grid reveal-stagger">
+
+        <!-- BENEFICIO 1 -->
+
+        <article class="benefit-card">
+
+          <div class="benefit-icon" aria-hidden="true">
+
+            <svg viewBox="0 0 120 100" fill="none">
+              <rect
+                x="20"
+                y="29"
+                width="80"
+                height="55"
+                rx="8"
+              />
+
+              <path d="M20 45h80"/>
+              <path d="M34 66h18"/>
+
+              <circle
+                cx="81"
+                cy="65"
+                r="10"
+              />
+
+              <path d="M81 58v14"/>
+              <path d="M76 62h8"/>
+              <path d="M76 68h8"/>
+            </svg>
+
+          </div>
+
+          <h3>
+            Ingresos adicionales
+          </h3>
+
+          <p>
+            Sumás la compensación como una opción dentro de tu servicio.
+            El aporte lo realiza el cliente y tu empresa puede obtener
+            un nuevo ingreso por cada operación realizada.
+          </p>
+
+          <span class="benefit-tag">
+            Sin financiar la plantación
+          </span>
+
+        </article>
+
+
+        <!-- BENEFICIO 2 -->
+
+        <article class="benefit-card">
+
+          <div class="benefit-icon" aria-hidden="true">
+
+            <svg viewBox="0 0 120 100" fill="none">
+
+              <path d="M60 84V46"/>
+
+              <path
+                d="M60 56C46 56 36 46 35 31c14-1 25 8 25 25Z"
+              />
+
+              <path
+                d="M60 47c0-16 11-27 27-27 0 16-10 27-27 27Z"
+              />
+
+              <path d="M28 84h64"/>
+
+              <path
+                d="M43 84c2-10 8-16 17-16s15 6 17 16"
+              />
+
+            </svg>
+
+          </div>
+
+          <h3>
+            Una marca con propósito
+          </h3>
+
+          <p>
+            Transformás una actividad que genera emisiones en una acción
+            ambiental concreta, visible y fácil de comunicar a clientes,
+            inversores, colaboradores y a toda tu comunidad.
+          </p>
+
+          <span class="benefit-tag">
+            Marketing e impacto positivo
+          </span>
+
+        </article>
+
+
+        <!-- BENEFICIO 3 -->
+
+        <article class="benefit-card">
+
+          <div class="benefit-icon" aria-hidden="true">
+
+            <svg viewBox="0 0 120 100" fill="none">
+
+              <path d="M24 79h72"/>
+              <path d="M32 79V54h56v25"/>
+              <path d="M41 54V37h38v17"/>
+              <path d="M50 79V65h20v14"/>
+              <path d="M47 37V27h26v10"/>
+              <path d="M86 33c8 5 12 12 12 22"/>
+              <path d="M91 27l-5 6 7 2"/>
+              <circle cx="98" cy="61" r="3"/>
+
+            </svg>
+
+          </div>
+
+          <h3>
+            Impacto real y trazable
+          </h3>
+
+          <p>
+            Cada kilogramo de CO₂ compensado se representa mediante
+            un token asociado al proyecto, permitiendo conectar
+            el aporte con árboles reales y con su seguimiento.
+          </p>
+
+          <span class="benefit-tag">
+            1 kg de CO₂ = 1 token
+          </span>
+
+        </article>
+
+      </div>
+
+
+      <div class="benefits-message reveal">
+
+        <p>
+          <strong>
+            Tu empresa no solo ofrece un servicio.
+          </strong>
+
+          También ayuda a generar trabajo en viveros, impulsar la producción
+          de árboles y construir una red de compensación en la que cada persona
+          puede conocer el destino de su aporte.
+        </p>
+
+        <a href="#contacto" class="btn btn-solid">
+
+          Integrar mi empresa
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =======================================================
+       CÓMO FUNCIONA
+  ======================================================== -->
+
+  <section class="integration-section">
+    <div class="wrap">
+
+      <div class="integration-heading reveal">
+
+        <span>
+          Una integración simple
+        </span>
+
+        <h2>
+          La compensación aparece dentro de una experiencia
+          que tu cliente ya conoce
+        </h2>
+
+        <p>
+          Reforestall se adapta al dato que cada empresa ya utiliza:
+          un vuelo, un traslado, una excursión, un envío, una entrada
+          o cualquier otra actividad que genere emisiones medibles.
+        </p>
+
+      </div>
+
+
+      <div class="integration-grid reveal-stagger">
+
+        <article class="integration-step">
+
+          <span class="integration-number">
+            01
+          </span>
+
+          <h3>
+            Se calcula la emisión
+          </h3>
+
+          <p>
+            La empresa utiliza sus propios datos o trabaja junto
+            a Reforestall para estimar la huella generada por el servicio.
+          </p>
+
+        </article>
+
+
+        <article class="integration-step">
+
+          <span class="integration-number">
+            02
+          </span>
+
+          <h3>
+            El cliente elige compensar
+          </h3>
+
+          <p>
+            La opción se incorpora en el checkout, la reserva,
+            la contratación o el momento más adecuado de la experiencia.
+          </p>
+
+        </article>
+
+
+        <article class="integration-step">
+
+          <span class="integration-number">
+            03
+          </span>
+
+          <h3>
+            Se generan los tokens
+          </h3>
+
+          <p>
+            Cada kilogramo de CO₂ compensado equivale a un token.
+            Un árbol puede representar hasta 3.000 kg durante su vida útil.
+          </p>
+
+        </article>
+
+
+        <article class="integration-step">
+
+          <span class="integration-number">
+            04
+          </span>
+
+          <h3>
+            El impacto se puede seguir
+          </h3>
+
+          <p>
+            Tanto la empresa como el cliente pueden conocer
+            el proyecto, los árboles vinculados y el destino del aporte.
+          </p>
+
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =======================================================
+       INVITACIÓN
+  ======================================================== -->
+
+  <section class="on-light">
+    <div class="wrap">
+
+      <div class="open-invite reveal">
+
+        <h3>
+          ¿Cómo querés integrar tu empresa con Reforestall?
+        </h3>
+
+        <p>
+          La propuesta puede adaptarse a aerolíneas, turismo, logística,
+          transporte, industrias, eventos y a cualquier otra actividad
+          que produzca emisiones medibles. Analizamos cada caso para definir
+          cómo calcular la huella, dónde mostrar la compensación y cómo
+          incorporarla dentro de la experiencia del cliente.
+        </p>
+
+        <a href="#contacto" class="btn btn-solid">
+
+          Hablemos
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =======================================================
+       CONTACTO
+  ======================================================== -->
+
+  <section class="on-light" id="contacto">
+    <div class="wrap">
+
+      <div class="contact-panel reveal">
+
+        <div>
+
+          <h2>
+            Contanos qué actividad querés compensar
+          </h2>
+
+          <p class="contact-intro">
+            Queremos entender cómo funciona tu empresa, qué servicio ofrece
+            y en qué momento podría incorporarse la compensación voluntaria
+            para tus clientes.
+          </p>
+
+          <div class="contact-highlight">
+
+            <strong>
+              Demo actual:
+            </strong>
+
+            esta etapa presenta la interfaz y la experiencia del producto.
+            La integración definitiva de datos, pagos y trazabilidad
+            se define según las necesidades de cada empresa.
+
+          </div>
+
+        </div>
+
+
+        <form
+          class="contact-form"
+          onsubmit="
+            event.preventDefault();
+            this.querySelector('.contact-note').textContent =
+            'Formulario de demostración. Todavía no hay un backend conectado.';
+          "
+        >
+
+          <label for="empresa">
+            Empresa
+          </label>
+
+          <input
+            id="empresa"
+            name="empresa"
+            type="text"
+            placeholder="Nombre de tu empresa"
+            required
+          >
+
+
+          <label for="rubro">
+            Rubro
+          </label>
+
+          <select id="rubro" name="rubro">
+
+            <option value="aerolineas">
+              Aerolíneas
+            </option>
+
+            <option value="turismo">
+              Turismo y excursiones
+            </option>
+
+            <option value="logistica">
+              Logística
+            </option>
+
+            <option value="industria">
+              Industria
+            </option>
+
+            <option value="eventos">
+              Eventos
+            </option>
+
+            <option value="transporte">
+              Transporte terrestre
+            </option>
+
+            <option value="otro">
+              Otro rubro
+            </option>
+
+          </select>
+
+
+          <label for="caso">
+            Contanos tu caso
+          </label>
+
+          <textarea
+            id="caso"
+            name="caso"
+            placeholder="Tipo de actividad, volumen aproximado, sistema de compra actual, plazos..."
+          ></textarea>
+
+
+          <button
+            type="submit"
+            class="btn btn-solid"
+            style="
+              width: 100%;
+              justify-content: center;
+              margin-top: 6px;
+            "
+          >
+            Enviar
+          </button>
+
+
+          <p class="contact-note"></p>
+
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+    <div class="wrap">
+
+      <div class="footer-grid">
+
+        <div>
+
+          <div class="footer-brand">
+            Reforestall
+          </div>
+
+          <p
+            style="
+              max-width: 290px;
+              margin-top: 14px;
+              font-size: 14px;
+              line-height: 1.6;
+              color: rgba(244, 241, 230, 0.55);
+            "
+          >
+            Infraestructura para transformar emisiones medibles
+            en regeneración ambiental trazable.
+          </p>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Producto
+          </h4>
+
+          <a href="index.html">
+            Inicio
+          </a>
+
+          <a href="compensar.html">
+            Quiero compensar
+          </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Empresas
+          </h4>
+
+          <a href="empresas.html">
+            Beneficios
+          </a>
+
+          <a href="empresas.html#contacto">
+            Hablar con nosotros
+          </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Red hoy
+          </h4>
+
+          <a href="index.html#red-hoy">
+            Chaco · Santa Fe
+          </a>
+
+          <a href="glaciarium.html">
+            Glaciarium, El Calafate
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          Demo de producto. Sin backend conectado todavía.
+        </span>
+
+        <span>
+          © 2026 Reforestall
+        </span>
+
+      </div>
+
+    </div>
+  </footer>
+
+
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>

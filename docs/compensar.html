@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Quiero compensar — Reforestall</title>
+
+  <meta
+    name="description"
+    content="Elegí cuántos kilogramos de CO₂ querés compensar y transformalos en una participación trazable dentro de Reforestall."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/styles.css"
+  >
+
+
+  <style>
+
+    /* =========================================================
+       ENCABEZADO
+    ========================================================= */
+
+    .compensate-header {
+      position: relative;
+      padding: 150px 0 105px;
+      overflow: hidden;
+      color: var(--paper);
+      background: var(--forest-950);
+      isolation: isolate;
+    }
+
+    .compensate-header::before {
+      position: absolute;
+      top: -330px;
+      right: -210px;
+      z-index: -2;
+
+      width: 760px;
+      height: 760px;
+
+      content: "";
+
+      border: 1px solid rgba(244, 241, 230, 0.07);
+      border-radius: 50%;
+    }
+
+    .compensate-header::after {
+      position: absolute;
+      top: -180px;
+      right: -40px;
+      z-index: -2;
+
+      width: 470px;
+      height: 470px;
+
+      content: "";
+
+      border: 1px solid rgba(244, 241, 230, 0.06);
+      border-radius: 50%;
+    }
+
+    .header-grid-line {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+
+      opacity: 0.18;
+      pointer-events: none;
+
+      background-image:
+        linear-gradient(
+          rgba(244, 241, 230, 0.045) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(244, 241, 230, 0.045) 1px,
+          transparent 1px
+        );
+
+      background-size: 54px 54px;
+
+      mask-image:
+        linear-gradient(
+          90deg,
+          transparent 0%,
+          black 58%,
+          black 100%
+        );
+    }
+
+    .header-orbit {
+      position: absolute;
+      top: 65px;
+      right: 12%;
+      z-index: -1;
+
+      width: 9px;
+      height: 9px;
+
+      background: var(--amber-light);
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 13px rgba(224, 174, 107, 0.07),
+        0 0 0 27px rgba(224, 174, 107, 0.025);
+    }
+
+    .compensate-header-content {
+      max-width: 850px;
+    }
+
+    .compensate-header h1 {
+      max-width: 790px;
+
+      font-size: clamp(43px, 5.7vw, 74px);
+      line-height: 1.04;
+      color: var(--paper);
+    }
+
+    .compensate-header p {
+      max-width: 620px;
+      margin-top: 25px;
+
+      font-size: 17px;
+      line-height: 1.72;
+      color: rgba(244, 241, 230, 0.7);
+    }
+
+    .header-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      margin-top: 35px;
+    }
+
+    .header-fact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 9px 13px;
+
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: rgba(244, 241, 230, 0.68);
+
+      background: rgba(244, 241, 230, 0.055);
+      border: 1px solid rgba(244, 241, 230, 0.11);
+      border-radius: 100px;
+    }
+
+    .header-fact::before {
+      width: 6px;
+      height: 6px;
+
+      content: "";
+
+      background: var(--moss-light);
+      border-radius: 50%;
+    }
+
+
+    /* =========================================================
+       INTRODUCCIÓN
+    ========================================================= */
+
+    .selection-intro {
+      padding: 100px 0 48px;
+      background: var(--paper);
+    }
+
+    .selection-intro-content {
+      max-width: 780px;
+    }
+
+    .selection-intro h2 {
+      font-size: clamp(32px, 4vw, 49px);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+
+    /* =========================================================
+       CALCULADORA
+    ========================================================= */
+
+    .calculator-section {
+      padding: 32px 0 115px;
+      background: var(--paper);
+    }
+
+    .compensation-panel {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+
+      overflow: hidden;
+
+      color: var(--paper);
+      background: var(--forest-950);
+      border: 1px solid rgba(29, 44, 21, 0.13);
+      border-radius: 24px;
+
+      box-shadow:
+        0 35px 85px rgba(20, 28, 12, 0.17),
+        0 6px 18px rgba(20, 28, 12, 0.07);
+    }
+
+
+    /* COLUMNA DE SELECCIÓN */
+
+    .calculator-controls {
+      padding: 50px;
+    }
+
+    .calculator-controls h3 {
+      max-width: 510px;
+
+      font-size: clamp(28px, 3.1vw, 40px);
+      line-height: 1.15;
+      color: var(--paper);
+    }
+
+    .calculator-controls-intro {
+      max-width: 520px;
+      margin-top: 15px;
+
+      font-size: 14.5px;
+      line-height: 1.68;
+      color: rgba(244, 241, 230, 0.58);
+    }
+
+    .amount-label {
+      display: block;
+      margin-top: 37px;
+      margin-bottom: 14px;
+
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: rgba(244, 241, 230, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.075em;
+    }
+
+
+    /* OPCIONES RÁPIDAS */
+
+    .amount-presets {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+    }
+
+    .amount-preset {
+      position: relative;
+
+      min-height: 92px;
+      padding: 18px;
+
+      text-align: left;
+      color: var(--paper);
+
+      background: rgba(244, 241, 230, 0.04);
+      border: 1px solid rgba(244, 241, 230, 0.12);
+      border-radius: 13px;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+    }
+
+    .amount-preset:hover {
+      transform: translateY(-3px);
+      border-color: rgba(244, 241, 230, 0.34);
+    }
+
+    .amount-preset.active {
+      color: var(--forest-950);
+      background: var(--amber-light);
+      border-color: var(--amber-light);
+    }
+
+    .amount-preset strong {
+      display: block;
+
+      font-family: var(--font-display);
+      font-size: 27px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .amount-preset span {
+      display: block;
+      margin-top: 8px;
+
+      font-size: 11px;
+      color: rgba(244, 241, 230, 0.47);
+    }
+
+    .amount-preset.active span {
+      color: rgba(15, 22, 9, 0.58);
+    }
+
+
+    /* CANTIDAD PERSONALIZADA */
+
+    .custom-amount {
+      margin-top: 29px;
+      padding-top: 27px;
+
+      border-top: 1px solid rgba(244, 241, 230, 0.1);
+    }
+
+    .custom-amount label {
+      display: block;
+
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: rgba(244, 241, 230, 0.58);
+    }
+
+    .custom-input-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+
+      margin-top: 13px;
+
+      background: rgba(244, 241, 230, 0.05);
+      border: 1px solid rgba(244, 241, 230, 0.14);
+      border-radius: 12px;
+
+      transition: border-color 0.2s ease;
+    }
+
+    .custom-input-box:focus-within {
+      border-color: var(--amber-light);
+    }
+
+    .custom-input-box input {
+      width: 100%;
+      padding: 17px 18px;
+
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--paper);
+
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+
+    .custom-input-box span {
+      padding: 0 18px;
+
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(244, 241, 230, 0.44);
+    }
+
+    .custom-help {
+      margin-top: 10px;
+
+      font-size: 11px;
+      line-height: 1.55;
+      color: rgba(244, 241, 230, 0.35);
+    }
+
+
+    /* COLUMNA DE RESULTADO */
+
+    .calculator-result {
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 48px;
+
+      background:
+        radial-gradient(
+          circle at 50% 25%,
+          rgba(121, 158, 84, 0.19),
+          transparent 39%
+        ),
+        rgba(244, 241, 230, 0.043);
+
+      border-left: 1px solid rgba(244, 241, 230, 0.1);
+    }
+
+    .result-heading {
+      max-width: 370px;
+      margin: 0 auto;
+
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1.25;
+      text-align: center;
+      color: var(--paper);
+    }
+
+
+    /* REPRESENTACIÓN DEL ÁRBOL */
+
+    .tree-progress {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 242px;
+      height: 242px;
+      margin: 27px auto;
+
+      background:
+        conic-gradient(
+          var(--moss-light) 0deg,
+          var(--moss-light) var(--tree-progress, 6deg),
+          rgba(244, 241, 230, 0.09) var(--tree-progress, 6deg),
+          rgba(244, 241, 230, 0.09) 360deg
+        );
+
+      border-radius: 50%;
+
+      transition: background 0.25s ease;
+    }
+
+    .tree-progress::before {
+      position: absolute;
+      inset: 13px;
+
+      content: "";
+
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          rgba(128, 163, 90, 0.17),
+          transparent 50%
+        ),
+        var(--forest-950);
+
+      border-radius: 50%;
+    }
+
+    .tree-progress-content {
+      position: relative;
+      z-index: 1;
+
+      max-width: 175px;
+      text-align: center;
+    }
+
+    .tree-symbol {
+      display: block;
+      margin-bottom: 8px;
+
+      font-size: 39px;
+    }
+
+    .tree-main-value {
+      display: block;
+
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .tree-main-label {
+      display: block;
+      margin-top: 8px;
+
+      font-size: 10.5px;
+      line-height: 1.45;
+      color: rgba(244, 241, 230, 0.47);
+    }
+
+    .tree-equivalence {
+      max-width: 390px;
+      margin: -2px auto 24px;
+
+      font-size: 12.5px;
+      line-height: 1.6;
+      text-align: center;
+      color: rgba(244, 241, 230, 0.57);
+    }
+
+
+    /* RESULTADOS */
+
+    .result-rows {
+      margin-top: 4px;
+    }
+
+    .result-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      padding: 12px 0;
+
+      font-size: 13px;
+      color: rgba(244, 241, 230, 0.55);
+
+      border-top: 1px solid rgba(244, 241, 230, 0.1);
+    }
+
+    .result-row strong {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      text-align: right;
+      color: var(--amber-light);
+    }
+
+
+    /* PRECIO Y BOTÓN */
+
+    .result-price-area {
+      margin-top: 22px;
+      padding-top: 21px;
+
+      text-align: center;
+
+      border-top: 1px solid rgba(244, 241, 230, 0.1);
+    }
+
+    .result-price-label {
+      display: block;
+
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: rgba(244, 241, 230, 0.38);
+      text-transform: uppercase;
+      letter-spacing: 0.075em;
+    }
+
+    .result-price {
+      display: block;
+      margin-top: 8px;
+
+      font-family: var(--font-display);
+      font-size: 45px;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .result-price-note {
+      display: block;
+      margin-top: 8px;
+
+      font-size: 10.5px;
+      color: rgba(244, 241, 230, 0.35);
+    }
+
+    .compensate-button {
+      width: 100%;
+      justify-content: center;
+
+      margin-top: 22px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+
+      font-size: 14px;
+    }
+
+    .demo-note {
+      margin-top: 11px;
+
+      font-size: 10.5px;
+      line-height: 1.5;
+      text-align: center;
+      color: rgba(244, 241, 230, 0.34);
+    }
+
+    .compensation-success {
+      display: none;
+
+      margin-top: 17px;
+      padding: 16px 17px;
+
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--moss-light);
+
+      background: rgba(167, 189, 116, 0.1);
+      border: 1px solid rgba(167, 189, 116, 0.3);
+      border-radius: 10px;
+    }
+
+    .compensation-success.show {
+      display: block;
+    }
+
+
+    /* =========================================================
+       RECORRIDO DEL APORTE
+    ========================================================= */
+
+    .contribution-section {
+      padding: 115px 0;
+      background: var(--paper-dim);
+    }
+
+    .contribution-heading {
+      max-width: 700px;
+      margin-bottom: 58px;
+    }
+
+    .contribution-heading h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+
+    /* CAMINO CONTINUO */
+
+    .contribution-route {
+      position: relative;
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+
+      padding: 35px 0 0;
+    }
+
+    .contribution-route::before {
+      position: absolute;
+      top: 59px;
+      right: 12.5%;
+      left: 12.5%;
+
+      height: 1px;
+
+      content: "";
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(80, 112, 56, 0.18),
+          rgba(80, 112, 56, 0.55),
+          rgba(80, 112, 56, 0.18)
+        );
+    }
+
+    .route-stage {
+      position: relative;
+      z-index: 1;
+
+      padding: 0 25px;
+      text-align: center;
+    }
+
+    .route-point {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 49px;
+      height: 49px;
+      margin: 0 auto 27px;
+
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--forest-950);
+
+      background: var(--paper);
+      border: 1px solid rgba(80, 112, 56, 0.27);
+      border-radius: 50%;
+
+      box-shadow: 0 0 0 9px var(--paper-dim);
+    }
+
+    .route-stage:first-child .route-point {
+      color: var(--forest-950);
+      background: var(--amber-light);
+      border-color: var(--amber-light);
+    }
+
+    .route-stage h3 {
+      font-size: 17.5px;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .route-stage p {
+      margin-top: 10px;
+
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--ink-dim);
+    }
+
+
+    /* =========================================================
+       CIERRE
+    ========================================================= */
+
+    .closing-section {
+      position: relative;
+
+      padding: 125px 0;
+      overflow: hidden;
+
+      color: var(--paper);
+      background: var(--forest-950);
+    }
+
+    .closing-section::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 760px;
+      height: 760px;
+
+      content: "";
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+
+      border: 1px solid rgba(244, 241, 230, 0.05);
+      border-radius: 50%;
+    }
+
+    .closing-section::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 500px;
+      height: 500px;
+
+      content: "";
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(123, 159, 87, 0.13),
+          transparent 68%
+        );
+
+      border-radius: 50%;
+    }
+
+    .closing-content {
+      position: relative;
+      z-index: 1;
+
+      max-width: 850px;
+      margin: 0 auto;
+
+      text-align: center;
+    }
+
+    .closing-content h2 {
+      font-size: clamp(34px, 4.8vw, 59px);
+      line-height: 1.08;
+      color: var(--paper);
+    }
+
+    .closing-content p {
+      max-width: 680px;
+      margin: 23px auto 0;
+
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(244, 241, 230, 0.64);
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 950px) {
+
+      .compensation-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .calculator-result {
+        border-top: 1px solid rgba(244, 241, 230, 0.1);
+        border-left: none;
+      }
+
+      .contribution-route {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px 0;
+      }
+
+      .contribution-route::before {
+        display: none;
+      }
+
+      .route-stage {
+        padding: 0 30px;
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .compensate-header {
+        padding: 120px 0 80px;
+      }
+
+      .selection-intro {
+        padding-top: 78px;
+      }
+
+      .calculator-section {
+        padding-bottom: 78px;
+      }
+
+      .calculator-controls,
+      .calculator-result {
+        padding: 32px 24px;
+      }
+
+      .amount-presets {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tree-progress {
+        width: 218px;
+        height: 218px;
+      }
+
+      .contribution-section,
+      .closing-section {
+        padding: 80px 0;
+      }
+
+      .contribution-route {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding-top: 5px;
+      }
+
+      .route-stage {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 20px;
+
+        padding: 22px 0;
+        text-align: left;
+
+        border-top: 1px solid var(--line-light);
+      }
+
+      .route-stage:first-child {
+        border-top: none;
+      }
+
+      .route-point {
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .route-stage-content {
+        padding-top: 4px;
+      }
+
+    }
+
+
+    @media (max-width: 500px) {
+
+      .compensate-header h1 {
+        font-size: 43px;
+      }
+
+      .amount-presets {
+        grid-template-columns: 1fr;
+      }
+
+      .amount-preset {
+        min-height: auto;
+      }
+
+      .result-price {
+        font-size: 40px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =======================================================
+       NAVEGACIÓN
+  ======================================================== -->
+
+  <nav class="site-nav">
+
+    <div class="wrap">
+
+      <a
+        href="index.html"
+        class="nav-brand"
+      >
+        <span class="dot"></span>
+        Reforestall
+      </a>
+
+
+<div class="nav-links">
+
+  <a
+    href="index.html"
+    data-page="index.html"
+  >
+    Inicio
+  </a>
+
+  <a
+    href="compensar.html"
+    data-page="compensar.html"
+  >
+    Quiero compensar
+  </a>
+
+  <a
+    href="empresas.html"
+    data-page="empresas.html"
+  >
+    Empresas
+  </a>
+
+  <a
+    href="participaciones.html"
+    data-page="participaciones.html"
+  >
+    Participaciones
+  </a>
+
+  <a
+    href="mi-impacto.html"
+    data-page="mi-impacto.html"
+  >
+    Mi impacto
+  </a>
+
+</div>
+
+
+      <div class="nav-cta">
+
+        <a
+          href="empresas.html"
+          class="btn btn-solid"
+          style="padding: 11px 20px; font-size: 13.5px;"
+        >
+          Sumar mi empresa
+        </a>
+
+        <button
+          class="nav-toggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <span class="l1"></span>
+          <span class="l2"></span>
+          <span class="l3"></span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =======================================================
+       ENCABEZADO
+  ======================================================== -->
+
+  <header class="compensate-header">
+
+    <div class="header-grid-line"></div>
+    <div class="header-orbit"></div>
+
+
+    <div class="wrap">
+
+      <div class="compensate-header-content">
+
+        <h1>
+          Elegí cuánto querés devolverle al ambiente
+        </h1>
+
+        <p>
+          No hace falta compensar una actividad específica ni completar
+          un árbol entero. Podés elegir libremente una cantidad,
+          conocer qué representa y sumarte al proyecto desde ahí.
+        </p>
+
+
+        <div class="header-facts">
+
+          <span class="header-fact">
+            1 kg de CO₂ = 1 token
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       INTRODUCCIÓN
+  ======================================================== -->
+
+  <section class="selection-intro">
+
+    <div class="wrap selection-intro-content">
+
+      <h2 class="reveal">
+        Cada persona decide el tamaño de su participación
+      </h2>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       CALCULADORA
+  ======================================================== -->
+
+  <section class="calculator-section">
+
+    <div class="wrap">
+
+
+      <div class="compensation-panel reveal">
+
+
+        <!-- SELECCIÓN -->
+
+        <div class="calculator-controls">
+
+          <h3>
+            ¿Cuántos kilogramos de CO₂ querés compensar?
+          </h3>
+
+          <p class="calculator-controls-intro">
+            Elegí una referencia rápida o ingresá cualquier otra cantidad.
+            No existe un máximo para participar.
+          </p>
+
+
+          <span class="amount-label">
+            Cantidades sugeridas
+          </span>
+
+
+          <div class="amount-presets">
+
+
+            <button
+              type="button"
+              class="amount-preset"
+              data-kg="10"
+            >
+
+              <strong>
+                10 kg
+              </strong>
+
+              <span>
+                Una primera participación
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="amount-preset active"
+              data-kg="50"
+            >
+
+              <strong>
+                50 kg
+              </strong>
+
+              <span>
+                Un aporte inicial
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="amount-preset"
+              data-kg="100"
+            >
+
+              <strong>
+                100 kg
+              </strong>
+
+              <span>
+                Una participación mayor
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="amount-preset"
+              data-kg="500"
+            >
+
+              <strong>
+                500 kg
+              </strong>
+
+              <span>
+                Un aporte significativo
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <div class="custom-amount">
+
+            <label for="amount-input">
+              Otra cantidad
+            </label>
+
+
+            <div class="custom-input-box">
+
+              <input
+                type="number"
+                id="amount-input"
+                value="50"
+                min="1"
+                step="1"
+                inputmode="numeric"
+              >
+
+              <span>
+                kg de CO₂
+              </span>
+
+            </div>
+
+
+            <p class="custom-help">
+              Podés ingresar cualquier número entero mayor que cero.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- RESULTADO -->
+
+        <div class="calculator-result">
+
+          <h3 class="result-heading">
+            Así se traduce tu elección dentro del proyecto
+          </h3>
+
+
+          <div
+            class="tree-progress"
+            id="tree-progress"
+          >
+
+            <div class="tree-progress-content">
+
+              <span class="tree-symbol">
+                🌳
+              </span>
+
+              <strong
+                class="tree-main-value"
+                id="tree-main-value"
+              >
+                1,67%
+              </strong>
+
+              <span
+                class="tree-main-label"
+                id="tree-main-label"
+              >
+                de la capacidad estimada de un árbol
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <p
+            class="tree-equivalence"
+            id="tree-equivalence"
+          >
+            Tu participación representa 50 kg dentro
+            de una capacidad estimada de 3.000 kg.
+          </p>
+
+
+          <div class="result-rows">
+
+
+            <div class="result-row">
+
+              <span>
+                Tokens registrados
+              </span>
+
+              <strong id="tokens-output">
+                50 tokens
+              </strong>
+
+            </div>
+
+
+            <div class="result-row">
+
+              <span>
+                Conversión
+              </span>
+
+              <strong>
+                1 token = 1 kg
+              </strong>
+
+            </div>
+
+
+            <div class="result-row">
+
+              <span>
+                Equivalencia ambiental
+              </span>
+
+              <strong id="capacity-output">
+                50 de 3.000 kg
+              </strong>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="result-price-area">
+
+            <span class="result-price-label">
+              Aporte estimado
+            </span>
+
+            <strong
+              class="result-price"
+              id="price-output"
+            >
+              $5.000
+            </strong>
+
+            <span class="result-price-note">
+              Valor demostrativo de $100 por kilogramo
+            </span>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="btn btn-solid compensate-button"
+            id="compensate-button"
+          >
+            Compensar 50 kg
+          </button>
+
+
+          <p class="demo-note">
+            Esta demostración todavía no procesa pagos
+            ni emite tokens reales.
+          </p>
+
+
+          <div
+            class="compensation-success"
+            id="compensation-success"
+          >
+            La compensación fue simulada correctamente.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       RECORRIDO DEL APORTE
+  ======================================================== -->
+
+  <section class="contribution-section">
+
+    <div class="wrap">
+
+
+      <div class="contribution-heading reveal">
+
+        <h2>
+          Del aporte digital al trabajo en el territorio
+        </h2>
+
+      </div>
+
+
+      <div class="contribution-route reveal-stagger">
+
+
+        <article class="route-stage">
+
+          <div class="route-point">
+            01
+          </div>
+
+          <div class="route-stage-content">
+
+            <h3>
+              Elegís una cantidad
+            </h3>
+
+            <p>
+              Definís libremente cuántos kilogramos querés compensar.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="route-stage">
+
+          <div class="route-point">
+            02
+          </div>
+
+          <div class="route-stage-content">
+
+            <h3>
+              Se genera el token
+            </h3>
+
+            <p>
+              Cada kilogramo genera un token.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="route-stage">
+
+          <div class="route-point">
+            03
+          </div>
+
+          <div class="route-stage-content">
+
+            <h3>
+              Se integra al proyecto
+            </h3>
+
+            <p>
+              La participación se vincula con capacidad disponible dentro de la red.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="route-stage">
+
+          <div class="route-point">
+            04
+          </div>
+
+          <div class="route-stage-content">
+
+            <h3>
+              Continúa en el territorio
+            </h3>
+
+            <p>
+              El aporte contribuye a producción, empleo, cuidado y plantación.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       CIERRE
+  ======================================================== -->
+
+  <section class="closing-section">
+
+    <div class="wrap">
+
+      <div class="closing-content reveal">
+
+        <h2>
+          Lo importante no es empezar con una cifra enorme, sino empezar
+        </h2>
+
+        <p>
+          Cada participación se suma a otras y permite construir una red
+          que conecta decisiones individuales con producción,
+          trabajo local y restauración ambiental.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div class="wrap">
+
+
+      <div class="footer-grid">
+
+
+        <div>
+
+          <div class="footer-brand">
+            Reforestall
+          </div>
+
+          <p
+            style="
+              margin-top: 14px;
+              font-size: 14px;
+              line-height: 1.6;
+              max-width: 290px;
+              color: rgba(244, 241, 230, 0.55);
+            "
+          >
+            Infraestructura para transformar emisiones medibles
+            en regeneración ambiental trazable.
+          </p>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Producto
+          </h4>
+
+          <a href="index.html">
+            Inicio
+          </a>
+
+          <a href="compensar.html">
+            Quiero compensar
+          </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Empresas
+          </h4>
+
+          <a href="empresas.html">
+            Beneficios e integración
+          </a>
+
+          <a href="empresas.html#contacto">
+            Hablar con nosotros
+          </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Red hoy
+          </h4>
+
+          <a href="index.html#red-hoy">
+            Chaco · Santa Fe
+          </a>
+
+          <a href="glaciarium.html">
+            Glaciarium, El Calafate
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          Demo de producto. Sin backend conectado todavía.
+        </span>
+
+        <span>
+          © 2026 Reforestall
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script src="assets/js/main.js"></script>
+
+
+  <script>
+
+    /* =========================================================
+       CONFIGURACIÓN
+    ========================================================= */
+
+    const PRICE_PER_KG = 100;
+    const TREE_CAPACITY_KG = 3000;
+
+
+    /* =========================================================
+       ELEMENTOS
+    ========================================================= */
+
+    const amountInput =
+      document.getElementById("amount-input");
+
+    const presets =
+      document.querySelectorAll(".amount-preset");
+
+    const tokensOutput =
+      document.getElementById("tokens-output");
+
+    const capacityOutput =
+      document.getElementById("capacity-output");
+
+    const priceOutput =
+      document.getElementById("price-output");
+
+    const treeProgress =
+      document.getElementById("tree-progress");
+
+    const treeMainValue =
+      document.getElementById("tree-main-value");
+
+    const treeMainLabel =
+      document.getElementById("tree-main-label");
+
+    const treeEquivalence =
+      document.getElementById("tree-equivalence");
+
+    const compensateButton =
+      document.getElementById("compensate-button");
+
+    const successBox =
+      document.getElementById("compensation-success");
+
+
+    /* =========================================================
+       FORMATO DE NÚMEROS
+    ========================================================= */
+
+    function formatNumber(value) {
+
+      return value.toLocaleString("es-AR");
+
+    }
+
+
+    function formatPercentage(value) {
+
+      return value.toLocaleString(
+        "es-AR",
+        {
+          minimumFractionDigits: value < 10 ? 2 : 1,
+          maximumFractionDigits: value < 10 ? 2 : 1
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       ACTUALIZAR RESULTADO
+    ========================================================= */
+
+    function updateCompensation(value, options) {
+
+      options = options || {};
+
+      let kg =
+        Number(value);
+
+
+      if (!Number.isFinite(kg) || kg < 1) {
+
+        kg = 1;
+
+      }
+
+
+      kg =
+        Math.round(kg);
+
+
+      if (!options.skipInput) {
+
+        amountInput.value =
+          kg;
+
+      }
+
+
+      const completeTrees =
+        Math.floor(kg / TREE_CAPACITY_KG);
+
+
+      const remainingKg =
+        kg % TREE_CAPACITY_KG;
+
+
+      const currentTreePercentage =
+        remainingKg === 0 && completeTrees > 0
+          ? 100
+          : (remainingKg / TREE_CAPACITY_KG) * 100;
+
+
+      const progressDegrees =
+        (currentTreePercentage / 100) * 360;
+
+
+      treeProgress.style.setProperty(
+        "--tree-progress",
+        progressDegrees + "deg"
+      );
+
+
+      tokensOutput.textContent =
+        formatNumber(kg) +
+        (
+          kg === 1
+            ? " token"
+            : " tokens"
+        );
+
+
+      priceOutput.textContent =
+        "$" +
+        formatNumber(
+          kg * PRICE_PER_KG
+        );
+
+
+      compensateButton.textContent =
+        "Compensar " +
+        formatNumber(kg) +
+        " kg";
+
+
+      compensateButton.disabled =
+        false;
+
+
+      successBox.classList.remove(
+        "show"
+      );
+
+
+      if (completeTrees === 0) {
+
+        const percentage =
+          (kg / TREE_CAPACITY_KG) * 100;
+
+
+        treeMainValue.textContent =
+          formatPercentage(percentage) +
+          "%";
+
+
+        treeMainLabel.textContent =
+          "de la capacidad estimada de un árbol";
+
+
+        treeEquivalence.textContent =
+          "Tu participación representa " +
+          formatNumber(kg) +
+          " kg dentro de una capacidad estimada de " +
+          formatNumber(TREE_CAPACITY_KG) +
+          " kg.";
+
+
+        capacityOutput.textContent =
+          formatNumber(kg) +
+          " de " +
+          formatNumber(TREE_CAPACITY_KG) +
+          " kg";
+
+      } else {
+
+        treeMainValue.textContent =
+          formatNumber(completeTrees) +
+          (
+            completeTrees === 1
+              ? " árbol"
+              : " árboles"
+          );
+
+
+        treeMainLabel.textContent =
+          remainingKg === 0
+            ? "de capacidad equivalente completa"
+            : "completos y una participación adicional";
+
+
+        if (remainingKg === 0) {
+
+          treeEquivalence.textContent =
+            "La cantidad seleccionada equivale a la capacidad estimada completa de " +
+            formatNumber(completeTrees) +
+            (
+              completeTrees === 1
+                ? " árbol."
+                : " árboles."
+            );
+
+
+          capacityOutput.textContent =
+            formatNumber(completeTrees) +
+            (
+              completeTrees === 1
+                ? " árbol completo"
+                : " árboles completos"
+            );
+
+        } else {
+
+          const remainingPercentage =
+            (remainingKg / TREE_CAPACITY_KG) * 100;
+
+
+          treeEquivalence.textContent =
+            "La cantidad seleccionada equivale a " +
+            formatNumber(completeTrees) +
+            (
+              completeTrees === 1
+                ? " árbol completo"
+                : " árboles completos"
+            ) +
+            " y " +
+            formatNumber(remainingKg) +
+            " kg adicionales.";
+
+
+          capacityOutput.textContent =
+            formatNumber(completeTrees) +
+            (
+              completeTrees === 1
+                ? " árbol + "
+                : " árboles + "
+            ) +
+            formatNumber(remainingKg) +
+            " kg";
+
+
+          treeMainLabel.textContent =
+            formatPercentage(remainingPercentage) +
+            "% del siguiente árbol";
+
+        }
+
+      }
+
+
+      presets.forEach(
+        function (preset) {
+
+          const presetKg =
+            Number(
+              preset.dataset.kg
+            );
+
+
+          preset.classList.toggle(
+            "active",
+            presetKg === kg
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       OPCIONES RÁPIDAS
+    ========================================================= */
+
+    presets.forEach(
+      function (preset) {
+
+        preset.addEventListener(
+          "click",
+          function () {
+
+            updateCompensation(
+              Number(
+                preset.dataset.kg
+              )
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       CANTIDAD PERSONALIZADA
+    ========================================================= */
+
+    amountInput.addEventListener(
+      "input",
+      function () {
+
+        const value =
+          Number(
+            amountInput.value
+          );
+
+
+        if (
+          amountInput.value === "" ||
+          !Number.isFinite(value)
+        ) {
+
+          return;
+
+        }
+
+
+        updateCompensation(
+          value,
+          {
+            skipInput: true
+          }
+        );
+
+      }
+    );
+
+
+    amountInput.addEventListener(
+      "blur",
+      function () {
+
+        if (
+          amountInput.value === "" ||
+          Number(amountInput.value) < 1
+        ) {
+
+          updateCompensation(1);
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       SIMULACIÓN
+    ========================================================= */
+
+    compensateButton.addEventListener(
+      "click",
+      function () {
+
+        const kg =
+          Math.max(
+            1,
+            Math.round(
+              Number(amountInput.value) || 1
+            )
+          );
+
+
+        compensateButton.disabled =
+          true;
+
+
+        compensateButton.textContent =
+          "Procesando simulación...";
+
+
+        setTimeout(
+          function () {
+
+            compensateButton.textContent =
+              "Compensación simulada";
+
+
+            successBox.innerHTML =
+              "<strong>La participación fue simulada correctamente.</strong><br>" +
+              formatNumber(kg) +
+              (
+                kg === 1
+                  ? " token quedaría registrado"
+                  : " tokens quedarían registrados"
+              ) +
+              " dentro de la capacidad disponible del proyecto.";
+
+
+            successBox.classList.add(
+              "show"
+            );
+
+          },
+          850
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       ESTADO INICIAL
+    ========================================================= */
+
+    updateCompensation(50);
+
+  </script>
+
+</body>
+
+</html>

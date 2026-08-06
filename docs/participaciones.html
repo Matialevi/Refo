@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Participaciones — Reforestall</title>
+
+  <meta
+    name="description"
+    content="Conocé los lugares y organizaciones que forman parte de la red de Reforestall."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/styles.css"
+  >
+
+
+  <style>
+
+    /* =========================================================
+       ENCABEZADO
+    ========================================================= */
+
+    .participations-header {
+      position: relative;
+
+      padding: 150px 0 105px;
+      overflow: hidden;
+
+      color: var(--paper);
+      background: var(--forest-950);
+
+      isolation: isolate;
+    }
+
+    .participations-header::before {
+      position: absolute;
+      top: -330px;
+      right: -210px;
+      z-index: -2;
+
+      width: 760px;
+      height: 760px;
+
+      content: "";
+
+      border: 1px solid rgba(244, 241, 230, 0.07);
+      border-radius: 50%;
+    }
+
+    .participations-header::after {
+      position: absolute;
+      top: -180px;
+      right: -40px;
+      z-index: -2;
+
+      width: 470px;
+      height: 470px;
+
+      content: "";
+
+      border: 1px solid rgba(244, 241, 230, 0.06);
+      border-radius: 50%;
+    }
+
+    .header-grid-line {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+
+      opacity: 0.18;
+      pointer-events: none;
+
+      background-image:
+        linear-gradient(
+          rgba(244, 241, 230, 0.045) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(244, 241, 230, 0.045) 1px,
+          transparent 1px
+        );
+
+      background-size: 54px 54px;
+
+      mask-image:
+        linear-gradient(
+          90deg,
+          transparent 0%,
+          black 58%,
+          black 100%
+        );
+    }
+
+    .header-orbit {
+      position: absolute;
+      top: 65px;
+      right: 12%;
+      z-index: -1;
+
+      width: 9px;
+      height: 9px;
+
+      background: var(--amber-light);
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 13px rgba(224, 174, 107, 0.07),
+        0 0 0 27px rgba(224, 174, 107, 0.025);
+    }
+
+    .participations-header-content {
+      max-width: 850px;
+    }
+
+    .participations-header h1 {
+      max-width: 760px;
+
+      font-size: clamp(43px, 5.7vw, 72px);
+      line-height: 1.04;
+      color: var(--paper);
+    }
+
+    .participations-header p {
+      max-width: 620px;
+      margin-top: 25px;
+
+      font-size: 17px;
+      line-height: 1.72;
+      color: rgba(244, 241, 230, 0.7);
+    }
+
+
+    /* =========================================================
+       INTRODUCCIÓN
+    ========================================================= */
+
+    .participations-intro {
+      padding: 100px 0 45px;
+      background: var(--paper);
+    }
+
+    .participations-intro-content {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      align-items: end;
+      gap: 65px;
+    }
+
+    .participations-intro h2 {
+      max-width: 580px;
+
+      font-size: clamp(31px, 4vw, 48px);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .participations-intro p {
+      max-width: 610px;
+
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ink-dim);
+    }
+
+
+    /* =========================================================
+       PARTICIPACIONES
+    ========================================================= */
+
+    .participants-section {
+      padding: 35px 0 115px;
+      background: var(--paper);
+    }
+
+    .participants-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 760px) minmax(260px, 1fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+
+    /* =========================================================
+       CASO PRINCIPAL
+    ========================================================= */
+
+    .participant-featured {
+      position: relative;
+
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+
+      min-height: 370px;
+      overflow: hidden;
+
+      color: var(--ink);
+      text-decoration: none;
+
+      background: var(--paper-dim);
+      border: 1px solid var(--line-light);
+      border-radius: var(--radius-lg);
+
+      box-shadow:
+        0 18px 45px rgba(29, 27, 15, 0.07);
+
+      transition:
+        transform 0.28s var(--ease-out),
+        box-shadow 0.28s var(--ease-out),
+        border-color 0.2s ease;
+    }
+
+    .participant-featured:hover {
+      transform: translateY(-5px);
+      border-color: rgba(29, 27, 15, 0.18);
+
+      box-shadow:
+        0 27px 60px rgba(29, 27, 15, 0.12);
+    }
+
+    .participant-photo {
+      position: relative;
+      min-height: 370px;
+      overflow: hidden;
+    }
+
+    .participant-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      transition: transform 0.65s var(--ease-out);
+    }
+
+    .participant-featured:hover .participant-photo img {
+      transform: scale(1.045);
+    }
+
+    .participant-photo::after {
+      position: absolute;
+      inset: 0;
+
+      content: "";
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(14, 20, 10, 0.03),
+          rgba(14, 20, 10, 0.14)
+        );
+    }
+
+    .participant-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 38px;
+    }
+
+    .participant-location {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--ice-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .participant-content h3 {
+      margin-top: 12px;
+
+      font-size: clamp(28px, 3.2vw, 39px);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .participant-content p {
+      max-width: 440px;
+      margin-top: 17px;
+
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--ink-dim);
+    }
+
+    .participant-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+
+      margin-top: 25px;
+    }
+
+    .participant-detail {
+      padding: 13px 14px;
+
+      background: rgba(29, 27, 15, 0.035);
+      border: 1px solid rgba(29, 27, 15, 0.07);
+      border-radius: 9px;
+    }
+
+    .participant-detail strong {
+      display: block;
+
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .participant-detail span {
+      display: block;
+      margin-top: 5px;
+
+      font-size: 11.5px;
+      line-height: 1.4;
+      color: var(--ink-dim);
+    }
+
+    .participant-link {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 8px;
+
+      margin-top: 25px;
+      padding-bottom: 4px;
+
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #111111;
+      text-decoration: none;
+
+      border-bottom: 1px solid rgba(17, 17, 17, 0.35);
+    }
+
+    .participant-link svg {
+      width: 14px;
+      height: 14px;
+
+      stroke: #111111;
+
+      transition: transform 0.2s var(--ease-nav);
+    }
+
+    .participant-featured:hover .participant-link svg {
+      transform: translateX(4px);
+    }
+
+
+    /* =========================================================
+       PRÓXIMA PARTICIPACIÓN
+    ========================================================= */
+
+    .participant-next {
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      min-height: 370px;
+      padding: 35px;
+      overflow: hidden;
+
+      background: var(--forest-950);
+      border: 1px solid rgba(29, 44, 21, 0.12);
+      border-radius: var(--radius-lg);
+
+      isolation: isolate;
+    }
+
+    .participant-next::before {
+      position: absolute;
+      right: -105px;
+      bottom: -120px;
+      z-index: -2;
+
+      width: 300px;
+      height: 300px;
+
+      content: "";
+
+      border: 1px solid rgba(244, 241, 230, 0.08);
+      border-radius: 50%;
+    }
+
+    .participant-next::after {
+      position: absolute;
+      right: -25px;
+      bottom: -40px;
+      z-index: -2;
+
+      width: 160px;
+      height: 160px;
+
+      content: "";
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(126, 163, 88, 0.16),
+          transparent 67%
+        );
+
+      border-radius: 50%;
+    }
+
+    .participant-next-number {
+      font-family: var(--font-display);
+      font-size: 70px;
+      line-height: 1;
+      color: rgba(244, 241, 230, 0.11);
+    }
+
+    .participant-next-content h3 {
+      max-width: 270px;
+
+      font-size: clamp(24px, 2.7vw, 32px);
+      line-height: 1.15;
+      color: var(--paper);
+    }
+
+    .participant-next-content p {
+      max-width: 280px;
+      margin-top: 15px;
+
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: rgba(244, 241, 230, 0.6);
+    }
+
+    .participant-next .participant-link {
+      color: var(--paper);
+      border-color: rgba(244, 241, 230, 0.3);
+    }
+
+    .participant-next .participant-link svg {
+      stroke: var(--paper);
+    }
+
+
+    /* =========================================================
+       CIERRE
+    ========================================================= */
+
+    .participations-closing {
+      position: relative;
+
+      padding: 115px 0;
+      overflow: hidden;
+
+      color: var(--paper);
+      background: var(--forest-950);
+    }
+
+    .participations-closing::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 720px;
+      height: 720px;
+
+      content: "";
+      transform: translate(-50%, -50%);
+
+      border: 1px solid rgba(244, 241, 230, 0.05);
+      border-radius: 50%;
+    }
+
+    .participations-closing::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 470px;
+      height: 470px;
+
+      content: "";
+      transform: translate(-50%, -50%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(123, 159, 87, 0.12),
+          transparent 68%
+        );
+
+      border-radius: 50%;
+    }
+
+    .participations-closing-content {
+      position: relative;
+      z-index: 1;
+
+      max-width: 790px;
+      margin: 0 auto;
+
+      text-align: center;
+    }
+
+    .participations-closing h2 {
+      font-size: clamp(33px, 4.6vw, 56px);
+      line-height: 1.08;
+      color: var(--paper);
+    }
+
+    .participations-closing p {
+      max-width: 620px;
+      margin: 22px auto 0;
+
+      font-size: 16px;
+      line-height: 1.72;
+      color: rgba(244, 241, 230, 0.63);
+    }
+
+
+    /* =========================================================
+       SELECCIÓN DE TEXTO
+    ========================================================= */
+
+    ::selection {
+      color: #ffffff;
+      background: #111111;
+    }
+
+    ::-moz-selection {
+      color: #ffffff;
+      background: #111111;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 980px) {
+
+      .participations-intro-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .participants-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .participant-next {
+        min-height: 320px;
+      }
+
+    }
+
+
+    @media (max-width: 760px) {
+
+      .participations-header {
+        padding: 120px 0 80px;
+      }
+
+      .participations-intro {
+        padding-top: 78px;
+      }
+
+      .participants-section {
+        padding-bottom: 78px;
+      }
+
+      .participant-featured {
+        grid-template-columns: 1fr;
+      }
+
+      .participant-photo {
+        min-height: 280px;
+      }
+
+      .participant-content {
+        padding: 30px 25px;
+      }
+
+      .participant-details {
+        grid-template-columns: 1fr;
+      }
+
+      .participations-closing {
+        padding: 80px 0;
+      }
+
+    }
+
+
+    @media (max-width: 500px) {
+
+      .participations-header h1 {
+        font-size: 43px;
+      }
+
+      .participant-photo {
+        min-height: 235px;
+      }
+
+      .participant-next {
+        min-height: 350px;
+        padding: 29px 25px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =======================================================
+       NAVEGACIÓN
+  ======================================================== -->
+
+  <nav class="site-nav">
+
+    <div class="wrap">
+
+      <a
+        href="index.html"
+        class="nav-brand"
+      >
+        <span class="dot"></span>
+        Reforestall
+      </a>
+
+
+      <div class="nav-links">
+
+  <a
+    href="index.html"
+    data-page="index.html"
+  >
+    Inicio
+  </a>
+
+  <a
+    href="compensar.html"
+    data-page="compensar.html"
+  >
+    Quiero compensar
+  </a>
+
+  <a
+    href="empresas.html"
+    data-page="empresas.html"
+  >
+    Empresas
+  </a>
+
+  <a
+    href="participaciones.html"
+    data-page="participaciones.html"
+  >
+    Participaciones
+  </a>
+
+  <a
+    href="mi-impacto.html"
+    data-page="mi-impacto.html"
+  >
+    Mi impacto
+  </a>
+
+</div>
+
+
+      <div class="nav-cta">
+
+        <a
+          href="empresas.html"
+          class="btn btn-solid"
+          style="padding: 11px 20px; font-size: 13.5px;"
+        >
+          Sumar mi empresa
+        </a>
+
+        <button
+          class="nav-toggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <span class="l1"></span>
+          <span class="l2"></span>
+          <span class="l3"></span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =======================================================
+       ENCABEZADO
+  ======================================================== -->
+
+  <header class="participations-header">
+
+    <div class="header-grid-line"></div>
+    <div class="header-orbit"></div>
+
+
+    <div class="wrap">
+
+      <div class="participations-header-content">
+
+        <h1>
+          Lugares que ya forman parte de la red
+        </h1>
+
+        <p>
+          Cada participación nace de una integración concreta.
+          Acá se reúnen los destinos y organizaciones que incorporan
+          Reforestall dentro de su actividad.
+        </p>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       INTRODUCCIÓN
+  ======================================================== -->
+
+  <section class="participations-intro">
+
+    <div class="wrap participations-intro-content">
+
+      <h2 class="reveal">
+        Experiencias reales que conectan actividad e impacto
+      </h2>
+
+      <p class="reveal">
+        Cada caso tiene una forma de integración diferente.
+        Algunas participaciones se vinculan con visitas, otras con servicios,
+        reservas o actividades que producen una huella medible.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       PARTICIPACIONES
+  ======================================================== -->
+
+  <section class="participants-section">
+
+    <div class="wrap">
+
+      <div class="participants-layout reveal-stagger">
+
+
+        <!-- GLACIARIUM -->
+
+        <a
+          href="glaciarium.html"
+          class="participant-featured"
+        >
+
+          <div class="participant-photo">
+
+            <img
+              src="https://images.unsplash.com/photo-1729546493750-314d158125fa?fm=jpg&amp;q=80&amp;w=1200&amp;auto=format&amp;fit=crop"
+              alt="Glaciar Perito Moreno en Santa Cruz"
+            >
+
+          </div>
+
+
+          <div class="participant-content">
+
+            <span class="participant-location">
+              El Calafate · Santa Cruz
+            </span>
+
+            <h3>
+              Glaciarium
+            </h3>
+
+            <p>
+              El centro de interpretación del hielo incorpora
+              la compensación dentro de la experiencia de sus visitantes.
+            </p>
+
+
+            <div class="participant-details">
+
+              <div class="participant-detail">
+
+                <strong>
+                  Integración
+                </strong>
+
+                <span>
+                  Vinculada a cada visita
+                </span>
+
+              </div>
+
+
+              <div class="participant-detail">
+
+                <strong>
+                  Estado
+                </strong>
+
+                <span>
+                  En tratativas
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <span class="participant-link">
+
+              Ver la experiencia
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <!-- PRÓXIMA EMPRESA -->
+
+        <article class="participant-next">
+
+          <span class="participant-next-number">
+            02
+          </span>
+
+
+          <div class="participant-next-content">
+
+            <h3>
+              La próxima participación puede comenzar acá
+            </h3>
+
+            <p>
+              Si tu empresa desarrolla una actividad con emisiones medibles,
+              podemos analizar cómo incorporarla a la red.
+            </p>
+
+
+            <a
+              href="empresas.html#contacto"
+              class="participant-link"
+            >
+
+              Hablar con Reforestall
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+
+            </a>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       CIERRE
+  ======================================================== -->
+
+  <section class="participations-closing">
+
+    <div class="wrap">
+
+      <div class="participations-closing-content reveal">
+
+        <h2>
+          Una red que crece con cada nueva integración
+        </h2>
+
+        <p>
+          El objetivo no es reunir logos, sino construir participaciones
+          que tengan una relación concreta con el proyecto,
+          los viveros y el territorio.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div class="wrap">
+
+
+      <div class="footer-grid">
+
+
+        <div>
+
+          <div class="footer-brand">
+            Reforestall
+          </div>
+
+          <p
+            style="
+              margin-top: 14px;
+              font-size: 14px;
+              line-height: 1.6;
+              max-width: 290px;
+              color: rgba(244, 241, 230, 0.55);
+            "
+          >
+            Infraestructura para transformar emisiones medibles
+            en regeneración ambiental trazable.
+          </p>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Producto
+          </h4>
+
+          <a href="index.html">
+            Inicio
+          </a>
+
+          <a href="compensar.html">
+            Quiero compensar
+          </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Empresas
+          </h4>
+
+          <a href="empresas.html">
+            Beneficios e integración
+          </a>
+
+          <a href="empresas.html#contacto">
+            Hablar con nosotros
+          </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Participaciones
+          </h4>
+
+          <a href="participaciones.html">
+            Ver todas
+          </a>
+
+          <a href="glaciarium.html">
+            Glaciarium
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          Demo de producto. Sin backend conectado todavía.
+        </span>
+
+        <span>
+          © 2026 Reforestall
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

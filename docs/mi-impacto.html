@@ -1,0 +1,3637 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Mi impacto — Reforestall</title>
+
+  <meta
+    name="description"
+    content="Consultá tus tokens, participaciones y la trazabilidad de tu impacto dentro de Reforestall."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/styles.css"
+  >
+
+  <style>
+
+    body {
+      background: var(--paper);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: 0.65;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .impact-header {
+      position: relative;
+      padding: 145px 0 95px;
+      overflow: hidden;
+      color: var(--paper);
+      background: var(--forest-950);
+      isolation: isolate;
+    }
+
+    .impact-header::before {
+      position: absolute;
+      top: -330px;
+      right: -210px;
+      z-index: -2;
+      width: 760px;
+      height: 760px;
+      content: "";
+      border: 1px solid rgba(244, 241, 230, 0.07);
+      border-radius: 50%;
+    }
+
+    .impact-header::after {
+      position: absolute;
+      top: -160px;
+      right: -30px;
+      z-index: -2;
+      width: 470px;
+      height: 470px;
+      content: "";
+      border: 1px solid rgba(244, 241, 230, 0.06);
+      border-radius: 50%;
+    }
+
+    .header-grid {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      opacity: 0.18;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(244, 241, 230, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 241, 230, 0.045) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(90deg, transparent 0%, black 58%, black 100%);
+    }
+
+    .header-point {
+      position: absolute;
+      top: 67px;
+      right: 12%;
+      z-index: -1;
+      width: 9px;
+      height: 9px;
+      background: var(--amber-light);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 13px rgba(224, 174, 107, 0.07),
+        0 0 0 27px rgba(224, 174, 107, 0.025);
+    }
+
+    .impact-header-content {
+      max-width: 800px;
+    }
+
+    .impact-header h1 {
+      max-width: 760px;
+      font-size: clamp(43px, 5.6vw, 72px);
+      line-height: 1.04;
+      color: var(--paper);
+    }
+
+    .impact-header p {
+      max-width: 600px;
+      margin-top: 24px;
+      font-size: 17px;
+      line-height: 1.72;
+      color: rgba(244, 241, 230, 0.69);
+    }
+
+    .access-section {
+      padding: 90px 0 115px;
+      background: var(--paper);
+    }
+
+    .access-intro {
+      max-width: 760px;
+      margin-bottom: 44px;
+    }
+
+    .access-intro h2 {
+      font-size: clamp(32px, 4vw, 49px);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .access-intro p {
+      max-width: 620px;
+      margin-top: 17px;
+      font-size: 16px;
+      line-height: 1.72;
+      color: var(--ink-dim);
+    }
+
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+    }
+
+    .access-card {
+      position: relative;
+      min-height: 420px;
+      padding: 42px;
+      overflow: hidden;
+      border-radius: 22px;
+    }
+
+    .access-card-primary {
+      color: var(--paper);
+      background: var(--forest-950);
+    }
+
+    .access-card-primary::after {
+      position: absolute;
+      right: -110px;
+      bottom: -130px;
+      width: 320px;
+      height: 320px;
+      content: "";
+      border: 1px solid rgba(244, 241, 230, 0.07);
+      border-radius: 50%;
+    }
+
+    .access-card-secondary {
+      background: var(--paper-dim);
+      border: 1px solid var(--line-light);
+    }
+
+    .access-card h3 {
+      max-width: 430px;
+      font-size: clamp(25px, 3vw, 35px);
+      line-height: 1.15;
+    }
+
+    .access-card-primary h3 {
+      color: var(--paper);
+    }
+
+    .access-card-secondary h3 {
+      color: var(--ink);
+    }
+
+    .access-card > p {
+      max-width: 470px;
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.68;
+    }
+
+    .access-card-primary > p {
+      color: rgba(244, 241, 230, 0.57);
+    }
+
+    .access-card-secondary > p {
+      color: var(--ink-dim);
+    }
+
+    .access-form {
+      position: relative;
+      z-index: 1;
+      margin-top: 34px;
+    }
+
+    .access-form label {
+      display: block;
+      margin-bottom: 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .access-card-primary label {
+      color: rgba(244, 241, 230, 0.45);
+    }
+
+    .access-card-secondary label {
+      color: var(--ink-dim);
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .field-row input {
+      width: 100%;
+      min-width: 0;
+      padding: 15px 16px;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .access-card-primary input {
+      color: var(--paper);
+      background: rgba(244, 241, 230, 0.055);
+      border: 1px solid rgba(244, 241, 230, 0.14);
+    }
+
+    .access-card-primary input:focus {
+      border-color: var(--amber-light);
+    }
+
+    .access-card-secondary input {
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid rgba(29, 27, 15, 0.14);
+    }
+
+    .access-card-secondary input:focus {
+      border-color: #111111;
+    }
+
+    .access-button {
+      min-width: 150px;
+      justify-content: center;
+    }
+
+    .token-button {
+      color: #ffffff;
+      background: #111111;
+      border-color: #111111;
+    }
+
+    .token-button:hover {
+      background: #000000;
+    }
+
+    .access-example {
+      margin-top: 13px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      line-height: 1.55;
+    }
+
+    .access-card-primary .access-example {
+      color: rgba(244, 241, 230, 0.34);
+    }
+
+    .access-card-secondary .access-example {
+      color: var(--ink-dim);
+    }
+
+    .access-error {
+      display: none;
+      margin-top: 15px;
+      padding: 13px 14px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      border-radius: 9px;
+    }
+
+    .access-error.show {
+      display: block;
+    }
+
+    .access-card-primary .access-error {
+      color: #f1c8bc;
+      background: rgba(188, 73, 47, 0.12);
+      border: 1px solid rgba(188, 73, 47, 0.27);
+    }
+
+    .access-card-secondary .access-error {
+      color: #7c2e20;
+      background: rgba(188, 73, 47, 0.08);
+      border: 1px solid rgba(188, 73, 47, 0.18);
+    }
+
+    .dashboard-section {
+      display: none;
+      padding: 70px 0 115px;
+      background: var(--paper);
+    }
+
+    .dashboard-section.show {
+      display: block;
+    }
+
+    .dashboard-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 35px;
+    }
+
+    .dashboard-welcome h2 {
+      font-size: clamp(32px, 4vw, 49px);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .dashboard-welcome p {
+      margin-top: 10px;
+      font-size: 14.5px;
+      color: var(--ink-dim);
+    }
+
+    .logout-button {
+      padding: 11px 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid rgba(29, 27, 15, 0.15);
+      border-radius: 8px;
+    }
+
+    .logout-button:hover {
+      border-color: #111111;
+    }
+
+    .summary-panel {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      overflow: hidden;
+      color: var(--paper);
+      background: var(--forest-950);
+      border-radius: 23px;
+      box-shadow:
+        0 30px 75px rgba(20, 28, 12, 0.15),
+        0 6px 18px rgba(20, 28, 12, 0.07);
+    }
+
+    .summary-main {
+      padding: 48px;
+    }
+
+    .summary-main h3 {
+      max-width: 520px;
+      font-size: clamp(27px, 3.2vw, 40px);
+      line-height: 1.15;
+      color: var(--paper);
+    }
+
+    .summary-main > p {
+      max-width: 520px;
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.68;
+      color: rgba(244, 241, 230, 0.54);
+    }
+
+    .summary-numbers {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 37px;
+    }
+
+    .summary-number {
+      padding: 21px;
+      background: rgba(244, 241, 230, 0.045);
+      border: 1px solid rgba(244, 241, 230, 0.1);
+      border-radius: 13px;
+    }
+
+    .summary-number strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(27px, 3vw, 40px);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .summary-number span {
+      display: block;
+      margin-top: 8px;
+      font-size: 11px;
+      line-height: 1.45;
+      color: rgba(244, 241, 230, 0.42);
+    }
+
+    .summary-visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 470px;
+      padding: 45px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(126, 163, 88, 0.2), transparent 40%),
+        rgba(244, 241, 230, 0.035);
+      border-left: 1px solid rgba(244, 241, 230, 0.1);
+    }
+
+    .tree-progress {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 245px;
+      height: 245px;
+      background:
+        conic-gradient(
+          var(--moss-light) 0deg,
+          var(--moss-light) var(--tree-progress, 148deg),
+          rgba(244, 241, 230, 0.09) var(--tree-progress, 148deg),
+          rgba(244, 241, 230, 0.09) 360deg
+        );
+      border-radius: 50%;
+    }
+
+    .tree-progress::before {
+      position: absolute;
+      inset: 13px;
+      content: "";
+      background:
+        radial-gradient(circle at 34% 28%, rgba(126, 163, 88, 0.16), transparent 47%),
+        var(--forest-950);
+      border-radius: 50%;
+    }
+
+    .tree-progress-content {
+      position: relative;
+      z-index: 1;
+      max-width: 170px;
+      text-align: center;
+    }
+
+    .tree-progress-content svg {
+      width: 41px;
+      height: 41px;
+      margin-bottom: 9px;
+      color: var(--moss-light);
+    }
+
+    .tree-progress-value {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 39px;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .tree-progress-label {
+      display: block;
+      margin-top: 8px;
+      font-size: 10.5px;
+      line-height: 1.45;
+      color: rgba(244, 241, 230, 0.45);
+    }
+
+    .tree-progress-note {
+      max-width: 390px;
+      margin-top: 23px;
+      font-size: 12.5px;
+      line-height: 1.62;
+      text-align: center;
+      color: rgba(244, 241, 230, 0.56);
+    }
+
+    .contributions-section {
+      margin-top: 80px;
+    }
+
+    .contributions-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .contributions-heading h2 {
+      font-size: clamp(30px, 3.7vw, 45px);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .contributions-heading p {
+      max-width: 470px;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ink-dim);
+    }
+
+    .contribution-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contribution-card {
+      overflow: hidden;
+      background: var(--paper-dim);
+      border: 1px solid var(--line-light);
+      border-radius: 17px;
+    }
+
+    .contribution-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      padding: 24px 26px;
+      text-align: left;
+      background: transparent;
+      border: none;
+    }
+
+    .contribution-header:hover {
+      background: rgba(29, 27, 15, 0.025);
+    }
+
+    .contribution-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 49px;
+      height: 49px;
+      color: var(--ice-deep);
+      background: rgba(60, 136, 148, 0.09);
+      border: 1px solid rgba(60, 136, 148, 0.18);
+      border-radius: 50%;
+    }
+
+    .contribution-icon.voluntary {
+      color: var(--moss);
+      background: rgba(80, 112, 56, 0.09);
+      border-color: rgba(80, 112, 56, 0.18);
+    }
+
+    .contribution-icon svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .contribution-copy h3 {
+      font-size: 19px;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .contribution-copy p {
+      margin-top: 5px;
+      font-size: 12.5px;
+      color: var(--ink-dim);
+    }
+
+    .contribution-values {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .contribution-value {
+      text-align: right;
+    }
+
+    .contribution-value strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .contribution-value span {
+      display: block;
+      margin-top: 3px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .contribution-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      color: #111111;
+      border: 1px solid rgba(29, 27, 15, 0.14);
+      border-radius: 50%;
+      transition: transform 0.25s ease;
+    }
+
+    .contribution-card.open .contribution-arrow {
+      transform: rotate(180deg);
+    }
+
+    .contribution-arrow svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .contribution-detail {
+      display: none;
+      padding: 0 26px 28px;
+    }
+
+    .contribution-card.open .contribution-detail {
+      display: block;
+    }
+
+    .detail-divider {
+      height: 1px;
+      margin-bottom: 27px;
+      background: rgba(29, 27, 15, 0.1);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 32px;
+    }
+
+    .token-info {
+      padding: 25px;
+      background: var(--paper);
+      border: 1px solid rgba(29, 27, 15, 0.08);
+      border-radius: 13px;
+    }
+
+    .token-info h4,
+    .trace-panel h4 {
+      font-size: 17px;
+      color: var(--ink);
+    }
+
+    .token-data {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 15px;
+      margin-top: 22px;
+    }
+
+    .token-data-item span {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .token-data-item strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+
+    .token-id-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 24px;
+      padding-bottom: 3px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #111111;
+      text-decoration: none;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(17, 17, 17, 0.3);
+    }
+
+    .trace-panel {
+      padding: 4px 0;
+    }
+
+    .trace-route {
+      position: relative;
+      margin-top: 24px;
+    }
+
+    .trace-route::before {
+      position: absolute;
+      top: 10px;
+      bottom: 12px;
+      left: 10px;
+      width: 1px;
+      content: "";
+      background: rgba(29, 27, 15, 0.13);
+    }
+
+    .trace-stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: 21px 1fr auto;
+      gap: 15px;
+      padding-bottom: 24px;
+    }
+
+    .trace-stage:last-child {
+      padding-bottom: 0;
+    }
+
+    .trace-point {
+      position: relative;
+      z-index: 1;
+      width: 21px;
+      height: 21px;
+      background: var(--paper-dim);
+      border: 2px solid rgba(29, 27, 15, 0.18);
+      border-radius: 50%;
+    }
+
+    .trace-stage.complete .trace-point {
+      background: var(--moss);
+      border-color: var(--moss);
+      box-shadow: inset 0 0 0 4px var(--paper-dim);
+    }
+
+    .trace-stage.current .trace-point {
+      background: var(--amber-light);
+      border-color: var(--amber-light);
+      box-shadow: inset 0 0 0 4px var(--paper-dim);
+    }
+
+    .trace-stage-content strong {
+      display: block;
+      font-size: 13.5px;
+      color: var(--ink);
+    }
+
+    .trace-stage-content span {
+      display: block;
+      margin-top: 4px;
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: var(--ink-dim);
+    }
+
+    .trace-date {
+      padding-top: 1px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--ink-dim);
+      white-space: nowrap;
+    }
+
+    .token-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(8, 12, 7, 0.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .token-modal.show {
+      display: flex;
+    }
+
+    .token-modal-card {
+      position: relative;
+      width: min(570px, 100%);
+      max-height: 90vh;
+      padding: 34px;
+      overflow-y: auto;
+      color: var(--paper);
+      background:
+        radial-gradient(circle at 80% 10%, rgba(143, 212, 222, 0.14), transparent 37%),
+        var(--forest-950);
+      border: 1px solid rgba(244, 241, 230, 0.13);
+      border-radius: 19px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      color: var(--paper);
+      background: rgba(244, 241, 230, 0.06);
+      border: 1px solid rgba(244, 241, 230, 0.12);
+      border-radius: 50%;
+    }
+
+    .modal-close:hover {
+      background: rgba(244, 241, 230, 0.1);
+    }
+
+    .token-modal-card h3 {
+      max-width: 430px;
+      padding-right: 40px;
+      font-size: 30px;
+      line-height: 1.15;
+      color: var(--paper);
+    }
+
+    .modal-token-id {
+      margin-top: 9px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ice);
+    }
+
+    .modal-amount {
+      margin-top: 28px;
+      font-family: var(--font-display);
+      font-size: 58px;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .modal-amount span {
+      display: block;
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: rgba(244, 241, 230, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .modal-data {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(244, 241, 230, 0.1);
+    }
+
+    .modal-data span {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      color: rgba(244, 241, 230, 0.38);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .modal-data strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--paper);
+    }
+
+    .modal-trace {
+      margin-top: 30px;
+    }
+
+    .modal-trace h4 {
+      font-size: 17px;
+      color: var(--paper);
+    }
+
+    .modal-trace .trace-route::before {
+      background: rgba(244, 241, 230, 0.13);
+    }
+
+    .modal-trace .trace-point {
+      background: var(--forest-950);
+      border-color: rgba(244, 241, 230, 0.2);
+    }
+
+    .modal-trace .trace-stage.complete .trace-point {
+      background: var(--moss-light);
+      border-color: var(--moss-light);
+      box-shadow: inset 0 0 0 4px var(--forest-950);
+    }
+
+    .modal-trace .trace-stage.current .trace-point {
+      background: var(--amber-light);
+      border-color: var(--amber-light);
+      box-shadow: inset 0 0 0 4px var(--forest-950);
+    }
+
+    .modal-trace .trace-stage-content strong {
+      color: var(--paper);
+    }
+
+    .modal-trace .trace-stage-content span,
+    .modal-trace .trace-date {
+      color: rgba(244, 241, 230, 0.46);
+    }
+
+    @media (max-width: 980px) {
+
+      .access-grid,
+      .summary-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-visual {
+        min-height: 410px;
+        border-top: 1px solid rgba(244, 241, 230, 0.1);
+        border-left: none;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 760px) {
+
+      .impact-header {
+        padding: 120px 0 80px;
+      }
+
+      .access-section,
+      .dashboard-section {
+        padding: 78px 0;
+      }
+
+      .access-card {
+        min-height: auto;
+        padding: 30px 24px;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+
+      .access-button {
+        width: 100%;
+      }
+
+      .dashboard-top,
+      .contributions-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .summary-main,
+      .summary-visual {
+        padding: 31px 24px;
+      }
+
+      .summary-numbers {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .summary-number:first-child {
+        grid-column: 1 / -1;
+      }
+
+      .tree-progress {
+        width: 220px;
+        height: 220px;
+      }
+
+      .contribution-header {
+        grid-template-columns: auto 1fr auto;
+        gap: 14px;
+        padding: 20px;
+      }
+
+      .contribution-values {
+        display: none;
+      }
+
+      .contribution-detail {
+        padding: 0 20px 22px;
+      }
+
+      .token-data,
+      .modal-data {
+        grid-template-columns: 1fr;
+      }
+
+      .trace-stage {
+        grid-template-columns: 21px 1fr;
+      }
+
+      .trace-date {
+        grid-column: 2;
+        margin-top: -8px;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+
+      .impact-header h1 {
+        font-size: 43px;
+      }
+
+      .summary-numbers {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-number:first-child {
+        grid-column: auto;
+      }
+
+      .contribution-icon {
+        width: 43px;
+        height: 43px;
+      }
+
+      .contribution-copy h3 {
+        font-size: 17px;
+      }
+
+      .token-modal-card {
+        padding: 28px 23px;
+      }
+
+      .modal-amount {
+        font-size: 49px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <nav class="site-nav">
+
+    <div class="wrap">
+
+      <a href="index.html" class="nav-brand">
+
+        <span class="dot"></span>
+
+        Reforestall
+
+      </a>
+
+      <div class="nav-links">
+
+        <a href="index.html" data-page="index.html">Inicio</a>
+
+        <a href="compensar.html" data-page="compensar.html">
+          Quiero compensar
+        </a>
+
+        <a href="empresas.html" data-page="empresas.html">
+          Empresas
+        </a>
+
+        <a href="participaciones.html" data-page="participaciones.html">
+          Participaciones
+        </a>
+
+        <a href="mi-impacto.html" data-page="mi-impacto.html">
+          Mi impacto
+        </a>
+
+      </div>
+
+      <div class="nav-cta">
+
+        <a
+          href="mi-impacto.html"
+          class="btn btn-solid"
+          style="padding: 11px 20px; font-size: 13.5px;"
+        >
+          Ver mis tokens
+        </a>
+
+        <button
+          class="nav-toggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+
+          <span class="l1"></span>
+          <span class="l2"></span>
+          <span class="l3"></span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+  <header class="impact-header">
+
+    <div class="header-grid"></div>
+
+    <div class="header-point"></div>
+
+    <div class="wrap">
+
+      <div class="impact-header-content">
+
+        <h1>
+          Todo tu aporte, reunido en un solo lugar
+        </h1>
+
+        <p>
+          Consultá tus tokens, revisá tus participaciones
+          y seguí el recorrido de cada compensación dentro del proyecto.
+        </p>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <section
+    class="access-section"
+    id="access-section"
+  >
+
+    <div class="wrap">
+
+      <div class="access-intro">
+
+        <h2>
+          Ingresá a tu cuenta o consultá un token
+        </h2>
+
+        <p>
+          Tu cuenta agrupa todas las participaciones asociadas
+          al correo utilizado al momento de compensar.
+        </p>
+
+      </div>
+
+
+      <div class="access-grid">
+
+        <article class="access-card access-card-primary">
+
+          <h3>
+            Ver todas mis participaciones
+          </h3>
+
+          <p>
+            Ingresá con el correo utilizado al compensar
+            para acceder al resumen completo de tu impacto.
+          </p>
+
+          <form
+            class="access-form"
+            id="email-form"
+          >
+
+            <label for="email-input">
+              Correo electrónico
+            </label>
+
+            <div class="field-row">
+
+              <input
+                type="email"
+                id="email-input"
+                placeholder="nombre@correo.com"
+                autocomplete="email"
+                required
+              >
+
+              <button
+                type="submit"
+                class="btn btn-solid access-button"
+              >
+                Ingresar
+              </button>
+
+            </div>
+
+            <p class="access-example">
+              Para probar la demo: matias@email.com
+            </p>
+
+            <div
+              class="access-error"
+              id="email-error"
+            >
+              No encontramos una cuenta asociada a ese correo.
+            </div>
+
+          </form>
+
+        </article>
+
+
+        <article class="access-card access-card-secondary">
+
+          <h3>
+            Consultar un token individual
+          </h3>
+
+          <p>
+            Ingresá el identificador del token para ver
+            su información y estado de trazabilidad.
+          </p>
+
+          <form
+            class="access-form"
+            id="token-form"
+          >
+
+            <label for="token-input">
+              ID del token
+            </label>
+
+            <div class="field-row">
+
+              <input
+                type="text"
+                id="token-input"
+                placeholder="RFS-TEST-0001"
+                autocomplete="off"
+                required
+              >
+
+              <button
+                type="submit"
+                class="btn access-button token-button"
+              >
+                Consultar
+              </button>
+
+            </div>
+
+            <p class="access-example">
+              Para probar: RFS-TEST-0001
+            </p>
+
+            <div
+              class="access-error"
+              id="token-error"
+            >
+              No encontramos un token con ese identificador.
+            </div>
+
+          </form>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <main
+    class="dashboard-section"
+    id="dashboard-section"
+  >
+
+    <div class="wrap">
+
+      <div class="dashboard-top">
+
+        <div class="dashboard-welcome">
+
+          <h2 id="welcome-title">
+            Hola, Matías
+          </h2>
+
+          <p id="welcome-email">
+            matias@email.com
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="logout-button"
+          id="logout-button"
+        >
+          Cerrar sesión
+        </button>
+
+      </div>
+
+
+      <section class="summary-panel">
+
+        <div class="summary-main">
+
+          <h3>
+            Tu impacto acumulado en Reforestall
+          </h3>
+
+          <p>
+            Este resumen reúne todas las compensaciones
+            registradas con tu cuenta.
+          </p>
+
+          <div class="summary-numbers">
+
+            <div class="summary-number">
+
+              <strong id="total-kg">
+                1.240 kg
+              </strong>
+
+              <span>
+                de CO₂ compensados
+              </span>
+
+            </div>
+
+            <div class="summary-number">
+
+              <strong id="total-tokens">
+                1.240
+              </strong>
+
+              <span>
+                tokens registrados
+              </span>
+
+            </div>
+
+            <div class="summary-number">
+
+              <strong id="total-contributions">
+                3
+              </strong>
+
+              <span>
+                participaciones
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="summary-visual">
+
+          <div
+            class="tree-progress"
+            id="tree-progress"
+          >
+
+            <div class="tree-progress-content">
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+
+                <path d="M12 22V10"/>
+
+                <path d="M12 14c-4.5 0-8-3.2-8-7 4.5 0 8 3.2 8 7Z"/>
+
+                <path d="M12 11c4.5 0 8-3.2 8-7-4.5 0-8 3.2-8 7Z"/>
+
+              </svg>
+
+              <strong
+                class="tree-progress-value"
+                id="tree-progress-value"
+              >
+                41,3%
+              </strong>
+
+              <span
+                class="tree-progress-label"
+                id="tree-progress-label"
+              >
+                de la capacidad estimada de un árbol
+              </span>
+
+            </div>
+
+          </div>
+
+          <p
+            class="tree-progress-note"
+            id="tree-progress-note"
+          >
+            Tus 1.240 kg forman parte de una capacidad estimada
+            de 3.000 kg.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <section class="contributions-section">
+
+        <div class="contributions-heading">
+
+          <h2>
+            Tus participaciones
+          </h2>
+
+          <p>
+            Abrí cada registro para ver el token,
+            el vivero vinculado y el avance de la trazabilidad.
+          </p>
+
+        </div>
+
+        <div
+          class="contribution-list"
+          id="contribution-list"
+        ></div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <div
+    class="token-modal"
+    id="token-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
+
+    <article class="token-modal-card">
+
+      <button
+        type="button"
+        class="modal-close"
+        id="modal-close"
+        aria-label="Cerrar"
+      >
+        ×
+      </button>
+
+      <h3 id="modal-title">
+        Token ambiental
+      </h3>
+
+      <p
+        class="modal-token-id"
+        id="modal-token-id"
+      >
+        RFS-TEST-0001
+      </p>
+
+      <div
+        class="modal-amount"
+        id="modal-amount"
+      >
+        8 kg
+
+        <span>
+          de CO₂ compensados
+        </span>
+
+      </div>
+
+      <div
+        class="modal-data"
+        id="modal-data"
+      ></div>
+
+      <div class="modal-trace">
+
+        <h4>
+          Trazabilidad
+        </h4>
+
+        <div
+          class="trace-route"
+          id="modal-trace-route"
+        ></div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <footer>
+
+    <div class="wrap">
+
+      <div class="footer-grid">
+
+        <div>
+
+          <div class="footer-brand">
+            Reforestall
+          </div>
+
+          <p
+            style="
+              margin-top: 14px;
+              font-size: 14px;
+              line-height: 1.6;
+              max-width: 290px;
+              color: rgba(244, 241, 230, 0.55);
+            "
+          >
+            Infraestructura para transformar emisiones medibles
+            en regeneración ambiental trazable.
+          </p>
+
+        </div>
+
+        <div class="footer-col">
+
+          <h4>Producto</h4>
+
+          <a href="index.html">
+            Inicio
+          </a>
+
+          <a href="compensar.html">
+            Quiero compensar
+          </a>
+
+        </div>
+
+        <div class="footer-col">
+
+          <h4>Empresas</h4>
+
+          <a href="empresas.html">
+            Beneficios e integración
+          </a>
+
+          <a href="empresas.html#contacto">
+            Hablar con nosotros
+          </a>
+
+        </div>
+
+        <div class="footer-col">
+
+          <h4>Cuenta</h4>
+
+          <a href="mi-impacto.html">
+            Mi impacto
+          </a>
+
+          <a href="participaciones.html">
+            Participaciones
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <span>
+          Consulta de tokens conectada a Supabase.
+        </span>
+
+        <span>
+          © 2026 Reforestall
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script src="assets/js/main.js"></script>
+
+
+  <script>
+
+    /*
+     * La consulta individual del token
+     * ya usa datos reales de Supabase.
+     *
+     * El acceso por correo continúa siendo
+     * una demostración temporal.
+     */
+
+    const TREE_CAPACITY_KG = 3000;
+
+
+    const SUPABASE_URL =
+      "https://ubfcuebfusxwejsuworg.supabase.co";
+
+
+    const SUPABASE_PUBLIC_KEY =
+      "sb_publishable_p_QUFBkzoFr1HxTPi9C2Dg_otVkScvZ";
+
+
+    /*
+     * Datos simulados mantenidos solamente
+     * para la demostración del ingreso por correo.
+     */
+    const USERS = {
+
+      "matias@email.com": {
+
+        name:
+          "Matías",
+
+        email:
+          "matias@email.com",
+
+        contributions: [
+
+          {
+            id:
+              "CON-001",
+
+            type:
+              "glaciarium",
+
+            title:
+              "Glaciarium",
+
+            subtitle:
+              "Entrada y Glaciobar · 2 personas",
+
+            date:
+              "15/07/2026",
+
+            kg:
+              8,
+
+            tokens:
+              ["RFS-CAL-4837"],
+
+            nursery:
+              "IIFA — Sáenz Peña, Chaco",
+
+            treeId:
+              "RFS-ARB-001284",
+
+            species:
+              "Algarrobo blanco",
+
+            status:
+              "Plantín en crecimiento",
+
+            trace: [
+              {
+                title:
+                  "Aporte registrado",
+
+                description:
+                  "La compensación fue asociada a tu cuenta.",
+
+                date:
+                  "15/07/2026",
+
+                state:
+                  "complete"
+              },
+
+              {
+                title:
+                  "Token generado",
+
+                description:
+                  "Se emitieron 8 tokens ambientales.",
+
+                date:
+                  "15/07/2026",
+
+                state:
+                  "complete"
+              },
+
+              {
+                title:
+                  "Capacidad asignada",
+
+                description:
+                  "Los tokens fueron vinculados al proyecto.",
+
+                date:
+                  "18/07/2026",
+
+                state:
+                  "complete"
+              },
+
+              {
+                title:
+                  "Plantín en crecimiento",
+
+                description:
+                  "El ejemplar continúa su desarrollo en vivero.",
+
+                date:
+                  "Actual",
+
+                state:
+                  "current"
+              },
+
+              {
+                title:
+                  "Plantación",
+
+                description:
+                  "La ubicación final será informada cuando se realice.",
+
+                date:
+                  "Pendiente",
+
+                state:
+                  "pending"
+              }
+            ]
+          },
+
+          {
+            id:
+              "CON-002",
+
+            type:
+              "voluntary",
+
+            title:
+              "Compensación voluntaria",
+
+            subtitle:
+              "Aporte realizado desde la web",
+
+            date:
+              "02/07/2026",
+
+            kg:
+              100,
+
+            tokens:
+              ["RFS-VOL-1204"],
+
+            nursery:
+              "Villa Guillermina, Santa Fe",
+
+            treeId:
+              "RFS-ARB-000972",
+
+            species:
+              "Espinillo",
+
+            status:
+              "Capacidad asignada",
+
+            trace: [
+              {
+                title:
+                  "Aporte registrado",
+
+                description:
+                  "La compensación fue asociada a tu cuenta.",
+
+                date:
+                  "02/07/2026",
+
+                state:
+                  "complete"
+              },
+
+              {
+                title:
+                  "Token generado",
+
+                description:
+                  "Se emitieron 100 tokens ambientales.",
+
+                date:
+                  "02/07/2026",
+
+                state:
+                  "complete"
+              },
+
+              {
+                title:
+                  "Capacidad asignada",
+
+                description:
+                  "La participación fue vinculada a capacidad disponible.",
+
+                date:
+                  "05/07/2026",
+
+                state:
+                  "current"
+              },
+
+              {
+                title:
+                  "Producción en vivero",
+
+                description:
+                  "El seguimiento continuará cuando se asigne el ejemplar.",
+
+                date:
+                  "Pendiente",
+
+                state:
+                  "pending"
+              },
+
+              {
+                title:
+                  "Plantación",
+
+                description:
+                  "Todavía no se registró la plantación.",
+
+                date:
+                  "Pendiente",
+
+                state:
+                  "pending"
+              }
+            ]
+          },
+
+          {
+            id:
+              "CON-003",
+
+            type:
+              "voluntary",
+
+            title:
+              "Compensación voluntaria",
+
+            subtitle:
+              "Participación ambiental individual",
+
+            date:
+              "18/06/2026",
+
+            kg:
+              1132,
+
+            tokens:
+              ["RFS-VOL-8542"],
+
+            nursery:
+              "IIFA — Sáenz Peña, Chaco",
+
+            treeId:
+              "RFS-ARB-000641",
+
+            species:
+              "Quebracho colorado",
+
+            status:
+              "Plantín producido",
+
+            trace: [
+              {
+                title:
+                  "Aporte registrado",
+
+                description:
+                  "La compensación fue asociada a tu cuenta.",
+
+                date:
+                  "18/06/2026",
+
+                state:
+                  "complete"
+              },
+
+              {
+                title:
+                  "Token generado",
+
+                description:
+                  "Se emitieron 1.132 tokens ambientales.",
+
+                date:
+                  "18/06/2026",
+
+                state:
+                  "complete"
+              },
+
+              {
+                title:
+                  "Capacidad asignada",
+
+                description:
+                  "Los tokens fueron vinculados a capacidad disponible.",
+
+                date:
+                  "21/06/2026",
+
+                state:
+                  "complete"
+              },
+
+              {
+                title:
+                  "Plantín producido",
+
+                description:
+                  "El ejemplar fue registrado dentro del vivero.",
+
+                date:
+                  "10/07/2026",
+
+                state:
+                  "current"
+              },
+
+              {
+                title:
+                  "Traslado y plantación",
+
+                description:
+                  "El destino definitivo todavía no fue confirmado.",
+
+                date:
+                  "Pendiente",
+
+                state:
+                  "pending"
+              }
+            ]
+          }
+
+        ]
+
+      }
+
+    };
+
+
+    /*
+     * Se mantienen para los botones
+     * de la demostración por correo.
+     */
+    const TOKENS = {
+
+      "RFS-CAL-4837": {
+
+        id:
+          "RFS-CAL-4837",
+
+        kg:
+          8,
+
+        source:
+          "Glaciarium",
+
+        activity:
+          "Entrada y Glaciobar",
+
+        date:
+          "15/07/2026",
+
+        nursery:
+          "IIFA — Sáenz Peña, Chaco",
+
+        treeId:
+          "RFS-ARB-001284",
+
+        species:
+          "Algarrobo blanco",
+
+        status:
+          "Plantín en crecimiento",
+
+        trace:
+          USERS[
+            "matias@email.com"
+          ]
+            .contributions[0]
+            .trace
+      },
+
+      "RFS-VOL-1204": {
+
+        id:
+          "RFS-VOL-1204",
+
+        kg:
+          100,
+
+        source:
+          "Compensación voluntaria",
+
+        activity:
+          "Aporte desde la web",
+
+        date:
+          "02/07/2026",
+
+        nursery:
+          "Villa Guillermina, Santa Fe",
+
+        treeId:
+          "RFS-ARB-000972",
+
+        species:
+          "Espinillo",
+
+        status:
+          "Capacidad asignada",
+
+        trace:
+          USERS[
+            "matias@email.com"
+          ]
+            .contributions[1]
+            .trace
+      },
+
+      "RFS-VOL-8542": {
+
+        id:
+          "RFS-VOL-8542",
+
+        kg:
+          1132,
+
+        source:
+          "Compensación voluntaria",
+
+        activity:
+          "Participación individual",
+
+        date:
+          "18/06/2026",
+
+        nursery:
+          "IIFA — Sáenz Peña, Chaco",
+
+        treeId:
+          "RFS-ARB-000641",
+
+        species:
+          "Quebracho colorado",
+
+        status:
+          "Plantín producido",
+
+        trace:
+          USERS[
+            "matias@email.com"
+          ]
+            .contributions[2]
+            .trace
+      }
+
+    };
+
+
+    const accessSection =
+      document.getElementById(
+        "access-section"
+      );
+
+    const dashboardSection =
+      document.getElementById(
+        "dashboard-section"
+      );
+
+    const emailForm =
+      document.getElementById(
+        "email-form"
+      );
+
+    const emailInput =
+      document.getElementById(
+        "email-input"
+      );
+
+    const emailError =
+      document.getElementById(
+        "email-error"
+      );
+
+    const tokenForm =
+      document.getElementById(
+        "token-form"
+      );
+
+    const tokenInput =
+      document.getElementById(
+        "token-input"
+      );
+
+    const tokenError =
+      document.getElementById(
+        "token-error"
+      );
+
+    const logoutButton =
+      document.getElementById(
+        "logout-button"
+      );
+
+    const contributionList =
+      document.getElementById(
+        "contribution-list"
+      );
+
+    const tokenModal =
+      document.getElementById(
+        "token-modal"
+      );
+
+    const modalClose =
+      document.getElementById(
+        "modal-close"
+      );
+
+
+    function formatNumber(
+      value
+    ) {
+      return Number(
+        value || 0
+      ).toLocaleString(
+        "es-AR"
+      );
+    }
+
+
+    function formatPercentage(
+      value
+    ) {
+      return Number(
+        value || 0
+      ).toLocaleString(
+        "es-AR",
+        {
+          minimumFractionDigits:
+            value < 10
+              ? 2
+              : 1,
+
+          maximumFractionDigits:
+            value < 10
+              ? 2
+              : 1
+        }
+      );
+    }
+
+
+    function validarConfiguracionSupabase() {
+
+      if (
+        !SUPABASE_URL ||
+        SUPABASE_URL.includes(
+          "PEGAR_ACA"
+        )
+      ) {
+        throw new Error(
+          "Falta configurar la URL de Supabase."
+        );
+      }
+
+      if (
+        !SUPABASE_PUBLIC_KEY ||
+        SUPABASE_PUBLIC_KEY.includes(
+          "PEGAR_ACA"
+        )
+      ) {
+        throw new Error(
+          "Falta configurar la llave pública de Supabase."
+        );
+      }
+
+    }
+
+
+    async function consultarTokenEnSupabase(
+      tokenId
+    ) {
+
+      validarConfiguracionSupabase();
+
+      const respuesta =
+        await fetch(
+          SUPABASE_URL +
+            "/rest/v1/rpc/consultar_impacto_token",
+          {
+            method:
+              "POST",
+
+            headers: {
+              apikey:
+                SUPABASE_PUBLIC_KEY,
+
+              Authorization:
+                "Bearer " +
+                SUPABASE_PUBLIC_KEY,
+
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+                p_token:
+                  tokenId
+              })
+          }
+        );
+
+      if (
+        !respuesta.ok
+      ) {
+
+        let detalle =
+          "No se pudo consultar el token.";
+
+        try {
+
+          const error =
+            await respuesta.json();
+
+          detalle =
+            error.message ||
+            error.details ||
+            error.hint ||
+            detalle;
+
+        } catch (_) {
+          // Mantiene el texto general.
+        }
+
+        throw new Error(
+          detalle
+        );
+
+      }
+
+      return await respuesta.json();
+
+    }
+
+
+    function convertirImpactoAToken(
+      impacto
+    ) {
+
+      const lotes =
+        Array.isArray(
+          impacto.lotes
+        )
+          ? impacto.lotes
+          : [];
+
+      const lotePrincipal =
+        lotes.length > 0
+          ? lotes[0]
+          : null;
+
+      const seguimientos =
+        lotePrincipal &&
+        Array.isArray(
+          lotePrincipal.seguimientos
+        )
+          ? lotePrincipal.seguimientos
+          : [];
+
+      const trazabilidad = [
+        {
+          title:
+            "Token generado",
+
+          description:
+            "Se emitió una compensación de " +
+            formatNumber(
+              impacto.kg_co2
+            ) +
+            " kg de CO₂.",
+
+          date:
+            formatearFechaDesdeSupabase(
+              impacto.fecha_emision
+            ),
+
+          state:
+            "complete"
+        }
+      ];
+
+
+      if (
+        lotePrincipal
+      ) {
+
+        trazabilidad.push({
+          title:
+            "Lote asignado",
+
+          description:
+            "La compensación fue vinculada al lote " +
+            lotePrincipal.lote_id +
+            ", correspondiente a la especie " +
+            lotePrincipal.especie +
+            ".",
+
+          date:
+            formatearFechaDesdeSupabase(
+              lotePrincipal.fecha_plantacion
+            ),
+
+          state:
+            seguimientos.length > 0
+              ? "complete"
+              : "current"
+        });
+
+      }
+
+
+      /*
+       * El JSON llega con el seguimiento
+       * más reciente primero.
+       *
+       * Lo invertimos para mostrar el
+       * historial desde el más antiguo.
+       */
+      seguimientos
+        .slice()
+        .reverse()
+        .forEach(
+          function (
+            seguimiento,
+            indice
+          ) {
+
+            let descripcion =
+              formatNumber(
+                seguimiento.arboles_vivos
+              ) +
+              " árboles vivos. Estado: " +
+              formatearEstadoVisible(
+                seguimiento.estado
+              ) +
+              ".";
+
+            if (
+              seguimiento
+                .altura_promedio_cm !== null &&
+              seguimiento
+                .altura_promedio_cm !== ""
+            ) {
+
+              descripcion +=
+                " Altura promedio: " +
+                seguimiento
+                  .altura_promedio_cm +
+                " cm.";
+
+            }
+
+            if (
+              seguimiento.observaciones
+            ) {
+
+              descripcion +=
+                " " +
+                seguimiento.observaciones;
+
+            }
+
+            trazabilidad.push({
+              title:
+                "Seguimiento del lote",
+
+              description:
+                descripcion,
+
+              date:
+                formatearFechaDesdeSupabase(
+                  seguimiento.fecha
+                ),
+
+              state:
+                indice ===
+                seguimientos.length - 1
+                  ? "current"
+                  : "complete"
+            });
+
+          }
+        );
+
+
+      if (
+        !lotePrincipal
+      ) {
+
+        trazabilidad.push({
+          title:
+            "Asignación pendiente",
+
+          description:
+            "El token todavía no tiene un lote forestal asignado.",
+
+          date:
+            "Pendiente",
+
+          state:
+            "pending"
+        });
+
+      }
+
+
+      return {
+        id:
+          impacto.token,
+
+        kg:
+          Number(
+            impacto.kg_co2 || 0
+          ),
+
+        source:
+          "Token ambiental",
+
+        activity:
+          lotePrincipal
+            ? "Compensación vinculada a un lote forestal"
+            : "Asignación pendiente",
+
+        date:
+          formatearFechaDesdeSupabase(
+            impacto.fecha_emision
+          ),
+
+        nursery:
+          lotePrincipal
+            ? lotePrincipal.vivero
+            : "Pendiente",
+
+        treeId:
+          lotePrincipal
+            ? lotePrincipal.lote_id
+            : "Pendiente",
+
+        species:
+          lotePrincipal
+            ? lotePrincipal.especie
+            : "Pendiente",
+
+        status:
+          lotePrincipal
+            ? formatearEstadoVisible(
+                lotePrincipal.estado_actual
+              )
+            : "Asignación pendiente",
+
+        trace:
+          trazabilidad
+      };
+
+    }
+
+
+    function formatearFechaDesdeSupabase(
+      fechaTexto
+    ) {
+
+      if (
+        !fechaTexto
+      ) {
+        return "Pendiente";
+      }
+
+      const fechaSimple =
+        String(
+          fechaTexto
+        ).substring(
+          0,
+          10
+        );
+
+      const partes =
+        fechaSimple.split(
+          "-"
+        );
+
+      if (
+        partes.length !== 3
+      ) {
+        return fechaTexto;
+      }
+
+      return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+      );
+
+    }
+
+
+    function formatearEstadoVisible(
+      estado
+    ) {
+
+      const texto =
+        String(
+          estado || ""
+        )
+          .trim()
+          .replaceAll(
+            "_",
+            " "
+          );
+
+      if (
+        !texto
+      ) {
+        return "Sin información";
+      }
+
+      return (
+        texto.charAt(0)
+          .toUpperCase() +
+        texto.slice(1)
+      );
+
+    }
+
+
+    function escaparHtml(
+      texto
+    ) {
+
+      const elemento =
+        document.createElement(
+          "div"
+        );
+
+      elemento.textContent =
+        String(
+          texto ?? ""
+        );
+
+      return elemento.innerHTML;
+
+    }
+
+
+    function getContributionIcon(
+      type
+    ) {
+
+      if (
+        type ===
+        "glaciarium"
+      ) {
+
+        return `
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polygon points="12 2 19 6.5 19 15.5 12 20 5 15.5 5 6.5"/>
+            <line x1="12" y1="2" x2="12" y2="20"/>
+            <line x1="5" y1="6.5" x2="19" y2="15.5"/>
+            <line x1="19" y1="6.5" x2="5" y2="15.5"/>
+          </svg>
+        `;
+
+      }
+
+      return `
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 22V10"/>
+          <path d="M12 14c-4.5 0-8-3.2-8-7 4.5 0 8 3.2 8 7Z"/>
+          <path d="M12 11c4.5 0 8-3.2 8-7-4.5 0-8 3.2-8 7Z"/>
+        </svg>
+      `;
+
+    }
+
+
+    function renderTrace(
+      trace
+    ) {
+
+      return trace.map(
+        function (
+          stage
+        ) {
+
+          return `
+            <div
+              class="trace-stage ${
+                escaparHtml(
+                  stage.state
+                )
+              }"
+            >
+
+              <span class="trace-point"></span>
+
+              <div class="trace-stage-content">
+
+                <strong>
+                  ${escaparHtml(
+                    stage.title
+                  )}
+                </strong>
+
+                <span>
+                  ${escaparHtml(
+                    stage.description
+                  )}
+                </span>
+
+              </div>
+
+              <span class="trace-date">
+                ${escaparHtml(
+                  stage.date
+                )}
+              </span>
+
+            </div>
+          `;
+
+        }
+      ).join("");
+
+    }
+
+
+    function openDashboard(
+      user
+    ) {
+
+      accessSection.classList.add(
+        "hidden"
+      );
+
+      dashboardSection.classList.add(
+        "show"
+      );
+
+      document.getElementById(
+        "welcome-title"
+      ).textContent =
+        "Hola, " +
+        user.name;
+
+      document.getElementById(
+        "welcome-email"
+      ).textContent =
+        user.email;
+
+      const totalKg =
+        user.contributions.reduce(
+          function (
+            total,
+            contribution
+          ) {
+            return (
+              total +
+              contribution.kg
+            );
+          },
+          0
+        );
+
+      document.getElementById(
+        "total-kg"
+      ).textContent =
+        formatNumber(
+          totalKg
+        ) +
+        " kg";
+
+      document.getElementById(
+        "total-tokens"
+      ).textContent =
+        formatNumber(
+          totalKg
+        );
+
+      document.getElementById(
+        "total-contributions"
+      ).textContent =
+        formatNumber(
+          user.contributions.length
+        );
+
+      updateTreeSummary(
+        totalKg
+      );
+
+      renderContributions(
+        user.contributions
+      );
+
+      window.scrollTo({
+        top:
+          dashboardSection.offsetTop -
+          70,
+
+        behavior:
+          "smooth"
+      });
+
+    }
+
+
+    function updateTreeSummary(
+      totalKg
+    ) {
+
+      const completeTrees =
+        Math.floor(
+          totalKg /
+          TREE_CAPACITY_KG
+        );
+
+      const remainingKg =
+        totalKg %
+        TREE_CAPACITY_KG;
+
+      const percentage =
+        remainingKg === 0 &&
+        completeTrees > 0
+          ? 100
+          : (
+              remainingKg /
+              TREE_CAPACITY_KG
+            ) *
+            100;
+
+      const degrees =
+        (
+          percentage /
+          100
+        ) *
+        360;
+
+      document
+        .getElementById(
+          "tree-progress"
+        )
+        .style
+        .setProperty(
+          "--tree-progress",
+          degrees +
+          "deg"
+        );
+
+      const value =
+        document.getElementById(
+          "tree-progress-value"
+        );
+
+      const label =
+        document.getElementById(
+          "tree-progress-label"
+        );
+
+      const note =
+        document.getElementById(
+          "tree-progress-note"
+        );
+
+
+      if (
+        completeTrees === 0
+      ) {
+
+        value.textContent =
+          formatPercentage(
+            (
+              totalKg /
+              TREE_CAPACITY_KG
+            ) *
+            100
+          ) +
+          "%";
+
+        label.textContent =
+          "de la capacidad estimada de un árbol";
+
+        note.textContent =
+          "Tus " +
+          formatNumber(
+            totalKg
+          ) +
+          " kg forman parte de una capacidad estimada de " +
+          formatNumber(
+            TREE_CAPACITY_KG
+          ) +
+          " kg.";
+
+      } else if (
+        remainingKg === 0
+      ) {
+
+        value.textContent =
+          formatNumber(
+            completeTrees
+          );
+
+        label.textContent =
+          completeTrees === 1
+            ? "árbol de capacidad equivalente"
+            : "árboles de capacidad equivalente";
+
+        note.textContent =
+          "Tu impacto equivale a la capacidad estimada completa de " +
+          formatNumber(
+            completeTrees
+          ) +
+          (
+            completeTrees === 1
+              ? " árbol."
+              : " árboles."
+          );
+
+      } else {
+
+        value.textContent =
+          formatNumber(
+            completeTrees
+          ) +
+          " +";
+
+        label.textContent =
+          completeTrees === 1
+            ? "árbol completo y una parte adicional"
+            : "árboles completos y una parte adicional";
+
+        note.textContent =
+          "Tu impacto equivale a " +
+          formatNumber(
+            completeTrees
+          ) +
+          (
+            completeTrees === 1
+              ? " árbol completo"
+              : " árboles completos"
+          ) +
+          " y " +
+          formatNumber(
+            remainingKg
+          ) +
+          " kg adicionales.";
+
+      }
+
+    }
+
+
+    function renderContributions(
+      contributions
+    ) {
+
+      contributionList.innerHTML =
+        contributions.map(
+          function (
+            contribution,
+            index
+          ) {
+
+            return `
+              <article
+                class="contribution-card"
+                data-index="${index}"
+              >
+
+                <button
+                  type="button"
+                  class="contribution-header"
+                >
+
+                  <span
+                    class="contribution-icon ${
+                      contribution.type ===
+                      "voluntary"
+                        ? "voluntary"
+                        : ""
+                    }"
+                  >
+                    ${getContributionIcon(
+                      contribution.type
+                    )}
+                  </span>
+
+                  <span class="contribution-copy">
+
+                    <h3>
+                      ${escaparHtml(
+                        contribution.title
+                      )}
+                    </h3>
+
+                    <p>
+                      ${escaparHtml(
+                        contribution.subtitle
+                      )}
+                      ·
+                      ${escaparHtml(
+                        contribution.date
+                      )}
+                    </p>
+
+                  </span>
+
+                  <span class="contribution-values">
+
+                    <span class="contribution-value">
+
+                      <strong>
+                        ${formatNumber(
+                          contribution.kg
+                        )} kg
+                      </strong>
+
+                      <span>
+                        CO₂ compensado
+                      </span>
+
+                    </span>
+
+                    <span class="contribution-value">
+
+                      <strong>
+                        ${formatNumber(
+                          contribution.kg
+                        )}
+                      </strong>
+
+                      <span>
+                        tokens
+                      </span>
+
+                    </span>
+
+                  </span>
+
+                  <span class="contribution-arrow">
+
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    >
+                      <path d="M6 9l6 6 6-6"/>
+                    </svg>
+
+                  </span>
+
+                </button>
+
+                <div class="contribution-detail">
+
+                  <div class="detail-divider"></div>
+
+                  <div class="detail-grid">
+
+                    <div class="token-info">
+
+                      <h4>
+                        Información vinculada
+                      </h4>
+
+                      <div class="token-data">
+
+                        <div class="token-data-item">
+
+                          <span>
+                            Token
+                          </span>
+
+                          <strong>
+                            ${escaparHtml(
+                              contribution.tokens[0]
+                            )}
+                          </strong>
+
+                        </div>
+
+                        <div class="token-data-item">
+
+                          <span>
+                            Estado actual
+                          </span>
+
+                          <strong>
+                            ${escaparHtml(
+                              contribution.status
+                            )}
+                          </strong>
+
+                        </div>
+
+                        <div class="token-data-item">
+
+                          <span>
+                            Vivero
+                          </span>
+
+                          <strong>
+                            ${escaparHtml(
+                              contribution.nursery
+                            )}
+                          </strong>
+
+                        </div>
+
+                        <div class="token-data-item">
+
+                          <span>
+                            ID del lote
+                          </span>
+
+                          <strong>
+                            ${escaparHtml(
+                              contribution.treeId
+                            )}
+                          </strong>
+
+                        </div>
+
+                        <div class="token-data-item">
+
+                          <span>
+                            Especie
+                          </span>
+
+                          <strong>
+                            ${escaparHtml(
+                              contribution.species
+                            )}
+                          </strong>
+
+                        </div>
+
+                        <div class="token-data-item">
+
+                          <span>
+                            Tu participación
+                          </span>
+
+                          <strong>
+                            ${formatNumber(
+                              contribution.kg
+                            )} kg
+                          </strong>
+
+                        </div>
+
+                      </div>
+
+                      <button
+                        type="button"
+                        class="token-id-button"
+                        data-token="${
+                          contribution.tokens[0]
+                        }"
+                      >
+                        Abrir token individual →
+                      </button>
+
+                    </div>
+
+                    <div class="trace-panel">
+
+                      <h4>
+                        Trazabilidad
+                      </h4>
+
+                      <div class="trace-route">
+
+                        ${renderTrace(
+                          contribution.trace
+                        )}
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </article>
+            `;
+
+          }
+        ).join("");
+
+
+      document
+        .querySelectorAll(
+          ".contribution-header"
+        )
+        .forEach(
+          function (
+            header
+          ) {
+
+            header.addEventListener(
+              "click",
+              function () {
+
+                const card =
+                  header.closest(
+                    ".contribution-card"
+                  );
+
+                card.classList.toggle(
+                  "open"
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          ".token-id-button"
+        )
+        .forEach(
+          function (
+            button
+          ) {
+
+            button.addEventListener(
+              "click",
+              function () {
+
+                const tokenId =
+                  button.dataset.token;
+
+                openTokenModal(
+                  TOKENS[
+                    tokenId
+                  ]
+                );
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+
+    function openTokenModal(
+      token
+    ) {
+
+      if (
+        !token
+      ) {
+        return;
+      }
+
+      document.getElementById(
+        "modal-title"
+      ).textContent =
+        token.source;
+
+      document.getElementById(
+        "modal-token-id"
+      ).textContent =
+        token.id;
+
+      document.getElementById(
+        "modal-amount"
+      ).innerHTML =
+        formatNumber(
+          token.kg
+        ) +
+        " kg" +
+        "<span>de CO₂ compensados</span>";
+
+      document.getElementById(
+        "modal-data"
+      ).innerHTML = `
+
+        <div>
+
+          <span>
+            Actividad
+          </span>
+
+          <strong>
+            ${escaparHtml(
+              token.activity
+            )}
+          </strong>
+
+        </div>
+
+        <div>
+
+          <span>
+            Fecha
+          </span>
+
+          <strong>
+            ${escaparHtml(
+              token.date
+            )}
+          </strong>
+
+        </div>
+
+        <div>
+
+          <span>
+            Vivero
+          </span>
+
+          <strong>
+            ${escaparHtml(
+              token.nursery
+            )}
+          </strong>
+
+        </div>
+
+        <div>
+
+          <span>
+            Lote vinculado
+          </span>
+
+          <strong>
+            ${escaparHtml(
+              token.treeId
+            )}
+          </strong>
+
+        </div>
+
+        <div>
+
+          <span>
+            Especie
+          </span>
+
+          <strong>
+            ${escaparHtml(
+              token.species
+            )}
+          </strong>
+
+        </div>
+
+        <div>
+
+          <span>
+            Estado
+          </span>
+
+          <strong>
+            ${escaparHtml(
+              token.status
+            )}
+          </strong>
+
+        </div>
+      `;
+
+      document.getElementById(
+        "modal-trace-route"
+      ).innerHTML =
+        renderTrace(
+          token.trace
+        );
+
+      tokenModal.classList.add(
+        "show"
+      );
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+    function closeTokenModal() {
+
+      tokenModal.classList.remove(
+        "show"
+      );
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    /*
+     * Ingreso por correo:
+     * sigue usando la demostración local.
+     */
+    emailForm.addEventListener(
+      "submit",
+      function (
+        event
+      ) {
+
+        event.preventDefault();
+
+        const email =
+          emailInput.value
+            .trim()
+            .toLowerCase();
+
+        const user =
+          USERS[
+            email
+          ];
+
+        if (
+          !user
+        ) {
+
+          emailError.classList.add(
+            "show"
+          );
+
+          return;
+
+        }
+
+        emailError.classList.remove(
+          "show"
+        );
+
+        openDashboard(
+          user
+        );
+
+      }
+    );
+
+
+    /*
+     * Consulta real por token.
+     */
+    tokenForm.addEventListener(
+      "submit",
+      async function (
+        event
+      ) {
+
+        event.preventDefault();
+
+        const tokenId =
+          tokenInput.value
+            .trim()
+            .toUpperCase();
+
+        const boton =
+          tokenForm.querySelector(
+            'button[type="submit"]'
+          );
+
+        tokenError.classList.remove(
+          "show"
+        );
+
+        if (
+          !tokenId
+        ) {
+
+          tokenError.textContent =
+            "Ingresá el identificador del token.";
+
+          tokenError.classList.add(
+            "show"
+          );
+
+          return;
+
+        }
+
+        const textoOriginal =
+          boton.textContent;
+
+        boton.disabled =
+          true;
+
+        boton.textContent =
+          "Consultando...";
+
+        try {
+
+          const impacto =
+            await consultarTokenEnSupabase(
+              tokenId
+            );
+
+          if (
+            !impacto ||
+            impacto.encontrado !==
+              true
+          ) {
+
+            tokenError.textContent =
+              "No encontramos un token con ese identificador.";
+
+            tokenError.classList.add(
+              "show"
+            );
+
+            return;
+
+          }
+
+          const token =
+            convertirImpactoAToken(
+              impacto
+            );
+
+          openTokenModal(
+            token
+          );
+
+        } catch (
+          error
+        ) {
+
+          console.error(
+            "Error consultando el token:",
+            error
+          );
+
+          tokenError.textContent =
+            "No pudimos consultar el token. Intentá nuevamente.";
+
+          tokenError.classList.add(
+            "show"
+          );
+
+        } finally {
+
+          boton.disabled =
+            false;
+
+          boton.textContent =
+            textoOriginal;
+
+        }
+
+      }
+    );
+
+
+    logoutButton.addEventListener(
+      "click",
+      function () {
+
+        dashboardSection.classList.remove(
+          "show"
+        );
+
+        accessSection.classList.remove(
+          "hidden"
+        );
+
+        emailInput.value =
+          "";
+
+        window.scrollTo({
+          top:
+            accessSection.offsetTop -
+            70,
+
+          behavior:
+            "smooth"
+        });
+
+      }
+    );
+
+
+    modalClose.addEventListener(
+      "click",
+      closeTokenModal
+    );
+
+
+    tokenModal.addEventListener(
+      "click",
+      function (
+        event
+      ) {
+
+        if (
+          event.target ===
+          tokenModal
+        ) {
+
+          closeTokenModal();
+
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      function (
+        event
+      ) {
+
+        if (
+          event.key ===
+            "Escape" &&
+          tokenModal.classList.contains(
+            "show"
+          )
+        ) {
+
+          closeTokenModal();
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>
