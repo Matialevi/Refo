@@ -589,6 +589,31 @@
       font-size: 14px;
     }
 
+    .payment-details {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .payment-details input {
+      width: 100%;
+      padding: 13px 14px;
+      font: 13px var(--font-body);
+      color: var(--paper);
+      background: rgba(244, 241, 230, 0.055);
+      border: 1px solid rgba(244, 241, 230, 0.14);
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .payment-details input:focus {
+      border-color: var(--amber-light);
+    }
+
+    .payment-details input::placeholder {
+      color: rgba(244, 241, 230, 0.36);
+    }
+
     .demo-note {
       margin-top: 11px;
 
@@ -1315,6 +1340,23 @@
           </div>
 
 
+          <div class="payment-details">
+            <input
+              type="text"
+              id="customer-name"
+              autocomplete="name"
+              placeholder="Nombre (opcional)"
+            >
+
+            <input
+              type="email"
+              id="customer-email"
+              autocomplete="email"
+              placeholder="Correo para recibir y consultar tu token"
+              required
+            >
+          </div>
+
           <button
             type="button"
             class="btn btn-solid compensate-button"
@@ -1325,8 +1367,8 @@
 
 
           <p class="demo-note">
-            Esta demostración todavía no procesa pagos
-            ni emite tokens reales.
+            El pago se procesa de forma segura mediante Mercado Pago.
+            Se genera un token por operación confirmada.
           </p>
 
 
@@ -1334,7 +1376,7 @@
             class="compensation-success"
             id="compensation-success"
           >
-            La compensación fue simulada correctamente.
+            Estamos preparando tu compensación.
           </div>
 
         </div>
@@ -1637,6 +1679,15 @@
 
     const successBox =
       document.getElementById("compensation-success");
+
+    const customerName =
+      document.getElementById("customer-name");
+
+    const customerEmail =
+      document.getElementById("customer-email");
+
+    const PAYMENT_FUNCTION_URL =
+      "https://ubfcuebfusxwejsuworg.supabase.co/functions/v1/crear-pago";
 
 
     /* =========================================================
@@ -1946,12 +1997,12 @@
 
 
     /* =========================================================
-       SIMULACIÓN
+       PAGO CON MERCADO PAGO
     ========================================================= */
 
     compensateButton.addEventListener(
       "click",
-      function () {
+      async function () {
 
         const kg =
           Math.max(
@@ -1962,35 +2013,53 @@
           );
 
 
-        compensateButton.disabled =
-          true;
+        const email =
+          customerEmail.value.trim().toLowerCase();
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          customerEmail.focus();
+          successBox.innerHTML =
+            "<strong>Ingresá un correo válido.</strong><br>Lo vamos a usar para asociar y consultar tu token.";
+          successBox.classList.add("show");
+          return;
+        }
+
+        compensateButton.disabled = true;
 
 
         compensateButton.textContent =
-          "Procesando simulación...";
+          "Conectando con Mercado Pago...";
 
 
-        setTimeout(
-          function () {
+        try {
+          const response = await fetch(PAYMENT_FUNCTION_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email: email,
+              nombre: customerName.value.trim(),
+              kg: kg
+            })
+          });
 
-            compensateButton.textContent =
-              "Compensación simulada";
+          const result = await response.json();
 
+          if (!response.ok || !result.checkout_url) {
+            throw new Error(result.error || "No pudimos iniciar el pago.");
+          }
 
-            successBox.innerHTML =
-              "<strong>La participación fue simulada correctamente.</strong><br>" +
-              "Se emitiría 1 certificado por " +
-              formatNumber(kg) +
-              " kg de CO₂ dentro de la capacidad disponible del proyecto.";
-
-
-            successBox.classList.add(
-              "show"
-            );
-
-          },
-          850
-        );
+          window.location.href = result.checkout_url;
+        } catch (error) {
+          compensateButton.disabled = false;
+          compensateButton.textContent =
+            "Compensar " + formatNumber(kg) + " kg";
+          successBox.innerHTML =
+            "<strong>No pudimos abrir Mercado Pago.</strong><br>" +
+            (error.message || "Intentá nuevamente en unos minutos.");
+          successBox.classList.add("show");
+        }
 
       }
     );
@@ -2001,6 +2070,23 @@
     ========================================================= */
 
     updateCompensation(50);
+
+    const paymentStatus =
+      new URLSearchParams(window.location.search).get("pago");
+
+    if (paymentStatus === "aprobado") {
+      successBox.innerHTML =
+        "<strong>Pago recibido.</strong><br>Estamos confirmándolo con Mercado Pago. Tu token quedará asociado al correo ingresado.";
+      successBox.classList.add("show");
+    } else if (paymentStatus === "pendiente") {
+      successBox.innerHTML =
+        "<strong>El pago está pendiente.</strong><br>El token se generará automáticamente cuando Mercado Pago lo apruebe.";
+      successBox.classList.add("show");
+    } else if (paymentStatus === "fallido") {
+      successBox.innerHTML =
+        "<strong>El pago no se completó.</strong><br>Podés intentarlo nuevamente cuando quieras.";
+      successBox.classList.add("show");
+    }
 
   </script>
 
