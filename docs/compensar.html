@@ -2080,8 +2080,24 @@
 
     updateCompensation(50);
 
+    const paymentParams =
+      new URLSearchParams(window.location.search);
+
+    const mercadoPagoStatus =
+      paymentParams.get("status") ||
+      paymentParams.get("collection_status");
+
     const paymentStatus =
-      new URLSearchParams(window.location.search).get("pago");
+      paymentParams.get("pago") ||
+      (
+        mercadoPagoStatus === "approved"
+          ? "aprobado"
+          : mercadoPagoStatus === "pending" || mercadoPagoStatus === "in_process"
+            ? "pendiente"
+            : mercadoPagoStatus === "rejected" || mercadoPagoStatus === "cancelled"
+              ? "fallido"
+              : null
+      );
 
     if (paymentStatus === "aprobado") {
       successBox.innerHTML =
@@ -2089,8 +2105,8 @@
       successBox.classList.add("show");
 
       const paymentId =
-        new URLSearchParams(window.location.search).get("payment_id") ||
-        new URLSearchParams(window.location.search).get("collection_id");
+        paymentParams.get("payment_id") ||
+        paymentParams.get("collection_id");
 
       if (paymentId) {
         fetch(PAYMENT_CONFIRMATION_URL, {
