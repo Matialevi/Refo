@@ -1035,7 +1035,7 @@
         <div class="header-facts">
 
           <span class="header-fact">
-            1 kg de CO₂ = 1 token
+            1 kg de CO₂ = $100
           </span>
 
         </div>
@@ -1246,7 +1246,7 @@
             id="tree-equivalence"
           >
             Tu participación representa 50 kg dentro
-            de una capacidad estimada de 3.000 kg.
+            de una capacidad estimada de 600 kg.
           </p>
 
 
@@ -1256,11 +1256,11 @@
             <div class="result-row">
 
               <span>
-                Tokens registrados
+                Certificado emitido
               </span>
 
               <strong id="tokens-output">
-                50 tokens
+                1 certificado
               </strong>
 
             </div>
@@ -1269,11 +1269,11 @@
             <div class="result-row">
 
               <span>
-                Conversión
+                Cantidad certificada
               </span>
 
               <strong>
-                1 token = 1 kg
+                50 kg de CO₂
               </strong>
 
             </div>
@@ -1286,7 +1286,7 @@
               </span>
 
               <strong id="capacity-output">
-                50 de 3.000 kg
+                50 de 600 kg
               </strong>
 
             </div>
@@ -1397,11 +1397,11 @@
           <div class="route-stage-content">
 
             <h3>
-              Se genera el token
+              Se genera el certificado
             </h3>
 
             <p>
-              Cada kilogramo genera un token.
+              La operación genera un certificado único por la cantidad total compensada.
             </p>
 
           </div>
@@ -1598,7 +1598,7 @@
     ========================================================= */
 
     const PRICE_PER_KG = 100;
-    const TREE_CAPACITY_KG = 3000;
+    const TREE_CAPACITY_KG = 600;
 
 
     /* =========================================================
@@ -1719,12 +1719,7 @@
 
 
       tokensOutput.textContent =
-        formatNumber(kg) +
-        (
-          kg === 1
-            ? " token"
-            : " tokens"
-        );
+        "1 certificado";
 
 
       priceOutput.textContent =
@@ -1984,13 +1979,9 @@
 
             successBox.innerHTML =
               "<strong>La participación fue simulada correctamente.</strong><br>" +
+              "Se emitiría 1 certificado por " +
               formatNumber(kg) +
-              (
-                kg === 1
-                  ? " token quedaría registrado"
-                  : " tokens quedarían registrados"
-              ) +
-              " dentro de la capacidad disponible del proyecto.";
+              " kg de CO₂ dentro de la capacidad disponible del proyecto.";
 
 
             successBox.classList.add(

@@ -1171,11 +1171,11 @@
           <div class="header-data-item">
 
             <strong>
-              1:1
+              $100
             </strong>
 
             <span>
-              un kilogramo por token
+              por kilogramo compensado
             </span>
 
           </div>
@@ -1578,11 +1578,11 @@
             <div class="result-row">
 
               <span>
-                Tokens
+                Certificado
               </span>
 
               <strong id="result-tokens">
-                3 tokens
+                1 certificado
               </strong>
 
             </div>
@@ -1591,11 +1591,11 @@
             <div class="result-row">
 
               <span>
-                Conversión
+                Cantidad certificada
               </span>
 
               <strong>
-                1 token = 1 kg
+                3 kg de CO₂
               </strong>
 
             </div>
@@ -1738,11 +1738,11 @@
           <div class="process-copy">
 
             <h3>
-              Se generan los tokens
+              Se genera el certificado
             </h3>
 
             <p>
-              Cada kilogramo compensado genera un token.
+              La operación genera un certificado único por la cantidad total compensada.
             </p>
 
           </div>
@@ -2091,12 +2091,9 @@
 
 
       resultTokens.textContent =
+        "1 certificado por " +
         formatNumber(kg) +
-        (
-          kg === 1
-            ? " token"
-            : " tokens"
-        );
+        " kg";
 
 
       resultPrice.textContent =
@@ -2249,13 +2246,9 @@
             successBox.innerHTML =
               "<strong>La compensación fue simulada correctamente.</strong><br>" +
               activity.name +
-              " quedó registrada con " +
+              " quedó registrada en 1 certificado por " +
               formatNumber(kg) +
-              (
-                kg === 1
-                  ? " token."
-                  : " tokens."
-              );
+              " kg de CO₂.";
 
 
             successBox.classList.add(

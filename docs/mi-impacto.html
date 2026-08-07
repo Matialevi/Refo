@@ -133,13 +133,13 @@
     }
 
     .access-section {
-      padding: 90px 0 115px;
+      padding: 72px 0 88px;
       background: var(--paper);
     }
 
     .access-intro {
       max-width: 760px;
-      margin-bottom: 44px;
+      margin-bottom: 30px;
     }
 
     .access-intro h2 {
@@ -164,8 +164,8 @@
 
     .access-card {
       position: relative;
-      min-height: 420px;
-      padding: 42px;
+      min-height: 340px;
+      padding: 32px;
       overflow: hidden;
       border-radius: 22px;
     }
@@ -193,7 +193,7 @@
 
     .access-card h3 {
       max-width: 430px;
-      font-size: clamp(25px, 3vw, 35px);
+      font-size: clamp(23px, 2.6vw, 31px);
       line-height: 1.15;
     }
 
@@ -223,7 +223,7 @@
     .access-form {
       position: relative;
       z-index: 1;
-      margin-top: 34px;
+      margin-top: 24px;
     }
 
     .access-form label {
@@ -334,7 +334,7 @@
 
     .dashboard-section {
       display: none;
-      padding: 70px 0 115px;
+      padding: 54px 0 88px;
       background: var(--paper);
     }
 
@@ -347,7 +347,7 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 30px;
-      margin-bottom: 35px;
+      margin-bottom: 24px;
     }
 
     .dashboard-welcome h2 {
@@ -389,12 +389,12 @@
     }
 
     .summary-main {
-      padding: 48px;
+      padding: 34px;
     }
 
     .summary-main h3 {
       max-width: 520px;
-      font-size: clamp(27px, 3.2vw, 40px);
+      font-size: clamp(25px, 2.8vw, 34px);
       line-height: 1.15;
       color: var(--paper);
     }
@@ -411,11 +411,11 @@
       display: grid;
       grid-template-columns: 1.35fr 1fr 1fr;
       gap: 12px;
-      margin-top: 37px;
+      margin-top: 25px;
     }
 
     .summary-number {
-      padding: 21px;
+      padding: 16px;
       background: rgba(244, 241, 230, 0.045);
       border: 1px solid rgba(244, 241, 230, 0.1);
       border-radius: 13px;
@@ -424,7 +424,7 @@
     .summary-number strong {
       display: block;
       font-family: var(--font-display);
-      font-size: clamp(27px, 3vw, 40px);
+      font-size: clamp(24px, 2.6vw, 34px);
       font-weight: 500;
       line-height: 1;
       color: var(--paper);
@@ -444,8 +444,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 470px;
-      padding: 45px;
+      min-height: 360px;
+      padding: 32px;
       background:
         radial-gradient(circle at 50% 30%, rgba(126, 163, 88, 0.2), transparent 40%),
         rgba(244, 241, 230, 0.035);
@@ -457,8 +457,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 245px;
-      height: 245px;
+      width: 190px;
+      height: 190px;
       background:
         conic-gradient(
           var(--moss-light) 0deg,
@@ -487,16 +487,16 @@
     }
 
     .tree-progress-content svg {
-      width: 41px;
-      height: 41px;
-      margin-bottom: 9px;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 7px;
       color: var(--moss-light);
     }
 
     .tree-progress-value {
       display: block;
       font-family: var(--font-display);
-      font-size: 39px;
+      font-size: 33px;
       font-weight: 500;
       line-height: 1;
       color: var(--paper);
@@ -823,10 +823,11 @@
 
     .token-modal-card {
       position: relative;
-      width: min(570px, 100%);
+      width: min(620px, 100%);
       max-height: 90vh;
       padding: 34px;
       overflow-y: auto;
+      scrollbar-width: none;
       color: var(--paper);
       background:
         radial-gradient(circle at 80% 10%, rgba(143, 212, 222, 0.14), transparent 37%),
@@ -834,6 +835,10 @@
       border: 1px solid rgba(244, 241, 230, 0.13);
       border-radius: 19px;
       box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45);
+    }
+
+    .token-modal-card::-webkit-scrollbar {
+      display: none;
     }
 
     .modal-close {
@@ -919,8 +924,13 @@
     }
 
     .modal-trace h4 {
-      font-size: 17px;
+      font-size: 20px;
       color: var(--paper);
+    }
+
+    .modal-trace .trace-stage {
+      gap: 16px;
+      padding-bottom: 27px;
     }
 
     .modal-trace .trace-route::before {
@@ -945,12 +955,19 @@
     }
 
     .modal-trace .trace-stage-content strong {
+      font-size: 15px;
       color: var(--paper);
     }
 
-    .modal-trace .trace-stage-content span,
+    .modal-trace .trace-stage-content span {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: rgba(244, 241, 230, 0.63);
+    }
+
     .modal-trace .trace-date {
-      color: rgba(244, 241, 230, 0.46);
+      font-size: 9.5px;
+      color: rgba(244, 241, 230, 0.56);
     }
 
     @media (max-width: 980px) {
@@ -961,7 +978,7 @@
       }
 
       .summary-visual {
-        min-height: 410px;
+        min-height: 320px;
         border-top: 1px solid rgba(244, 241, 230, 0.1);
         border-left: none;
       }
@@ -1016,8 +1033,8 @@
       }
 
       .tree-progress {
-        width: 220px;
-        height: 220px;
+        width: 180px;
+        height: 180px;
       }
 
       .contribution-header {
@@ -1380,11 +1397,11 @@
             <div class="summary-number">
 
               <strong id="total-tokens">
-                1.240
+                3
               </strong>
 
               <span>
-                tokens registrados
+                certificados registrados
               </span>
 
             </div>
@@ -1455,7 +1472,7 @@
             id="tree-progress-note"
           >
             Tus 1.240 kg forman parte de una capacidad estimada
-            de 3.000 kg.
+            de 600 kg.
           </p>
 
         </div>
@@ -1656,7 +1673,7 @@
      * una demostración temporal.
      */
 
-    const TREE_CAPACITY_KG = 3000;
+    const TREE_CAPACITY_KG = 600;
 
 
     const SUPABASE_URL =
@@ -1737,7 +1754,7 @@
                   "Token generado",
 
                 description:
-                  "Se emitieron 8 tokens ambientales.",
+                  "Se emitió un certificado ambiental por 8 kg de CO₂.",
 
                 date:
                   "15/07/2026",
@@ -1751,7 +1768,7 @@
                   "Capacidad asignada",
 
                 description:
-                  "Los tokens fueron vinculados al proyecto.",
+                  "El certificado fue vinculado al proyecto.",
 
                 date:
                   "18/07/2026",
@@ -1844,7 +1861,7 @@
                   "Token generado",
 
                 description:
-                  "Se emitieron 100 tokens ambientales.",
+                  "Se emitió un certificado ambiental por 100 kg de CO₂.",
 
                 date:
                   "02/07/2026",
@@ -1951,7 +1968,7 @@
                   "Token generado",
 
                 description:
-                  "Se emitieron 1.132 tokens ambientales.",
+                  "Se emitió un certificado ambiental por 1.132 kg de CO₂.",
 
                 date:
                   "18/06/2026",
@@ -1965,7 +1982,7 @@
                   "Capacidad asignada",
 
                 description:
-                  "Los tokens fueron vinculados a capacidad disponible.",
+                  "El certificado fue vinculado a capacidad disponible.",
 
                 date:
                   "21/06/2026",
@@ -2478,7 +2495,7 @@
             "Asignación pendiente",
 
           description:
-            "El token todavía no tiene un lote forestal asignado.",
+            "El certificado todavía no tiene un lote forestal asignado.",
 
           date:
             "Pendiente",
@@ -2774,7 +2791,7 @@
         "total-tokens"
       ).textContent =
         formatNumber(
-          totalKg
+          user.contributions.length
         );
 
       document.getElementById(
@@ -3024,12 +3041,12 @@
 
                       <strong>
                         ${formatNumber(
-                          contribution.kg
+                          contribution.tokens.length
                         )}
                       </strong>
 
                       <span>
-                        tokens
+                        certificado
                       </span>
 
                     </span>
