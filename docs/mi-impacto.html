@@ -299,6 +299,38 @@
       line-height: 1.55;
     }
 
+    .auth-fields {
+      display: grid;
+      gap: 12px;
+    }
+
+    .auth-fields label {
+      margin: 2px 0 -4px;
+    }
+
+    .auth-fields input {
+      width: 100%;
+      padding: 15px 16px;
+      color: var(--paper);
+      background: rgba(244, 241, 230, 0.06);
+      border: 1px solid rgba(244, 241, 230, 0.14);
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .auth-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .auth-secondary {
+      color: var(--paper);
+      background: transparent;
+      border: 1px solid rgba(244, 241, 230, 0.25);
+    }
+
     .access-card-primary .access-example {
       color: rgba(244, 241, 230, 0.34);
     }
@@ -1239,7 +1271,7 @@
               Correo electrónico
             </label>
 
-            <div class="field-row">
+            <div class="auth-fields">
 
               <input
                 type="email"
@@ -1249,6 +1281,23 @@
                 required
               >
 
+              <label for="password-input">
+                Contraseña
+              </label>
+
+              <input
+                type="password"
+                id="password-input"
+                placeholder="Mínimo 6 caracteres"
+                autocomplete="current-password"
+                minlength="6"
+                required
+              >
+
+            </div>
+
+            <div class="auth-actions">
+
               <button
                 type="submit"
                 class="btn btn-solid access-button"
@@ -1256,17 +1305,25 @@
                 Ingresar
               </button>
 
+              <button
+                type="button"
+                class="btn access-button auth-secondary"
+                id="signup-button"
+              >
+                Crear cuenta
+              </button>
+
             </div>
 
             <p class="access-example">
-              Para probar la demo: matias@email.com
+              Usá el mismo correo que ingresaste al compensar.
             </p>
 
             <div
               class="access-error"
               id="email-error"
             >
-              No encontramos una cuenta asociada a ese correo.
+              No pudimos iniciar sesión.
             </div>
 
           </form>
@@ -1299,7 +1356,7 @@
               <input
                 type="text"
                 id="token-input"
-                placeholder="RFS-TEST-0001"
+                placeholder="RFS-TKN-XXXXXXXXXXXX"
                 autocomplete="off"
                 required
               >
@@ -1314,7 +1371,7 @@
             </div>
 
             <p class="access-example">
-              Para probar: RFS-TEST-0001
+              Ejemplo: RFS-TKN-9B7D33A3AA39
             </p>
 
             <div
@@ -1660,17 +1717,15 @@
   </footer>
 
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/main.js"></script>
 
 
   <script>
 
     /*
-     * La consulta individual del token
-     * ya usa datos reales de Supabase.
-     *
-     * El acceso por correo continúa siendo
-     * una demostración temporal.
+     * Tanto la consulta individual como el acceso
+     * a la cuenta usan datos reales de Supabase.
      */
 
     const TREE_CAPACITY_KG = 600;
@@ -1683,10 +1738,19 @@
     const SUPABASE_PUBLIC_KEY =
       "sb_publishable_p_QUFBkzoFr1HxTPi9C2Dg_otVkScvZ";
 
+    const AUTH_REDIRECT_URL =
+      "https://matialevi.github.io/Refo/mi-impacto.html";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLIC_KEY
+      );
+
 
     /*
-     * Datos simulados mantenidos solamente
-     * para la demostración del ingreso por correo.
+     * Datos históricos de diseño. La interfaz activa
+     * obtiene las cuentas y los tokens desde Supabase.
      */
     const USERS = {
 
@@ -2173,6 +2237,16 @@
         "email-error"
       );
 
+    const passwordInput =
+      document.getElementById(
+        "password-input"
+      );
+
+    const signupButton =
+      document.getElementById(
+        "signup-button"
+      );
+
     const tokenForm =
       document.getElementById(
         "token-form"
@@ -2332,6 +2406,32 @@
       }
 
       return await respuesta.json();
+
+    }
+
+    async function cargarMiImpacto() {
+
+      const resultado =
+        await supabaseClient.rpc(
+          "consultar_mi_impacto"
+        );
+
+      if (resultado.error) {
+        throw resultado.error;
+      }
+
+      if (
+        !resultado.data ||
+        resultado.data.encontrado !== true
+      ) {
+        throw new Error(
+          "La cuenta todavía no está vinculada a un perfil de Reforestall."
+        );
+      }
+
+      openDashboard(
+        resultado.data.usuario
+      );
 
     }
 
@@ -2791,7 +2891,12 @@
         "total-tokens"
       ).textContent =
         formatNumber(
-          user.contributions.length
+          user.contributions.reduce(
+            function (total, contribution) {
+              return total + contribution.tokens.length;
+            },
+            0
+          )
         );
 
       document.getElementById(
@@ -3253,11 +3358,27 @@
                 const tokenId =
                   button.dataset.token;
 
-                openTokenModal(
-                  TOKENS[
-                    tokenId
-                  ]
-                );
+                consultarTokenEnSupabase(
+                  tokenId
+                )
+                  .then(function (impacto) {
+                    if (
+                      impacto &&
+                      impacto.encontrado === true
+                    ) {
+                      openTokenModal(
+                        convertirImpactoAToken(
+                          impacto
+                        )
+                      );
+                    }
+                  })
+                  .catch(function (error) {
+                    console.error(
+                      "No se pudo abrir el token:",
+                      error
+                    );
+                  });
 
               }
             );
@@ -3415,13 +3536,9 @@
     }
 
 
-    /*
-     * Ingreso por correo:
-     * sigue usando la demostración local.
-     */
     emailForm.addEventListener(
       "submit",
-      function (
+      async function (
         event
       ) {
 
@@ -3432,31 +3549,90 @@
             .trim()
             .toLowerCase();
 
-        const user =
-          USERS[
-            email
-          ];
+        const password =
+          passwordInput.value;
 
-        if (
-          !user
-        ) {
-
-          emailError.classList.add(
-            "show"
+        const button =
+          emailForm.querySelector(
+            'button[type="submit"]'
           );
 
-          return;
+        emailError.classList.remove("show");
+        button.disabled = true;
+        button.textContent = "Ingresando...";
 
+        try {
+          const authResult =
+            await supabaseClient.auth.signInWithPassword({
+              email: email,
+              password: password
+            });
+
+          if (authResult.error) {
+            throw authResult.error;
+          }
+
+          await cargarMiImpacto();
+        } catch (error) {
+          emailError.textContent =
+            error.message ||
+            "No pudimos iniciar sesión.";
+          emailError.classList.add("show");
+        } finally {
+          button.disabled = false;
+          button.textContent = "Ingresar";
         }
 
-        emailError.classList.remove(
-          "show"
-        );
+      }
+    );
 
-        openDashboard(
-          user
-        );
+    signupButton.addEventListener(
+      "click",
+      async function () {
+        const email = emailInput.value.trim().toLowerCase();
+        const password = passwordInput.value;
 
+        if (!emailForm.reportValidity()) {
+          return;
+        }
+
+        emailError.classList.remove("show");
+        signupButton.disabled = true;
+        signupButton.textContent = "Creando...";
+
+        try {
+          const signupResult =
+            await supabaseClient.auth.signUp({
+              email: email,
+              password: password,
+              options: {
+                emailRedirectTo: AUTH_REDIRECT_URL,
+                data: {
+                  nombre: email.split("@")[0]
+                }
+              }
+            });
+
+          if (signupResult.error) {
+            throw signupResult.error;
+          }
+
+          if (signupResult.data.session) {
+            await cargarMiImpacto();
+          } else {
+            emailError.textContent =
+              "Cuenta creada. Revisá tu correo para confirmarla y después iniciá sesión.";
+            emailError.classList.add("show");
+          }
+        } catch (error) {
+          emailError.textContent =
+            error.message ||
+            "No pudimos crear la cuenta.";
+          emailError.classList.add("show");
+        } finally {
+          signupButton.disabled = false;
+          signupButton.textContent = "Crear cuenta";
+        }
       }
     );
 
@@ -3575,7 +3751,9 @@
 
     logoutButton.addEventListener(
       "click",
-      function () {
+      async function () {
+
+        await supabaseClient.auth.signOut();
 
         dashboardSection.classList.remove(
           "show"
@@ -3586,6 +3764,9 @@
         );
 
         emailInput.value =
+          "";
+
+        passwordInput.value =
           "";
 
         window.scrollTo({
@@ -3599,6 +3780,15 @@
 
       }
     );
+
+    supabaseClient.auth.getSession()
+      .then(function (resultado) {
+        if (resultado.data.session) {
+          cargarMiImpacto().catch(function (error) {
+            console.error("No se pudo restaurar la sesión:", error);
+          });
+        }
+      });
 
 
     modalClose.addEventListener(
