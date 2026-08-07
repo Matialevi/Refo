@@ -117,14 +117,6 @@ Deno.serve(async (request: Request) => {
       }, 200);
     }
 
-    if (payment.live_mode !== true) {
-      return jsonResponse(request, {
-        received: true,
-        processed: false,
-        sandbox: true,
-      }, 200);
-    }
-
     const externalReference = String(payment.external_reference || "");
     const kg = Number(payment.metadata?.kg_co2);
     const amount = Number(payment.transaction_amount);
@@ -167,7 +159,9 @@ Deno.serve(async (request: Request) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          p_origen: "mercado_pago",
+          p_origen: payment.live_mode === true
+            ? "mercado_pago"
+            : "mercado_pago_prueba",
           p_referencia_externa: String(payment.id),
           p_email: email,
           p_kg_co2: kg,
@@ -176,6 +170,7 @@ Deno.serve(async (request: Request) => {
           p_cliente_id: null,
           p_moneda: payment.currency_id || "ARS",
           p_detalle: {
+            es_prueba: payment.live_mode !== true,
             mercado_pago_payment_id: String(payment.id),
             mercado_pago_preference_id: payment.preference_id || null,
             external_reference: externalReference,
@@ -198,6 +193,7 @@ Deno.serve(async (request: Request) => {
       processed: true,
       token_id: result.token_id,
       duplicate: result.duplicada,
+      sandbox: payment.live_mode !== true,
     }, 200);
   } catch (error) {
     console.error("mercadopago-webhook", error);
