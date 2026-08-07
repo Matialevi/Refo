@@ -1887,7 +1887,7 @@
       "sb_publishable_p_QUFBkzoFr1HxTPi9C2Dg_otVkScvZ";
 
     const AUTH_REDIRECT_URL =
-      "https://matialevi.github.io/Refo/mi-impacto.html";
+      new URL("mi-impacto.html", window.location.href).href;
 
     const supabaseClient =
       window.supabase.createClient(
