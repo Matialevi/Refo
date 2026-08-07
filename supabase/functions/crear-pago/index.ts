@@ -84,6 +84,7 @@ Deno.serve(async (request: Request) => {
             ...(nombre ? { name: nombre } : {}),
           },
           metadata: {
+            modo_prueba: true,
             kg_co2: kg,
             email,
             nombre,

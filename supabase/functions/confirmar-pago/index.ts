@@ -50,7 +50,10 @@ Deno.serve(async (request: Request) => {
     const kg = Number(payment.metadata?.kg_co2);
     const amount = Number(payment.transaction_amount);
     const expectedAmount = kg * 100;
-    const email = String(payment.payer?.email || payment.metadata?.email || "")
+    const isTestPayment =
+      payment.metadata?.modo_prueba === true ||
+      payment.metadata?.modo_prueba === "true";
+    const email = String(payment.metadata?.email || payment.payer?.email || "")
       .trim()
       .toLowerCase();
     const nombre = String(
@@ -79,9 +82,7 @@ Deno.serve(async (request: Request) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          p_origen: payment.live_mode === true
-            ? "mercado_pago"
-            : "mercado_pago_prueba",
+          p_origen: isTestPayment ? "mercado_pago_prueba" : "mercado_pago",
           p_referencia_externa: String(payment.id),
           p_email: email,
           p_kg_co2: kg,
@@ -90,7 +91,7 @@ Deno.serve(async (request: Request) => {
           p_cliente_id: null,
           p_moneda: payment.currency_id || "ARS",
           p_detalle: {
-            es_prueba: payment.live_mode !== true,
+            es_prueba: isTestPayment,
             confirmado_por: "retorno_checkout",
             mercado_pago_payment_id: String(payment.id),
             mercado_pago_preference_id: payment.preference_id || null,
@@ -113,7 +114,7 @@ Deno.serve(async (request: Request) => {
       processed: true,
       token_id: result.token_id,
       duplicate: result.duplicada,
-      sandbox: payment.live_mode !== true,
+      sandbox: isTestPayment,
       kg,
       email,
     });
