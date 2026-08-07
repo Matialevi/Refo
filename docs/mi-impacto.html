@@ -514,7 +514,7 @@
 
     .summary-numbers {
       display: grid;
-      grid-template-columns: 1.35fr 1fr 1fr;
+      grid-template-columns: 1.35fr 1fr;
       gap: 12px;
       margin-top: 25px;
     }
@@ -1133,10 +1133,6 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .summary-number:first-child {
-        grid-column: 1 / -1;
-      }
-
       .tree-progress {
         width: 180px;
         height: 180px;
@@ -1623,18 +1619,6 @@
 
               <span>
                 tokens registrados
-              </span>
-
-            </div>
-
-            <div class="summary-number">
-
-              <strong id="tree-equivalent">
-                2,07
-              </strong>
-
-              <span>
-                árboles equivalentes
               </span>
 
             </div>
@@ -3108,19 +3092,6 @@
             },
             0
           )
-        );
-
-      document.getElementById(
-        "tree-equivalent"
-      ).textContent =
-        Number(
-          totalKg / TREE_CAPACITY_KG
-        ).toLocaleString(
-          "es-AR",
-          {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 3
-          }
         );
 
       updateTreeSummary(
