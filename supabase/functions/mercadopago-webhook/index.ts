@@ -117,6 +117,14 @@ Deno.serve(async (request: Request) => {
       }, 200);
     }
 
+    if (payment.live_mode !== true) {
+      return jsonResponse(request, {
+        received: true,
+        processed: false,
+        sandbox: true,
+      }, 200);
+    }
+
     const externalReference = String(payment.external_reference || "");
     const kg = Number(payment.metadata?.kg_co2);
     const amount = Number(payment.transaction_amount);
