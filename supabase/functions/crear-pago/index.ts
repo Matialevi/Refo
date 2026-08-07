@@ -56,7 +56,7 @@ Deno.serve(async (request: Request) => {
     const amount = kg * PRICE_PER_KG;
     const externalReference = `reforestall:${crypto.randomUUID()}`;
     const notificationUrl =
-      `${supabaseUrl}/functions/v1/mercadopago-webhook`;
+      `${supabaseUrl}/functions/v1/mercadopago-webhook?source_news=webhooks`;
     const returnBase = `${siteUrl.replace(/\/$/, "")}/compensar.html`;
 
     const preferenceResponse = await fetch(

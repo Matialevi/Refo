@@ -1695,6 +1695,9 @@
     const PAYMENT_FUNCTION_URL =
       "https://ubfcuebfusxwejsuworg.supabase.co/functions/v1/crear-pago";
 
+    const PAYMENT_CONFIRMATION_URL =
+      "https://ubfcuebfusxwejsuworg.supabase.co/functions/v1/confirmar-pago";
+
 
     /* =========================================================
        FORMATO DE NÚMEROS
@@ -2082,8 +2085,45 @@
 
     if (paymentStatus === "aprobado") {
       successBox.innerHTML =
-        "<strong>Pago recibido.</strong><br>Estamos confirmándolo con Mercado Pago. Tu token quedará asociado al correo ingresado.";
+        "<strong>Pago recibido.</strong><br>Estamos confirmándolo con Mercado Pago y generando tu token de prueba.";
       successBox.classList.add("show");
+
+      const paymentId =
+        new URLSearchParams(window.location.search).get("payment_id") ||
+        new URLSearchParams(window.location.search).get("collection_id");
+
+      if (paymentId) {
+        fetch(PAYMENT_CONFIRMATION_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ payment_id: paymentId })
+        })
+          .then(function (response) {
+            return response.json().then(function (result) {
+              if (!response.ok) {
+                throw new Error(result.error || "No pudimos confirmar el pago.");
+              }
+              return result;
+            });
+          })
+          .then(function (result) {
+            if (!result.processed) {
+              successBox.innerHTML =
+                "<strong>El pago todavía está siendo procesado.</strong><br>El token se generará cuando Mercado Pago lo apruebe.";
+              return;
+            }
+
+            successBox.innerHTML =
+              "<strong>Token de prueba generado correctamente.</strong><br>" +
+              "Identificador: <code>" + result.token_id + "</code>. " +
+              "Quedó asociado al correo utilizado en la operación.";
+          })
+          .catch(function (error) {
+            successBox.innerHTML =
+              "<strong>El pago fue recibido, pero falta confirmar el token.</strong><br>" +
+              error.message;
+          });
+      }
     } else if (paymentStatus === "pendiente") {
       successBox.innerHTML =
         "<strong>El pago está pendiente.</strong><br>El token se generará automáticamente cuando Mercado Pago lo apruebe.";
