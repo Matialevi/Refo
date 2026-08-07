@@ -25,7 +25,7 @@ Deno.serve(async (request: Request) => {
   const accessToken = Deno.env.get("MERCADOPAGO_ACCESS_TOKEN") || "";
   const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
   const siteUrl = Deno.env.get("REFORESTALL_SITE_URL") ||
-    "https://matialevi.github.io/Refo";
+    "https://reforestall.com.ar";
 
   if (!accessToken) {
     return jsonResponse(
