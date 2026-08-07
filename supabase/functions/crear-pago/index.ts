@@ -111,7 +111,7 @@ Deno.serve(async (request: Request) => {
       );
     }
 
-    const checkoutUrl = preference.sandbox_init_point || preference.init_point;
+    const checkoutUrl = preference.init_point;
 
     if (!checkoutUrl) {
       return jsonResponse(
