@@ -304,6 +304,48 @@
       gap: 12px;
     }
 
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-bottom: 18px;
+      padding: 4px;
+      background: rgba(244, 241, 230, 0.06);
+      border: 1px solid rgba(244, 241, 230, 0.1);
+      border-radius: 12px;
+    }
+
+    .auth-tab {
+      padding: 10px 12px;
+      color: rgba(244, 241, 230, 0.58);
+      background: transparent;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .auth-tab.active {
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    .auth-field-hidden {
+      display: none;
+    }
+
+    .auth-confirm-field {
+      display: grid;
+      gap: 12px;
+    }
+
+    .auth-confirm-field.auth-field-hidden {
+      display: none;
+    }
+
+    .auth-confirm-field label {
+      margin: 2px 0 -4px;
+    }
+
     .auth-fields label {
       margin: 2px 0 -4px;
     }
@@ -331,6 +373,31 @@
       border: 1px solid rgba(244, 241, 230, 0.25);
     }
 
+    .auth-link {
+      align-self: center;
+      padding: 8px 2px;
+      color: rgba(244, 241, 230, 0.68);
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .access-error.success {
+      color: #d9ecba;
+      background: rgba(150, 185, 91, 0.12);
+      border-color: rgba(150, 185, 91, 0.28);
+    }
+
+    .password-reset-form {
+      display: none;
+    }
+
+    .password-reset-form.show {
+      display: block;
+    }
+
     .access-card-primary .access-example {
       color: rgba(244, 241, 230, 0.34);
     }
@@ -356,6 +423,12 @@
       color: #f1c8bc;
       background: rgba(188, 73, 47, 0.12);
       border: 1px solid rgba(188, 73, 47, 0.27);
+    }
+
+    .access-card-primary .access-error.success {
+      color: #d9ecba;
+      background: rgba(150, 185, 91, 0.12);
+      border-color: rgba(150, 185, 91, 0.28);
     }
 
     .access-card-secondary .access-error {
@@ -1267,6 +1340,26 @@
             id="email-form"
           >
 
+            <div class="auth-tabs" aria-label="Acceso a la cuenta">
+
+              <button
+                type="button"
+                class="auth-tab active"
+                id="login-tab"
+              >
+                Ingresar
+              </button>
+
+              <button
+                type="button"
+                class="auth-tab"
+                id="signup-tab"
+              >
+                Crear cuenta
+              </button>
+
+            </div>
+
             <label for="email-input">
               Correo electrónico
             </label>
@@ -1294,6 +1387,25 @@
                 required
               >
 
+              <div
+                class="auth-confirm-field auth-field-hidden"
+                id="confirm-password-field"
+              >
+
+                <label for="confirm-password-input">
+                  Repetir contraseña
+                </label>
+
+                <input
+                  type="password"
+                  id="confirm-password-input"
+                  placeholder="Volvé a escribirla"
+                  autocomplete="new-password"
+                  minlength="6"
+                >
+
+              </div>
+
             </div>
 
             <div class="auth-actions">
@@ -1301,16 +1413,17 @@
               <button
                 type="submit"
                 class="btn btn-solid access-button"
+                id="auth-submit-button"
               >
                 Ingresar
               </button>
 
               <button
                 type="button"
-                class="btn access-button auth-secondary"
-                id="signup-button"
+                class="auth-link"
+                id="forgot-password-button"
               >
-                Crear cuenta
+                Olvidé mi contraseña
               </button>
 
             </div>
@@ -1325,6 +1438,57 @@
             >
               No pudimos iniciar sesión.
             </div>
+
+          </form>
+
+          <form
+            class="password-reset-form"
+            id="password-reset-form"
+          >
+
+            <h3>Elegí una nueva contraseña</h3>
+
+            <p>
+              Escribila dos veces para confirmar el cambio.
+            </p>
+
+            <div class="auth-fields">
+
+              <input
+                type="password"
+                id="new-password-input"
+                placeholder="Mínimo 6 caracteres"
+                autocomplete="new-password"
+                minlength="6"
+                required
+              >
+
+              <input
+                type="password"
+                id="new-password-confirm-input"
+                placeholder="Repetir contraseña"
+                autocomplete="new-password"
+                minlength="6"
+                required
+              >
+
+            </div>
+
+            <div class="auth-actions">
+
+              <button
+                type="submit"
+                class="btn btn-solid access-button"
+              >
+                Guardar contraseña
+              </button>
+
+            </div>
+
+            <div
+              class="access-error"
+              id="password-reset-message"
+            ></div>
 
           </form>
 
@@ -1458,19 +1622,19 @@
               </strong>
 
               <span>
-                certificados registrados
+                tokens registrados
               </span>
 
             </div>
 
             <div class="summary-number">
 
-              <strong id="total-contributions">
-                3
+              <strong id="tree-equivalent">
+                2,07
               </strong>
 
               <span>
-                participaciones
+                árboles equivalentes
               </span>
 
             </div>
@@ -2242,10 +2406,57 @@
         "password-input"
       );
 
-    const signupButton =
+    const confirmPasswordInput =
       document.getElementById(
-        "signup-button"
+        "confirm-password-input"
       );
+
+    const confirmPasswordField =
+      document.getElementById(
+        "confirm-password-field"
+      );
+
+    const loginTab =
+      document.getElementById(
+        "login-tab"
+      );
+
+    const signupTab =
+      document.getElementById(
+        "signup-tab"
+      );
+
+    const authSubmitButton =
+      document.getElementById(
+        "auth-submit-button"
+      );
+
+    const forgotPasswordButton =
+      document.getElementById(
+        "forgot-password-button"
+      );
+
+    const passwordResetForm =
+      document.getElementById(
+        "password-reset-form"
+      );
+
+    const newPasswordInput =
+      document.getElementById(
+        "new-password-input"
+      );
+
+    const newPasswordConfirmInput =
+      document.getElementById(
+        "new-password-confirm-input"
+      );
+
+    const passwordResetMessage =
+      document.getElementById(
+        "password-reset-message"
+      );
+
+    let authMode = "login";
 
     const tokenForm =
       document.getElementById(
@@ -2900,10 +3111,16 @@
         );
 
       document.getElementById(
-        "total-contributions"
+        "tree-equivalent"
       ).textContent =
-        formatNumber(
-          user.contributions.length
+        Number(
+          totalKg / TREE_CAPACITY_KG
+        ).toLocaleString(
+          "es-AR",
+          {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 3
+          }
         );
 
       updateTreeSummary(
@@ -3536,102 +3753,261 @@
     }
 
 
-    emailForm.addEventListener(
-      "submit",
-      async function (
-        event
-      ) {
+    function mostrarMensajeAcceso(
+      mensaje,
+      esExito
+    ) {
+      emailError.textContent = mensaje;
+      emailError.classList.toggle(
+        "success",
+        Boolean(esExito)
+      );
+      emailError.classList.add("show");
+    }
 
-        event.preventDefault();
+    function cambiarModoAcceso(
+      modo
+    ) {
+      authMode = modo;
 
-        const email =
-          emailInput.value
-            .trim()
-            .toLowerCase();
+      const esRegistro =
+        modo === "signup";
 
-        const password =
-          passwordInput.value;
+      loginTab.classList.toggle(
+        "active",
+        !esRegistro
+      );
+      signupTab.classList.toggle(
+        "active",
+        esRegistro
+      );
+      confirmPasswordField.classList.toggle(
+        "auth-field-hidden",
+        !esRegistro
+      );
+      confirmPasswordInput.required =
+        esRegistro;
+      passwordInput.autocomplete =
+        esRegistro
+          ? "new-password"
+          : "current-password";
+      authSubmitButton.textContent =
+        esRegistro
+          ? "Crear mi cuenta"
+          : "Ingresar";
+      forgotPasswordButton.style.display =
+        esRegistro
+          ? "none"
+          : "inline-block";
+      emailError.classList.remove(
+        "show",
+        "success"
+      );
+    }
 
-        const button =
-          emailForm.querySelector(
-            'button[type="submit"]'
-          );
-
-        emailError.classList.remove("show");
-        button.disabled = true;
-        button.textContent = "Ingresando...";
-
-        try {
-          const authResult =
-            await supabaseClient.auth.signInWithPassword({
-              email: email,
-              password: password
-            });
-
-          if (authResult.error) {
-            throw authResult.error;
-          }
-
-          await cargarMiImpacto();
-        } catch (error) {
-          emailError.textContent =
-            error.message ||
-            "No pudimos iniciar sesión.";
-          emailError.classList.add("show");
-        } finally {
-          button.disabled = false;
-          button.textContent = "Ingresar";
-        }
-
+    loginTab.addEventListener(
+      "click",
+      function () {
+        cambiarModoAcceso("login");
       }
     );
 
-    signupButton.addEventListener(
+    signupTab.addEventListener(
       "click",
-      async function () {
-        const email = emailInput.value.trim().toLowerCase();
-        const password = passwordInput.value;
+      function () {
+        cambiarModoAcceso("signup");
+      }
+    );
+
+    emailForm.addEventListener(
+      "submit",
+      async function (event) {
+        event.preventDefault();
 
         if (!emailForm.reportValidity()) {
           return;
         }
 
-        emailError.classList.remove("show");
-        signupButton.disabled = true;
-        signupButton.textContent = "Creando...";
+        const email =
+          emailInput.value.trim().toLowerCase();
+        const password =
+          passwordInput.value;
+        const esRegistro =
+          authMode === "signup";
+
+        if (
+          esRegistro &&
+          password !== confirmPasswordInput.value
+        ) {
+          mostrarMensajeAcceso(
+            "Las contraseñas no coinciden.",
+            false
+          );
+          return;
+        }
+
+        emailError.classList.remove(
+          "show",
+          "success"
+        );
+        authSubmitButton.disabled = true;
+        authSubmitButton.textContent =
+          esRegistro
+            ? "Creando cuenta..."
+            : "Ingresando...";
 
         try {
-          const signupResult =
-            await supabaseClient.auth.signUp({
-              email: email,
-              password: password,
-              options: {
-                emailRedirectTo: AUTH_REDIRECT_URL,
-                data: {
-                  nombre: email.split("@")[0]
+          if (esRegistro) {
+            const signupResult =
+              await supabaseClient.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                  emailRedirectTo: AUTH_REDIRECT_URL,
+                  data: {
+                    nombre: email.split("@")[0]
+                  }
                 }
-              }
-            });
+              });
 
-          if (signupResult.error) {
-            throw signupResult.error;
-          }
+            if (signupResult.error) {
+              throw signupResult.error;
+            }
 
-          if (signupResult.data.session) {
-            await cargarMiImpacto();
+            if (signupResult.data.session) {
+              await cargarMiImpacto();
+            } else {
+              mostrarMensajeAcceso(
+                "Cuenta creada. Revisá tu correo y confirmala para poder ingresar.",
+                true
+              );
+            }
           } else {
-            emailError.textContent =
-              "Cuenta creada. Revisá tu correo para confirmarla y después iniciá sesión.";
-            emailError.classList.add("show");
+            const authResult =
+              await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password
+              });
+
+            if (authResult.error) {
+              throw authResult.error;
+            }
+
+            await cargarMiImpacto();
           }
         } catch (error) {
-          emailError.textContent =
+          mostrarMensajeAcceso(
             error.message ||
-            "No pudimos crear la cuenta.";
-          emailError.classList.add("show");
+              "No pudimos completar la operación.",
+            false
+          );
         } finally {
-          signupButton.disabled = false;
-          signupButton.textContent = "Crear cuenta";
+          authSubmitButton.disabled = false;
+          authSubmitButton.textContent =
+            esRegistro
+              ? "Crear mi cuenta"
+              : "Ingresar";
+        }
+      }
+    );
+
+    forgotPasswordButton.addEventListener(
+      "click",
+      async function () {
+        const email =
+          emailInput.value.trim().toLowerCase();
+
+        if (!emailInput.reportValidity()) {
+          return;
+        }
+
+        forgotPasswordButton.disabled = true;
+
+        try {
+          const resultado =
+            await supabaseClient.auth.resetPasswordForEmail(
+              email,
+              {
+                redirectTo: AUTH_REDIRECT_URL
+              }
+            );
+
+          if (resultado.error) {
+            throw resultado.error;
+          }
+
+          mostrarMensajeAcceso(
+            "Te enviamos un correo para que puedas elegir una nueva contraseña.",
+            true
+          );
+        } catch (error) {
+          mostrarMensajeAcceso(
+            error.message ||
+              "No pudimos enviar el correo de recuperación.",
+            false
+          );
+        } finally {
+          forgotPasswordButton.disabled = false;
+        }
+      }
+    );
+
+    passwordResetForm.addEventListener(
+      "submit",
+      async function (event) {
+        event.preventDefault();
+
+        if (!passwordResetForm.reportValidity()) {
+          return;
+        }
+
+        if (
+          newPasswordInput.value !==
+          newPasswordConfirmInput.value
+        ) {
+          passwordResetMessage.textContent =
+            "Las contraseñas no coinciden.";
+          passwordResetMessage.classList.add("show");
+          return;
+        }
+
+        const button =
+          passwordResetForm.querySelector(
+            'button[type="submit"]'
+          );
+        button.disabled = true;
+        button.textContent = "Guardando...";
+
+        try {
+          const resultado =
+            await supabaseClient.auth.updateUser({
+              password: newPasswordInput.value
+            });
+
+          if (resultado.error) {
+            throw resultado.error;
+          }
+
+          passwordResetMessage.textContent =
+            "Contraseña actualizada correctamente.";
+          passwordResetMessage.classList.add(
+            "show",
+            "success"
+          );
+
+          setTimeout(function () {
+            passwordResetForm.classList.remove("show");
+            emailForm.style.display = "block";
+            cambiarModoAcceso("login");
+          }, 1200);
+        } catch (error) {
+          passwordResetMessage.textContent =
+            error.message ||
+            "No pudimos actualizar la contraseña.";
+          passwordResetMessage.classList.add("show");
+        } finally {
+          button.disabled = false;
+          button.textContent = "Guardar contraseña";
         }
       }
     );
@@ -3778,6 +4154,18 @@
             "smooth"
         });
 
+      }
+    );
+
+    supabaseClient.auth.onAuthStateChange(
+      function (evento) {
+        if (evento === "PASSWORD_RECOVERY") {
+          dashboardSection.classList.remove("show");
+          accessSection.classList.remove("hidden");
+          emailForm.style.display = "none";
+          passwordResetForm.classList.add("show");
+          newPasswordInput.focus();
+        }
       }
     );
 
