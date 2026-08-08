@@ -1021,6 +1021,145 @@
 
     }
 
+    /* Versión compacta del simulador */
+    @media (min-width: 981px) {
+      .experience-section .wrap {
+        max-width: 1080px;
+      }
+
+      .experience-panel {
+        grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.92fr);
+        border-radius: 20px;
+      }
+
+      .activity-selection,
+      .experience-result {
+        padding: 32px 34px;
+      }
+
+      .activity-selection h3 {
+        font-size: clamp(25px, 2.5vw, 34px);
+      }
+
+      .activity-selection > p {
+        margin-top: 10px;
+        line-height: 1.55;
+      }
+
+      .activity-list {
+        gap: 9px;
+        margin-top: 22px;
+      }
+
+      .activity-card {
+        gap: 14px;
+        padding: 13px 15px;
+      }
+
+      .activity-icon {
+        width: 42px;
+        height: 42px;
+      }
+
+      .people-section {
+        margin-top: 23px;
+        padding-top: 20px;
+      }
+
+      .people-control {
+        margin-top: 13px;
+      }
+
+      .people-value {
+        min-height: 62px;
+      }
+
+      .result-title {
+        font-size: 22px;
+      }
+
+      .result-visual {
+        width: 190px;
+        height: 190px;
+        margin: 19px auto;
+      }
+
+      .result-icon svg {
+        width: 33px;
+        height: 33px;
+      }
+
+      .result-kg {
+        font-size: 38px;
+      }
+
+      .selected-summary {
+        margin-bottom: 16px;
+      }
+
+      .result-row {
+        padding: 9px 0;
+      }
+
+      .price-area {
+        margin-top: 15px;
+        padding-top: 15px;
+      }
+
+      .price-area strong {
+        font-size: 38px;
+      }
+
+      .compensate-button {
+        margin-top: 16px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .experience-panel {
+        border-radius: 18px;
+      }
+
+      .activity-selection,
+      .experience-result {
+        padding: 25px 18px;
+      }
+
+      .activity-selection h3 {
+        font-size: 28px;
+      }
+
+      .activity-list {
+        margin-top: 22px;
+        gap: 9px;
+      }
+
+      .activity-card {
+        padding: 13px;
+      }
+
+      .people-section {
+        margin-top: 24px;
+        padding-top: 21px;
+      }
+
+      .people-value {
+        min-height: 64px;
+      }
+
+      .result-visual {
+        width: 188px;
+        height: 188px;
+        margin: 20px auto;
+      }
+
+      .result-row {
+        padding: 10px 0;
+      }
+    }
+
   </style>
 
 </head>
