@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Propuesta conceptual TAQSA × Reforestall para estimar y compensar el impacto de viajes por la Patagonia.">
+  <title>TAQSA × Reforestall — Viajes con impacto positivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#f7f3e8;--forest:#10200c;--forest-2:#182f16;--paper:#f3f0e5;--text:#182016;--muted:#697064;--lime:#b4d56c;--ice:#a8dbe5;--gold:#d89737;--line:rgba(247,243,232,.15)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--paper);color:var(--text);font-family:"DM Sans",sans-serif} button,a{font:inherit} a{color:inherit}
+    .nav{position:absolute;z-index:3;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;max-width:1240px;margin:auto;padding:26px 28px;color:white}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:"Playfair Display",serif;font-size:22px}.brand-dot{width:10px;height:10px;border-radius:50%;background:var(--lime)}
+    .proposal-pill{padding:10px 15px;border:1px solid rgba(255,255,255,.35);border-radius:999px;font:12px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.08em;background:rgba(8,18,7,.28);backdrop-filter:blur(8px)}
+    .hero{position:relative;min-height:780px;color:white;background:linear-gradient(90deg,rgba(8,18,7,.91) 0%,rgba(8,18,7,.68) 48%,rgba(8,18,7,.22) 100%),url("https://taqsa.com.ar/wp-content/uploads/2023/06/el_chalten.jpeg") center/cover;display:flex;align-items:flex-end}
+    .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,18,7,.7),transparent 50%);pointer-events:none}.hero-inner{position:relative;z-index:1;width:min(1184px,calc(100% - 48px));margin:0 auto;padding:180px 0 86px}
+    .eyebrow{font:500 12px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.14em;color:var(--lime);margin:0 0 20px}.hero h1{font:500 clamp(46px,7vw,88px)/.98 "Playfair Display",serif;max-width:850px;margin:0 0 28px}.hero-copy{font-size:19px;line-height:1.65;max-width:700px;color:rgba(255,255,255,.82);margin:0}
+    .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:60px;border:1px solid var(--line);max-width:850px;background:var(--line)}.fact{padding:22px 24px;background:rgba(9,20,8,.62)}.fact small{display:block;font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:7px}.fact strong{font-size:17px}
+    .section{width:min(1184px,calc(100% - 48px));margin:auto;padding:108px 0}.intro{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;align-items:start}.intro h2,.process h2,.closing h2{font:500 clamp(38px,5vw,62px)/1.08 "Playfair Display",serif;margin:0}.intro-copy{font-size:18px;line-height:1.7;color:var(--muted);margin:0}.source-link{display:inline-flex;margin-top:25px;font-weight:600;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px}
+    .calculator{background:var(--forest);color:var(--ink);border-radius:28px;overflow:hidden;box-shadow:0 28px 70px rgba(27,47,20,.2)}.calc-head{padding:44px 48px 28px}.calc-head h2{font:500 clamp(32px,4vw,48px) "Playfair Display",serif;margin:8px 0 10px}.calc-head p{color:rgba(247,243,232,.6);margin:0}.routes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:18px 48px 42px}.route{appearance:none;text-align:left;color:var(--ink);background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;padding:24px;cursor:pointer;transition:.2s}.route:hover,.route.active{transform:translateY(-2px);border-color:var(--lime);background:rgba(180,213,108,.09)}.route small{display:block;font:11px "DM Mono",monospace;color:var(--ice);text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px}.route strong{display:block;font-size:19px;line-height:1.3;margin-bottom:8px}.route span{color:rgba(247,243,232,.52);font-size:14px;line-height:1.5}
+    .calc-body{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}.controls{padding:46px 48px}.control-label{font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.1em;color:rgba(247,243,232,.5)}.counter{display:flex;align-items:center;gap:22px;margin:18px 0 34px}.counter button{width:45px;height:45px;border-radius:50%;border:1px solid var(--line);background:transparent;color:white;font-size:23px;cursor:pointer}.counter output{font:500 46px "Playfair Display",serif;min-width:52px;text-align:center}.note{font-size:13px;line-height:1.6;color:rgba(247,243,232,.5);border-left:2px solid var(--lime);padding-left:16px}
+    .result{background:var(--forest-2);padding:46px 48px;display:flex;flex-direction:column;justify-content:center}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-bottom:30px}.metric small{display:block;font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:rgba(247,243,232,.45);margin-bottom:8px}.metric strong{font:500 38px "Playfair Display",serif}.metric strong.compact{font-size:26px}.demo-button{border:0;border-radius:999px;padding:16px 20px;background:var(--gold);color:#1a1e14;font-weight:700;cursor:pointer}.demo-caption{text-align:center;font-size:11px;line-height:1.5;color:rgba(247,243,232,.42);margin:12px 8px 0}
+    .process{background:#e9e7da}.process-wrap{width:min(1184px,calc(100% - 48px));margin:auto;padding:108px 0}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(24,32,22,.13);margin-top:54px}.step{background:#e9e7da;padding:34px 28px;min-height:220px}.step b{font:12px "DM Mono",monospace;color:#6d8d36}.step h3{font:500 22px "Playfair Display",serif;margin:36px 0 12px}.step p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+    .closing{background:var(--forest);color:var(--ink)}.closing-inner{width:min(1184px,calc(100% - 48px));margin:auto;padding:110px 0;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}.closing p{font-size:18px;line-height:1.7;color:rgba(247,243,232,.62);margin:0}.footer{background:#091307;color:rgba(247,243,232,.5);font-size:13px}.footer-inner{width:min(1184px,calc(100% - 48px));margin:auto;padding:30px 0;display:flex;justify-content:space-between;gap:20px}.footer a{color:var(--ice);text-decoration:none}
+    @media(max-width:800px){.hero{min-height:720px}.facts,.routes,.steps{grid-template-columns:1fr}.intro,.calc-body,.closing-inner{grid-template-columns:1fr}.intro{gap:32px}.routes{padding:12px 24px 32px}.calc-head,.controls,.result{padding-left:24px;padding-right:24px}.facts{max-width:none}.fact{padding:16px 18px}.section,.process-wrap{padding:76px 0}.steps{gap:0}.step{min-height:auto}.footer-inner{flex-direction:column}.proposal-pill{font-size:10px}.brand{font-size:18px}}
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Identidad de la propuesta">
+    <div class="brand"><span class="brand-dot"></span>Reforestall × TAQSA</div>
+    <span class="proposal-pill">Propuesta conceptual</span>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Viajes con impacto positivo</p>
+      <h1>Cada viaje por la Patagonia puede dejar una huella positiva</h1>
+      <p class="hero-copy">Una experiencia pensada para que quienes viajan con TAQSA puedan conocer una estimación del impacto de su recorrido y elegir compensarlo junto a Reforestall.</p>
+      <div class="facts">
+        <div class="fact"><small>Territorio</small><strong>Patagonia argentina</strong></div>
+        <div class="fact"><small>Compensación</small><strong>$100 por kg de CO₂</strong></div>
+        <div class="fact"><small>Alcance</small><strong>Argentina + Chile</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section intro">
+      <h2>Conectar destinos y cuidar el territorio</h2>
+      <div>
+        <p class="intro-copy">TAQSA conecta destinos centrales de la Patagonia, entre ellos El Calafate, El Chaltén y Ushuaia, además de operar una frecuencia entre Ushuaia y Punta Arenas. Esta propuesta suma una acción ambiental simple al viaje, sin modificar la experiencia de compra.</p>
+        <a class="source-link" href="https://taqsa.com.ar/" target="_blank" rel="noopener">Conocer TAQSA ↗</a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="simulador-title">
+      <div class="calculator">
+        <div class="calc-head">
+          <p class="eyebrow">Experiencia demostrativa</p>
+          <h2 id="simulador-title">Simulá la compensación de un viaje</h2>
+          <p>Elegí un recorrido e indicá cuántas personas viajaron.</p>
+        </div>
+        <div class="routes" role="group" aria-label="Elegir recorrido">
+          <button class="route active" type="button" data-route="chalten"><small>Ruta 01</small><strong>El Calafate ↔ El Chaltén</strong><span>Una conexión esencial entre dos íconos de Santa Cruz.</span></button>
+          <button class="route" type="button" data-route="regional"><small>Ruta 02</small><strong>Recorrido regional</strong><span>Una simulación para trayectos de media distancia en Santa Cruz.</span></button>
+          <button class="route" type="button" data-route="chile"><small>Ruta 03</small><strong>Ushuaia ↔ Punta Arenas</strong><span>Una experiencia internacional entre Argentina y Chile.</span></button>
+        </div>
+        <div class="calc-body">
+          <div class="controls">
+            <div class="control-label">Cantidad de pasajeros</div>
+            <div class="counter"><button id="minus" type="button" aria-label="Quitar una persona">−</button><output id="passengers">1</output><button id="plus" type="button" aria-label="Agregar una persona">+</button></div>
+            <p class="note">La estimación es ilustrativa y deberá validarse con datos operativos reales de TAQSA antes de una implementación comercial.</p>
+          </div>
+          <div class="result" aria-live="polite">
+            <div class="result-grid">
+              <div class="metric"><small>Impacto estimado</small><strong><span id="kg">18</span> kg</strong></div>
+              <div class="metric"><small>Aporte sugerido</small><strong class="compact">$<span id="amount">1.800</span></strong></div>
+              <div class="metric"><small>Por operación</small><strong class="compact">1 token</strong></div>
+              <div class="metric"><small>Modalidad</small><strong class="compact">Opcional</strong></div>
+            </div>
+            <button class="demo-button" type="button" id="demo">Simular compensación</button>
+            <p class="demo-caption" id="demo-caption">Demostración conceptual: no realiza cobros ni genera tokens reales.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="process-wrap">
+        <p class="eyebrow">Una experiencia sencilla</p>
+        <h2>Del pasaje a una acción concreta</h2>
+        <div class="steps">
+          <article class="step"><b>01</b><h3>Elegir el viaje</h3><p>El recorrido queda identificado dentro de la experiencia de compra.</p></article>
+          <article class="step"><b>02</b><h3>Estimar el impacto</h3><p>Se calcula una referencia ambiental según el trayecto y los pasajeros.</p></article>
+          <article class="step"><b>03</b><h3>Compensar</h3><p>La persona decide si desea sumar el aporte a su operación.</p></article>
+          <article class="step"><b>04</b><h3>Recibir el token</h3><p>La operación genera un único token trazable, sin importar los kg compensados.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="closing-inner">
+        <h2>Viajar, conocer y devolverle algo al territorio</h2>
+        <p>TAQSA moviliza personas a través de algunos de los paisajes más valiosos de la Patagonia. Reforestall puede transformar cada recorrido en una oportunidad voluntaria de compromiso ambiental, clara para el pasajero y medible para la empresa.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="footer-inner"><span>Propuesta privada · TAQSA × Reforestall</span><span>Concepto demostrativo, no constituye una integración comercial activa.</span></div></footer>
+
+  <script>
+    const PRICE_PER_KG = 100;
+    const routes = { chalten: 18, regional: 24, chile: 32 };
+    let selected = "chalten";
+    let passengers = 1;
+    const passengerOutput = document.querySelector("#passengers");
+    const kgOutput = document.querySelector("#kg");
+    const amountOutput = document.querySelector("#amount");
+    const render = () => {
+      const kg = routes[selected] * passengers;
+      passengerOutput.textContent = passengers;
+      kgOutput.textContent = kg.toLocaleString("es-AR");
+      amountOutput.textContent = (kg * PRICE_PER_KG).toLocaleString("es-AR");
+    };
+    document.querySelectorAll(".route").forEach(button => button.addEventListener("click", () => {
+      document.querySelectorAll(".route").forEach(item => item.classList.remove("active"));
+      button.classList.add("active");
+      selected = button.dataset.route;
+      render();
+    }));
+    document.querySelector("#minus").addEventListener("click", () => { passengers = Math.max(1, passengers - 1); render(); });
+    document.querySelector("#plus").addEventListener("click", () => { passengers = Math.min(50, passengers + 1); render(); });
+    document.querySelector("#demo").addEventListener("click", () => {
+      document.querySelector("#demo-caption").textContent = "Simulación completada. En esta propuesta no se realizó ningún cobro ni se emitió un token real.";
+    });
+  </script>
+</body>
+</html>
