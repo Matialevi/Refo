@@ -14,10 +14,11 @@
     .nav{position:absolute;z-index:3;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;max-width:1240px;margin:auto;padding:26px 28px;color:white}
     .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--display);font-size:22px}.brand-dot{width:10px;height:10px;border-radius:50%;background:var(--lime)}
     .proposal-pill{padding:10px 15px;border:1px solid rgba(255,255,255,.35);border-radius:999px;font:12px var(--mono);text-transform:uppercase;letter-spacing:.08em;background:rgba(8,18,7,.28);backdrop-filter:blur(8px)}
-    .hero{position:relative;min-height:780px;color:white;background:linear-gradient(90deg,rgba(8,18,7,.91) 0%,rgba(8,18,7,.68) 48%,rgba(8,18,7,.22) 100%),url("https://taqsa.com.ar/wp-content/uploads/2023/06/el_chalten.jpeg") center/cover;display:flex;align-items:flex-end}
+    .hero{position:relative;min-height:780px;color:white;background:linear-gradient(90deg,rgba(8,18,7,.91) 0%,rgba(8,18,7,.68) 48%,rgba(8,18,7,.22) 100%),url("https://taqsa.com.ar/wp-content/uploads/2023/06/el_chalten.jpeg") center calc(50% + var(--hero-shift,0px))/cover;display:flex;align-items:flex-end}
     .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,18,7,.7),transparent 50%);pointer-events:none}.hero-inner{position:relative;z-index:1;width:min(1184px,calc(100% - 48px));margin:0 auto;padding:180px 0 86px}
     .eyebrow{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.14em;color:var(--lime);margin:0 0 20px}.hero h1{font:500 clamp(46px,7vw,88px)/.98 var(--display);max-width:850px;margin:0 0 28px}.hero-copy{font-size:19px;line-height:1.65;max-width:700px;color:rgba(255,255,255,.82);margin:0}
     .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:60px;border:1px solid var(--line);max-width:850px;background:var(--line)}.fact{padding:22px 24px;background:rgba(9,20,8,.62)}.fact small{display:block;font:11px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:7px}.fact strong{font-size:17px}
+    .route-strip{overflow:hidden;background:var(--gold);color:#172012;border-block:1px solid rgba(16,32,12,.22)}.route-strip-track{display:flex;width:max-content;animation:routeMove 24s linear infinite}.route-strip span{padding:13px 25px;font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}.route-strip i{color:rgba(23,32,18,.45);font-style:normal}
     .section{width:min(1120px,calc(100% - 48px));margin:auto;padding:82px 0}.intro{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;align-items:start}.intro h2,.process h2,.closing h2{font:500 clamp(38px,5vw,62px)/1.08 var(--display);margin:0}.intro-copy{font-size:18px;line-height:1.7;color:var(--muted);margin:0}.source-link{display:inline-flex;margin-top:25px;font-weight:600;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px}
     .calculator{background:var(--forest);color:var(--ink);border-radius:24px;overflow:hidden;box-shadow:0 24px 60px rgba(27,47,20,.18);animation:rise .7s ease both}.calc-head{padding:32px 36px 18px}.calc-head h2{font:500 clamp(29px,3.4vw,42px) var(--display);margin:6px 0 8px}.calc-head p{color:rgba(247,243,232,.6);margin:0}.routes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 36px 28px}.route{position:relative;overflow:hidden;appearance:none;text-align:left;color:var(--ink);background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:15px;padding:18px 19px;cursor:pointer;transition:transform .25s ease,background .25s ease,border-color .25s ease}.route:after{content:"→";position:absolute;right:18px;top:15px;color:var(--lime);opacity:0;transform:translateX(-8px);transition:.25s}.route:hover,.route.active{transform:translateY(-3px);border-color:var(--lime);background:rgba(180,213,108,.09)}.route:hover:after,.route.active:after{opacity:1;transform:none}.route small{display:block;font:11px var(--mono);color:var(--ice);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}.route strong{display:block;font-size:17px;line-height:1.3;margin-bottom:6px;padding-right:22px}.route span{color:rgba(247,243,232,.52);font-size:12.5px;line-height:1.45}
     .calc-body{display:grid;grid-template-columns:.9fr 1.1fr;border-top:1px solid var(--line)}.controls{padding:32px 36px}.control-label{font:11px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:rgba(247,243,232,.5)}.counter{display:flex;align-items:center;gap:17px;margin:15px 0 24px}.counter button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:white;font-size:21px;cursor:pointer;transition:.2s}.counter button:hover{background:var(--lime);color:var(--forest);transform:scale(1.06)}.counter output{font:500 39px var(--display);min-width:44px;text-align:center}.note{font-size:11.5px;line-height:1.55;color:rgba(247,243,232,.5);border-left:2px solid var(--lime);padding-left:14px}
@@ -25,8 +26,11 @@
     .process{background:#e9e7da}.process-wrap{width:min(1120px,calc(100% - 48px));margin:auto;padding:88px 0}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(24,32,22,.13);margin-top:44px}.step{background:#e9e7da;padding:30px 26px;min-height:200px;transition:.25s}.step:hover{background:#f2efe4;transform:translateY(-4px)}.step b{font:12px var(--mono);color:#6d8d36}.step h3{font:500 22px var(--display);margin:30px 0 12px}.step p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
     .closing{background:var(--forest);color:var(--ink)}.closing-inner{width:min(1184px,calc(100% - 48px));margin:auto;padding:110px 0;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}.closing p{font-size:18px;line-height:1.7;color:rgba(247,243,232,.62);margin:0}.footer{background:#091307;color:rgba(247,243,232,.5);font-size:13px}.footer-inner{width:min(1184px,calc(100% - 48px));margin:auto;padding:30px 0;display:flex;justify-content:space-between;gap:20px}.footer a{color:var(--ice);text-decoration:none}
     @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+    @keyframes routeMove{to{transform:translateX(-50%)}}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:none}
     @media(max-width:800px){.nav{padding:20px}.hero{min-height:650px;background-position:62% center}.hero-inner{width:calc(100% - 40px);padding:145px 0 58px}.hero h1{font-size:clamp(40px,12vw,60px)}.hero-copy{font-size:16px}.facts,.routes,.steps{grid-template-columns:1fr}.facts{margin-top:38px;max-width:none}.intro,.calc-body,.closing-inner{grid-template-columns:1fr}.intro{gap:28px}.section{width:calc(100% - 32px);padding:62px 0}.routes{padding:10px 18px 22px}.calc-head,.controls,.result{padding-left:20px;padding-right:20px}.calc-head{padding-top:25px}.route{padding:16px}.fact{padding:14px 16px}.controls{padding-top:26px;padding-bottom:26px}.result{padding-top:28px;padding-bottom:28px}.result-grid{gap:18px 12px}.metric strong{font-size:29px}.metric strong.compact{font-size:19px}.process-wrap{width:calc(100% - 40px);padding:68px 0}.steps{gap:0;margin-top:34px}.step{min-height:auto;padding:24px 20px;border-top:1px solid rgba(24,32,22,.12)}.closing-inner{width:calc(100% - 40px);padding:72px 0;gap:28px}.footer-inner{width:calc(100% - 40px);flex-direction:column}.proposal-pill{font-size:9px;padding:8px 10px}.brand{font-size:17px}}
-    @media(max-width:430px){.nav{align-items:flex-start}.proposal-pill{max-width:112px;text-align:center;line-height:1.4}.hero{min-height:620px}.hero-inner{padding-top:132px}.facts{grid-template-columns:1fr 1fr}.fact:last-child{grid-column:1/-1}.calculator{border-radius:18px}.calc-head h2{font-size:31px}.counter{justify-content:center}.control-label{text-align:center}.note{text-align:left}.result-grid{grid-template-columns:1fr 1fr}.demo-button{width:100%}}
+    @media(max-width:430px){.nav{align-items:flex-start}.proposal-pill{max-width:112px;text-align:center;line-height:1.4}.hero{min-height:620px}.hero-inner{padding-top:132px}.facts{grid-template-columns:1fr 1fr}.fact:last-child{grid-column:1/-1}.calculator{border-radius:18px}.calc-head h2{font-size:31px}.counter{justify-content:center}.control-label{text-align:center}.note{text-align:left}.result-grid{grid-template-columns:1fr 1fr}.demo-button{width:100%}.route-strip span{padding:11px 18px;font-size:9px}}
+    @media(prefers-reduced-motion:reduce){.route-strip-track{animation:none}.reveal{opacity:1;transform:none}.calculator{animation:none}}
   </style>
 </head>
 <body>
@@ -48,8 +52,13 @@
     </div>
   </header>
 
+  <div class="route-strip" aria-hidden="true"><div class="route-strip-track">
+    <span>El Calafate <i>●</i> El Chaltén <i>●</i> Ushuaia <i>●</i> Punta Arenas <i>●</i> Patagonia en movimiento <i>●</i></span>
+    <span>El Calafate <i>●</i> El Chaltén <i>●</i> Ushuaia <i>●</i> Punta Arenas <i>●</i> Patagonia en movimiento <i>●</i></span>
+  </div></div>
+
   <main>
-    <section class="section intro">
+    <section class="section intro reveal">
       <h2>Conectar destinos y cuidar el territorio</h2>
       <div>
         <p class="intro-copy">TAQSA conecta destinos centrales de la Patagonia, entre ellos El Calafate, El Chaltén y Ushuaia, además de operar una frecuencia entre Ushuaia y Punta Arenas. Esta propuesta suma una acción ambiental simple al viaje, sin modificar la experiencia de compra.</p>
@@ -58,7 +67,7 @@
     </section>
 
     <section class="section" aria-labelledby="simulador-title">
-      <div class="calculator">
+      <div class="calculator reveal">
         <div class="calc-head">
           <p class="eyebrow">Experiencia demostrativa</p>
           <h2 id="simulador-title">Simulá la compensación de un viaje</h2>
@@ -93,7 +102,7 @@
       <div class="process-wrap">
         <p class="eyebrow">Una experiencia sencilla</p>
         <h2>Del pasaje a una acción concreta</h2>
-        <div class="steps">
+        <div class="steps reveal">
           <article class="step"><b>01</b><h3>Elegir el viaje</h3><p>El recorrido queda identificado dentro de la experiencia de compra.</p></article>
           <article class="step"><b>02</b><h3>Estimar el impacto</h3><p>Se calcula una referencia ambiental según el trayecto y los pasajeros.</p></article>
           <article class="step"><b>03</b><h3>Compensar</h3><p>La persona decide si desea sumar el aporte a su operación.</p></article>
@@ -103,7 +112,7 @@
     </section>
 
     <section class="closing">
-      <div class="closing-inner">
+      <div class="closing-inner reveal">
         <h2>Viajar, conocer y devolverle algo al territorio</h2>
         <p>TAQSA moviliza personas a través de algunos de los paisajes más valiosos de la Patagonia. Reforestall puede transformar cada recorrido en una oportunidad voluntaria de compromiso ambiental, clara para el pasajero y medible para la empresa.</p>
       </div>
@@ -141,6 +150,13 @@
     document.querySelector("#demo").addEventListener("click", () => {
       document.querySelector("#demo-caption").textContent = "Simulación completada. En esta propuesta no se realizó ningún cobro ni se emitió un token real.";
     });
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
+    }, { threshold: .12 });
+    document.querySelectorAll(".reveal").forEach(item => revealObserver.observe(item));
+    window.addEventListener("scroll", () => {
+      document.querySelector(".hero").style.setProperty("--hero-shift", Math.min(42, window.scrollY * .08) + "px");
+    }, { passive: true });
   </script>
 </body>
 </html>
