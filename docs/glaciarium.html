@@ -1314,6 +1314,49 @@
       }
     }
 
+    .glacier-current {
+      overflow: hidden;
+      background: linear-gradient(90deg, #75d0df, #a8e4ec 48%, #77cedd);
+      color: #0e292d;
+    }
+
+    .glacier-current-track {
+      display: flex;
+      width: max-content;
+      animation: glacier-flow 24s linear infinite;
+    }
+
+    .glacier-current span {
+      padding: 12px 24px;
+      white-space: nowrap;
+      font-family: "Space Mono", monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .glacier-current i {
+      margin: 0 8px;
+      font-style: normal;
+      opacity: .42;
+    }
+
+    @keyframes glacier-flow {
+      to { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 760px) {
+      .glacier-current span {
+        padding: 10px 17px;
+        font-size: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .glacier-current-track { animation: none; }
+    }
+
   </style>
 
 </head>
@@ -1493,6 +1536,13 @@
     </div>
 
   </header>
+
+  <div class="glacier-current" aria-hidden="true">
+    <div class="glacier-current-track">
+      <span>Hielo patagónico <i>●</i> Experiencias con impacto <i>●</i> El Calafate <i>●</i> Conocer para regenerar <i>●</i></span>
+      <span>Hielo patagónico <i>●</i> Experiencias con impacto <i>●</i> El Calafate <i>●</i> Conocer para regenerar <i>●</i></span>
+    </div>
+  </div>
 
 
   <!-- =======================================================
