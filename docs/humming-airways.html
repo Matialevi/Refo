@@ -1,0 +1,341 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Compensá el impacto estimado de tu vuelo con Humming Airways y seguí tu participación desde Reforestall."><title>Humming Airways × Reforestall</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet"><style>
+/* ==========================================================================
+   Reforestall — sistema visual base (construido desde cero)
+   Paleta: bosque nativo. Tipografía: Fraunces (display) + Inter (texto)
+   + Space Mono (datos/etiquetas).
+   ========================================================================== */
+
+:root{
+  /* superficie oscura, de base "monte" */
+  --forest-950:#141c0c;
+  --forest-900:#1b2510;
+  --forest-800:#232f16;
+  --forest-700:#354220;
+
+  /* acentos */
+  --moss:#7C9152;
+  --moss-light:#A7BD74;
+  --amber:#C68A3D;
+  --amber-light:#E0AE6B;
+  --ice:#8FD4DE;      /* glaciar — uso puntual, no acento primario */
+  --ice-deep:#3C8894;
+
+  /* superficies claras */
+  --paper:#F4F1E6;
+  --paper-dim:#EAE5D3;
+  --ink:#1D1B0F;
+  --ink-dim:rgba(29,27,15,.64);
+
+  --line-dark:rgba(244,241,230,.14);
+  --line-light:rgba(29,27,15,.13);
+
+  --radius-sm:6px;
+  --radius-md:14px;
+  --radius-lg:28px;
+
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-nav:cubic-bezier(.45,.05,.55,.95);
+
+  --font-display:'Fraunces',serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --font-mono:'Space Mono',monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+img{max-width:100%;display:block;}
+a{color:inherit;}
+::selection{background:var(--moss-light);color:var(--forest-950);}
+
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  font-weight:500;
+  letter-spacing:-.01em;
+  line-height:1.08;
+  margin:0;
+  text-wrap:balance;
+}
+em{font-style:italic;}
+
+p{margin:0;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+@media(max-width:640px){.wrap{padding:0 20px;}}
+
+.mono{font-family:var(--font-mono);}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--moss);
+}
+.eyebrow::before{content:'';width:22px;height:1px;background:currentColor;opacity:.7;}
+.on-dark .eyebrow{color:var(--moss-light);}
+
+/* ---------- botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-body);font-weight:600;font-size:14.5px;
+  padding:14px 24px;border-radius:100px;border:1px solid transparent;
+  cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:transform .2s var(--ease-out), opacity .2s var(--ease-nav), background-color .2s var(--ease-nav), border-color .2s var(--ease-nav);
+}
+.btn:active{transform:scale(.97);}
+.btn-solid{background:var(--amber);color:var(--forest-950);}
+.btn-solid:hover{background:var(--amber-light);}
+.btn-outline{background:transparent;border-color:var(--line-dark);color:var(--paper);}
+.btn-outline:hover{border-color:rgba(244,241,230,.5);}
+.on-light .btn-outline{border-color:var(--line-light);color:var(--ink);}
+.on-light .btn-outline:hover{border-color:rgba(29,27,15,.4);}
+.btn svg{width:15px;height:15px;transition:transform .2s var(--ease-nav);}
+.btn:hover svg{transform:translateX(2px);}
+
+/* ---------- nav ---------- */
+.site-nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(244,241,230,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-light);
+}
+.site-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-display);font-size:19px;font-weight:600;color:var(--ink);}
+.nav-brand .dot{width:9px;height:9px;border-radius:50%;background:var(--moss);}
+.nav-links{display:flex;align-items:center;gap:6px;}
+.nav-links a{
+  text-decoration:none;font-size:14px;font-weight:500;color:var(--ink-dim);
+  padding:9px 16px;border-radius:100px;transition:color .2s var(--ease-nav), background-color .2s var(--ease-nav);
+}
+.nav-links a:hover{color:var(--ink);background:rgba(29,27,15,.05);}
+.nav-links a.active{color:var(--ink);background:var(--paper-dim);}
+.nav-cta{display:flex;align-items:center;gap:14px;}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+.nav-toggle span{display:block;width:20px;height:1.5px;background:var(--ink);margin:5px 0;transition:transform .2s var(--ease-nav), opacity .2s var(--ease-nav);}
+
+@media(max-width:860px){
+  .nav-links{
+    /* .site-nav tiene backdrop-filter, así que es el containing block de este
+       fixed: "bottom:0" se resolvería contra sus 72px, no el viewport. Se fija
+       la altura explícita en vh, que sí es siempre relativa al viewport. */
+    position:fixed;top:72px;left:0;right:0;height:calc(100vh - 72px);height:calc(100dvh - 72px);
+    background:var(--paper);overflow-y:auto;
+    flex-direction:column;align-items:stretch;padding:18px 20px;gap:2px;
+    transform:translateY(-8px);opacity:0;pointer-events:none;
+    transition:transform .25s var(--ease-out), opacity .2s var(--ease-nav);
+  }
+  .nav-links a{padding:14px 8px;border-radius:8px;font-size:16px;}
+  body.nav-open .nav-links{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .nav-toggle{display:block;}
+  body.nav-open .nav-toggle .l1{transform:translateY(6.5px) rotate(45deg);}
+  body.nav-open .nav-toggle .l2{opacity:0;}
+  body.nav-open .nav-toggle .l3{transform:translateY(-6.5px) rotate(-45deg);}
+}
+
+/* ---------- reveal-on-scroll ---------- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease-out), transform .7s var(--ease-out);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-stagger > *{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-out), transform .6s var(--ease-out);}
+.reveal-stagger.in > *{opacity:1;transform:translateY(0);}
+.reveal-stagger.in > *:nth-child(1){transition-delay:.02s;}
+.reveal-stagger.in > *:nth-child(2){transition-delay:.09s;}
+.reveal-stagger.in > *:nth-child(3){transition-delay:.16s;}
+.reveal-stagger.in > *:nth-child(4){transition-delay:.23s;}
+.reveal-stagger.in > *:nth-child(5){transition-delay:.30s;}
+.reveal-stagger.in > *:nth-child(6){transition-delay:.37s;}
+
+/* ---------- section rhythm ---------- */
+section{padding:120px 0;}
+section.tight{padding:80px 0;}
+.on-dark{background:var(--forest-950);color:var(--paper);position:relative;isolation:isolate;}
+.on-light{background:var(--paper);color:var(--ink);}
+.on-panel{background:var(--paper-dim);color:var(--ink);}
+
+/* textura sutil sobre fondos verde oscuro sólido, para que no queden planos.
+   overlay casi no se nota sobre un verde tan oscuro (efecto débil cerca de
+   los extremos), así que va con opacity más alta que en un fondo claro. */
+.on-dark::before, footer::before{
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+footer{position:relative;isolation:isolate;}
+
+.section-head{max-width:640px;}
+.section-head h2{font-size:clamp(28px,3.6vw,42px);}
+.section-head p{margin-top:18px;font-size:16.5px;line-height:1.65;color:var(--ink-dim);}
+.on-dark .section-head p{color:rgba(244,241,230,.68);}
+
+.hairline{border-top:1px solid var(--line-light);}
+.on-dark .hairline{border-top:1px solid var(--line-dark);}
+
+/* ---------- footer ---------- */
+footer{background:var(--forest-950);color:rgba(244,241,230,.7);padding:64px 0 40px;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;}
+.footer-brand{font-family:var(--font-display);font-size:20px;color:var(--paper);}
+.footer-col h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,241,230,.45);margin-bottom:14px;font-weight:400;}
+.footer-col a{display:block;text-decoration:none;font-size:14px;color:rgba(244,241,230,.75);padding:6px 0;transition:color .2s var(--ease-nav);}
+.footer-col a:hover{color:var(--paper);}
+.footer-bottom{margin-top:56px;padding-top:24px;border-top:1px solid var(--line-dark);display:flex;justify-content:space-between;font-size:12.5px;color:rgba(244,241,230,.4);flex-wrap:wrap;gap:10px;font-family:var(--font-mono);}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr;}}
+
+</style><style>
+:root{--navy:#112d49;--blue:#1d4b72;--yellow:#f2bd2e;--green:#213c2b;--leaf:#7fa56a;--bg:#f5f7f6;--text:#17232d;--muted:#63707a;--line:rgba(23,35,45,.14);--ui:"Archivo",sans-serif;--impact:"Archivo Black",sans-serif;--ease:cubic-bezier(.16,1,.3,1)}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:var(--ui)}body.nav-open{overflow:hidden}button,a{font:inherit}.wrap{width:min(1180px,calc(100% - 64px));margin:auto}:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}.site-nav{position:sticky;top:0;z-index:20;background:rgba(245,247,246,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}.site-nav .wrap{display:flex;height:72px;align-items:center;justify-content:space-between}.nav-brand{display:flex;gap:11px;align-items:center;font-family:var(--ui);font-weight:700;text-decoration:none}.mark{display:grid;width:27px;height:20px;grid-template-columns:8px 1fr;gap:3px;transform:skewX(-15deg)}.mark i:first-child{background:var(--yellow)}.mark i:last-child{background:var(--leaf)}.nav-links{display:flex;gap:4px}.nav-links a{padding:9px 13px;border-radius:0;background:none;color:var(--muted);font-size:13px;text-decoration:none}.nav-links a:hover,.nav-links a.active{background:none;color:var(--text);box-shadow:inset 0 -2px var(--yellow)}.nav-cta{padding:11px 17px;background:var(--navy);color:white;font-size:13px;font-weight:700;text-decoration:none}.nav-toggle{display:none;border:0;background:none}.nav-toggle span{display:block;width:22px;height:2px;margin:5px;background:var(--text);transition:.2s}
+.hero{position:relative;min-height:565px;overflow:hidden;background:var(--navy);color:white;isolation:isolate}.hero img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:64% center;filter:saturate(.78)}.hero:after{position:absolute;inset:0;z-index:-1;content:"";background:linear-gradient(90deg,rgba(9,30,49,.98),rgba(17,45,73,.88) 48%,rgba(17,45,73,.2) 84%)}.hero-content{display:flex;min-height:565px;max-width:710px;flex-direction:column;justify-content:center;padding:65px 0}.back{width:max-content;margin-bottom:38px;color:rgba(255,255,255,.65);font-size:12px;text-decoration:none}.partner{display:flex;gap:10px;align-items:center;margin-bottom:19px;color:var(--yellow);font-size:11px;font-weight:700;text-transform:uppercase}.partner:before{width:30px;height:3px;content:"";background:currentColor}h1,h2,h3,p{margin:0}h1{font:400 clamp(45px,6.5vw,78px)/.96 var(--impact);letter-spacing:-.055em}.hero p{max-width:600px;margin-top:23px;color:rgba(255,255,255,.73);font-size:17px;line-height:1.65}.start{display:flex;width:max-content;gap:14px;align-items:center;margin-top:28px;color:white;font-weight:700;text-decoration:none}.start span{padding:10px 14px;background:var(--yellow);color:var(--navy)}
+.facts{background:white;border-bottom:1px solid var(--line)}.facts .wrap{display:grid;grid-template-columns:1.25fr repeat(3,1fr)}.facts div{min-height:90px;padding:21px 24px;border-right:1px solid var(--line)}.facts .intro{display:flex;align-items:center;padding-left:0;color:var(--muted);font-size:12px;line-height:1.5}.facts small{display:block;color:var(--muted);font-size:9px;font-weight:700;text-transform:uppercase}.facts strong{display:block;margin-top:7px;font-size:14px}
+.experience{padding:90px 0 110px}.head{display:grid;grid-template-columns:1fr .8fr;gap:60px;align-items:end;margin-bottom:38px}.label{display:block;margin-bottom:15px;color:var(--blue);font-size:11px;font-weight:700;text-transform:uppercase}.head h2,.impact-copy h2{font:400 clamp(34px,4.5vw,55px)/1 var(--impact);letter-spacing:-.045em}.head p{color:var(--muted);font-size:15px;line-height:1.7}.shell{display:grid;grid-template-columns:1.12fr .88fr;background:white;border:1px solid var(--line);box-shadow:0 28px 70px rgba(0,0,0,.1)}.form{padding:35px 38px}.field-title{font-size:13px}.hint{display:block;margin-top:6px;color:var(--muted);font-size:11px}.routes{margin-top:22px;border-top:1px solid var(--line)}.route{display:grid;width:100%;grid-template-columns:58px 1fr 28px;gap:15px;align-items:center;padding:20px 4px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--text);text-align:left;cursor:pointer;transition:.2s}.route:hover{padding-inline:12px;background:rgba(29,75,114,.04)}.route.selected{padding-inline:15px;background:rgba(242,189,46,.1);box-shadow:inset 4px 0 var(--yellow)}.code{font:400 20px var(--impact)}.route strong{display:block;font-size:13px}.route-copy span{display:block;margin-top:5px;color:var(--muted);font-size:10px}.check{display:grid;width:22px;height:22px;place-items:center;border:1px solid var(--line);color:transparent}.selected .check{background:var(--navy);color:white}.passengers{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:30px}.counter{display:flex;border:1px solid var(--line)}.counter button,.counter output{display:grid;width:44px;height:43px;place-items:center;border:0;background:none}.counter button{font-size:20px;cursor:pointer}.counter button:hover{background:var(--yellow)}.counter output{border-inline:1px solid var(--line);font-weight:700}
+.result{display:flex;flex-direction:column;justify-content:space-between;padding:38px;background:var(--navy);color:white}.result-route{display:flex;justify-content:space-between;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.18)}.result-route span,.result small{color:rgba(255,255,255,.48);font-size:10px;font-weight:700;text-transform:uppercase}.result-route strong{color:var(--yellow);font-size:12px}.metric{padding:34px 0}.metric b{display:block;margin-top:9px;font:400 clamp(50px,6vw,76px)/.95 var(--impact);letter-spacing:-.06em}.metric b i{font:500 14px var(--ui);font-style:normal;letter-spacing:0}.path{height:3px;margin:28px 0;background:rgba(255,255,255,.15)}.path i{position:relative;display:block;width:100%;height:100%;background:var(--yellow);transform:scaleX(var(--path,.45));transform-origin:left;transition:transform .4s var(--ease)}.path i:after{position:absolute;right:0;top:50%;width:10px;height:10px;content:"";transform:translate(50%,-50%) rotate(45deg);background:var(--yellow)}.summary{color:rgba(255,255,255,.62);font-size:12px;line-height:1.6}.amount{display:flex;align-items:end;justify-content:space-between;padding:22px 0;border-top:1px solid rgba(255,255,255,.18)}.amount span:first-child{color:rgba(255,255,255,.55);font-size:11px}.amount strong{font:400 31px var(--impact);color:var(--yellow)}.compensate{display:flex;width:100%;justify-content:space-between;padding:16px 18px;border:0;background:var(--yellow);color:var(--navy);font-weight:700;cursor:pointer}.demo{margin-top:10px;color:rgba(255,255,255,.42);font-size:9px}.success{display:none;margin-top:14px;padding:14px;background:var(--green);font-size:11px;line-height:1.5}.success.show{display:block}
+.journey{padding:100px 0;background:white}.journey-head{max-width:720px}.journey-head h2{font:400 clamp(33px,4.5vw,52px)/1 var(--impact);letter-spacing:-.045em}.journey-head p{margin-top:20px;color:var(--muted);line-height:1.7}.steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:50px;border-block:1px solid var(--line)}.step{min-height:225px;padding:26px 24px;border-right:1px solid var(--line)}.step:first-child{padding-left:0}.step:last-child{border:0;padding-right:0}.step span{color:var(--blue);font-size:10px;font-weight:700;text-transform:uppercase}.step h3{margin-top:35px;font-size:20px}.step p{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}.step.key{background:var(--yellow)}
+.impact{padding:105px 0;background:var(--green);color:white}.impact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:8vw;align-items:center}.impact-copy .label{color:var(--yellow)}.impact-copy p{max-width:540px;margin-top:23px;color:rgba(255,255,255,.64);line-height:1.7}.impact-copy a{display:inline-block;margin-top:28px;padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,.4);color:white;font-weight:700;text-decoration:none}.preview{background:var(--bg);color:var(--text)}.preview-head{display:flex;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}.preview-head span{color:var(--muted);font-size:9px;text-transform:uppercase}.total{padding:27px 22px}.total small{color:var(--muted);font-size:10px;text-transform:uppercase}.total b{display:block;margin-top:8px;font:400 clamp(43px,5vw,63px) var(--impact)}.total b i{font:500 12px var(--ui);font-style:normal}.preview-row{display:grid;grid-template-columns:90px 1fr auto;gap:15px;padding:18px 22px;border-top:1px solid var(--line);font-size:11px}.preview-row span{color:var(--muted)}.preview-row b{color:var(--green)}.closing{padding:78px 0;background:var(--yellow)}.closing .wrap{display:flex;align-items:center;justify-content:space-between;gap:40px}.closing h2{max-width:720px;font:400 clamp(34px,4.7vw,58px)/.98 var(--impact);letter-spacing:-.045em}.closing a{padding:16px 20px;background:var(--navy);color:white;font-weight:700;text-decoration:none}footer{padding:40px 0;background:#091c2d;color:rgba(255,255,255,.55)}footer .wrap{display:flex;justify-content:space-between;gap:20px;font-size:11px}footer strong{color:white}.reveal{opacity:0;transform:translateY(18px);transition:.7s var(--ease)}.reveal.in{opacity:1;transform:none}
+@media(max-width:900px){.wrap{width:min(760px,calc(100% - 40px))}.nav-links{position:fixed;inset:72px 0 auto;display:flex;max-height:0;overflow:hidden;flex-direction:column;align-items:stretch;background:var(--bg);opacity:0;transition:.25s}.nav-open .nav-links{max-height:calc(100svh - 72px);padding:16px 20px 28px;opacity:1}.nav-links a{padding:15px 8px}.nav-cta{display:none}.nav-toggle{display:block}.nav-open .nav-toggle span:first-child{transform:translateY(7px) rotate(45deg)}.nav-open .nav-toggle span:nth-child(2){opacity:0}.nav-open .nav-toggle span:last-child{transform:translateY(-7px) rotate(-45deg)}.facts .wrap{grid-template-columns:1fr 1fr}.facts .intro{grid-column:1/-1;border-bottom:1px solid var(--line);padding-left:20px}.head,.impact-grid,.shell{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.step{border-bottom:1px solid var(--line)}.closing .wrap{align-items:flex-start;flex-direction:column}}
+@media(max-width:600px){.wrap{width:calc(100% - 32px)}.hero,.hero-content{min-height:610px}.hero-content{padding:50px 0}h1{font-size:47px}.hero p{font-size:15px}.facts .wrap{width:100%}.facts div{padding-inline:16px}.experience{padding:65px 0 78px}.head{gap:22px}.head h2,.impact-copy h2{font-size:36px}.form,.result{padding:27px 20px}.route{grid-template-columns:48px 1fr 22px}.passengers{align-items:flex-start;flex-direction:column}.counter{width:100%}.counter button{flex:1}.journey{padding:72px 0}.steps{grid-template-columns:1fr}.step,.step:first-child,.step:last-child{min-height:0;padding:25px 20px;border-right:0;border-bottom:1px solid var(--line)}.impact{padding:75px 0}.preview-row{grid-template-columns:1fr auto}.preview-row span{grid-column:1/-1}.closing{padding:62px 0}footer .wrap{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
+.lookup{margin:24px 0 8px;padding:18px;background:#eef2f4;border:1px solid var(--line)}.lookup-label{display:flex;align-items:center;justify-content:space-between;gap:15px}.lookup-label strong{font-size:13px}.lookup-label span{color:var(--muted);font-size:10px}.lookup-form{display:grid;grid-template-columns:1fr auto;margin-top:13px}.lookup-form input{min-width:0;padding:13px 14px;border:1px solid var(--line);border-right:0;background:white;color:var(--text);font:600 14px var(--ui);text-transform:uppercase}.lookup-form button{padding:13px 17px;border:0;background:var(--navy);color:white;font-size:12px;font-weight:700;cursor:pointer}.lookup-form button:hover{background:var(--blue)}.lookup-feedback{min-height:15px;margin-top:9px;color:var(--muted);font-size:10px;line-height:1.45}.lookup-feedback.ok{color:var(--green);font-weight:700}.lookup-feedback.error{color:#a33a2b}.or{display:flex;align-items:center;gap:12px;margin:20px 0 0;color:var(--muted);font-size:9px;font-weight:700;text-transform:uppercase}.or:before,.or:after{height:1px;content:"";flex:1;background:var(--line)}.service-note{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;line-height:1.45}.service-note b{color:var(--text)}
+@media(max-width:600px){.lookup-label{align-items:flex-start;flex-direction:column}.lookup-form{grid-template-columns:1fr}.lookup-form input{border-right:1px solid var(--line);border-bottom:0}.lookup-form button{width:100%}}
+.steps{position:relative;padding-top:48px;overflow:hidden}.steps::before{position:absolute;top:25px;right:14px;left:14px;height:1px;content:"";background:repeating-linear-gradient(90deg,rgba(29,75,114,.28) 0 8px,transparent 8px 14px)}.steps::after{position:absolute;top:12px;left:0;content:"✈";color:var(--blue);font-size:23px;line-height:1;transform:translateX(var(--plane-x,0px)) rotate(6deg);will-change:transform}.step{transition:background-color .28s,color .28s}.step.passed:not(.key){background:#eef3f5}.step.passed span{color:var(--green)}.journey-status{display:flex;justify-content:space-between;margin-top:15px;color:var(--muted);font-size:10px}.journey-status strong{color:var(--blue)}
+@media(max-width:600px){.steps{padding-top:42px}.steps::before{right:8px;left:8px}.steps::after{top:12px}}
+.compensation-choice{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}.choice-title{display:block;font-size:13px}.choice-options{display:grid;gap:8px;margin-top:13px}.choice-option{display:flex;align-items:flex-start;gap:11px;padding:12px;border:1px solid var(--line);cursor:pointer;transition:background-color .2s,border-color .2s}.choice-option:has(input:checked){border-color:var(--blue);background:rgba(29,75,114,.05)}.choice-option input{margin:2px 0 0;accent-color:var(--navy)}.choice-option strong{display:block;font-size:12px}.choice-option span{display:block;margin-top:3px;color:var(--muted);font-size:10px;line-height:1.4}.custom-kg{display:none;margin-top:12px;padding:14px;background:#eef2f4}.custom-kg.show{display:block}.custom-kg label{display:block;color:var(--muted);font-size:10px;font-weight:700;text-transform:uppercase}.kg-input{display:flex;align-items:center;margin-top:8px;border:1px solid var(--line);background:white}.kg-input input{width:100%;min-width:0;padding:12px;border:0;background:transparent;font:700 16px var(--ui)}.kg-input span{padding-right:12px;color:var(--muted);font-size:12px}.custom-help{margin-top:7px;color:var(--muted);font-size:9px;line-height:1.4}
+.experience{padding-top:72px}.head{margin-bottom:28px}.form{padding:28px 32px}.lookup{margin-top:18px;padding:14px}.lookup-form{margin-top:10px}.route{padding-block:14px}.route:hover{padding-block:14px}.passengers{margin-top:20px}.compensation-choice{margin-top:20px;padding-top:18px}.custom-kg{margin-top:10px;padding:0;background:transparent}.result{padding:30px 34px}.metric{padding:28px 0}.path{margin:22px 0}.amount{padding:18px 0}
+@media(max-width:600px){.experience{padding-top:54px}.form,.result{padding:22px 18px}.lookup{padding:12px}.route{padding-block:12px}.compensation-choice{margin-top:16px;padding-top:15px}}
+</style></head><body>
+<nav class="site-nav"><div class="wrap"><a class="nav-brand" href="index.html"><span class="mark"><i></i><i></i></span>Reforestall</a><div class="nav-links"><a href="index.html">Inicio</a><a href="compensar.html">Quiero compensar</a><a href="empresas.html">Empresas</a><a class="active" href="participaciones.html">Participaciones</a><a href="mi-impacto.html">Mi impacto</a></div><a class="nav-cta" href="#compensar">Compensar mi vuelo</a><button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button></div></nav>
+<header class="hero"><img src="https://www.hummingairways.com/images/fondo1.webp" alt="Avión de Humming Airways"><div class="wrap hero-content reveal"><a class="back" href="participaciones.html">← Volver a participaciones</a><span class="partner">Humming Airways × Reforestall</span><h1>Tu vuelo, con una compensación a medida</h1><p>Conocé el impacto estimado de tu vuelo y elegí cuánto compensar</p></div></header>
+<main><section class="experience" id="compensar"><div class="wrap"><div class="head reveal"><div><h2>Ingresá tu vuelo y conocé su impacto</h2></div><p>Cada recorrido tiene una estimación diferente. Seleccioná el vuelo y la cantidad de personas incluidas en tu reserva</p></div><div class="shell reveal"><div class="form"><strong class="field-title">¿Cuál fue tu recorrido?</strong><span class="hint">Si tenés el código, podés encontrarla más rápido.</span><div class="lookup"><div class="lookup-label"><strong>Ingresá tu código de vuelo</strong><span>Ejemplos demo: HA101 · HA204 · HA330</span></div><form class="lookup-form" id="flight-lookup"><input id="flight-code" inputmode="text" autocomplete="off" maxlength="8" placeholder="Ej. HA101" aria-label="Código de vuelo"><button type="submit">Buscar vuelo</button></form><p class="lookup-feedback" id="lookup-feedback" aria-live="polite">En la versión integrada, la ruta y los datos del vuelo aparecerían automáticamente</p></div><div class="or">O elegí la ruta manualmente</div><div class="routes" role="group" aria-label="Elegir vuelo">
+<button class="route selected" data-flight="pdp" aria-pressed="true"><span class="code">PDP</span><span class="route-copy"><strong>Buenos Aires → Punta del Este</strong><span>Aeroparque a Laguna del Sauce</span></span><span class="check">✓</span></button><button class="route" data-flight="mdz" aria-pressed="false"><span class="code">MDZ</span><span class="route-copy"><strong>Buenos Aires → Mendoza</strong><span>Conexión nacional de distancia media</span></span><span class="check">✓</span></button><button class="route" data-flight="regional" aria-pressed="false"><span class="code">REG</span><span class="route-copy"><strong>Otro destino regional</strong><span>Referencia para una ruta operada por Humming</span></span><span class="check">✓</span></button></div><div class="passengers"><div><strong class="field-title">Personas en la reserva</strong><span class="hint">Entre 1 y 19 pasajeros</span></div><div class="counter"><button id="minus" aria-label="Quitar una persona">−</button><output id="people">1</output><button id="plus" aria-label="Agregar una persona">+</button></div></div></div>
+<aside class="result"><div><div class="result-route"><span>Ruta seleccionada</span><strong id="route-code">AEP → PDP</strong></div><div class="metric"><small>Impacto estimado</small><b><span id="kg">25</span> <i>kg de CO₂</i></b><div class="path"><i></i></div><p class="summary" id="summary">Estimación para 1 persona en el vuelo Buenos Aires → Punta del Este</p></div></div><div><div class="amount"><span>Aporte sugerido</span><strong>$<span id="amount">11.250</span></strong></div><button class="compensate" id="confirm">Compensar este vuelo <span>→</span></button><p class="demo">Compensación voluntaria · Podés revisar toda la información antes de continuar. Esta demo no procesa pagos</p><div class="success" id="success">Tu participación está lista. En la experiencia real, continuarías al pago y después podrías consultarla en Mi impacto.</div></div></aside></div></div></section>
+<section class="journey"><div class="wrap"><div class="journey-head reveal"><h2>Así compensás tu vuelo</h2><p>La información acompaña cada paso para que siempre sepas qué estás eligiendo y qué sucede después</p></div><div class="steps reveal"><article class="step"><span>Antes de viajar</span><h3>Elegís tu vuelo</h3><p>La ruta puede llegar desde tu reserva o seleccionarse manualmente</p></article><article class="step"><span>Al aterrizar</span><h3>Conocés la estimación</h3><p>Revisás el impacto y el aporte sugerido antes de decidir</p></article><article class="step key"><span>Tu decisión</span><h3>Elegís participar</h3><p>La compensación es voluntaria, clara y sin pasos innecesarios</p></article><article class="step"><span>Después</span><h3>Seguís tu impacto</h3><p>La operación queda registrada para consultarla cuando quieras</p></article></div><div class="journey-status" aria-live="polite"><span>Recorrido de la participación</span><strong id="journey-stage">Elegís tu vuelo</strong></div></div></section>
+<section class="impact"><div class="wrap impact-grid"><div class="impact-copy reveal"><h2>Revisá el impacto de cada vuelo</h2><p>Desde Mi impacto podés consultar los kilogramos compensados, las operaciones realizadas y el registro generado por cada participación</p><a href="mi-impacto.html">Conocer Mi impacto →</a></div><div class="preview reveal"><div class="preview-head"><strong>Mi impacto</strong><span>Vista de ejemplo</span></div><div class="total"><small>Total compensado</small><b>85 <i>kg de CO₂</i></b></div><div class="preview-row"><span>Último aporte</span><strong id="preview-route">Humming · AEP → PDP</strong><b>+<span id="preview-kg">25</span> kg</b></div><div class="preview-row"><span>Actividad</span><strong>3 participaciones</strong><b>3 tokens</b></div></div></div></section><section class="closing"><div class="wrap reveal"><h2>Volá y compensá desde un mismo lugar</h2><a href="#compensar">Compensar un vuelo</a></div></section></main>
+<footer><div class="wrap"><strong>Reforestall × Humming Airways</strong><a href="participaciones.html">Volver a participaciones</a><span>Demo de producto · Sin integración comercial activa</span></div></footer>
+<script>const PRICE=450,flights={pdp:{name:'Buenos Aires → Punta del Este',code:'AEP → PDP',kg:25},mdz:{name:'Buenos Aires → Mendoza',code:'AEP → MDZ',kg:42},regional:{name:'Otro destino regional',code:'Ruta regional',kg:32}};let selected='pdp',people=1;const $=s=>document.querySelector(s);function render(){const f=flights[selected],kg=f.kg*people;$('#people').textContent=people;$('#kg').textContent=kg.toLocaleString('es-AR');$('#amount').textContent=(kg*PRICE).toLocaleString('es-AR');$('#route-code').textContent=f.code;$('#summary').textContent=`Estimación para ${people} ${people===1?'persona':'personas'} en el vuelo ${f.name}.`;$('#preview-route').textContent=`Humming · ${f.code}`;$('#preview-kg').textContent=kg.toLocaleString('es-AR');document.documentElement.style.setProperty('--path',Math.min(.88,(30+kg*.75)/100));$('#success').classList.remove('show')}document.querySelectorAll('.route').forEach(b=>b.onclick=()=>{document.querySelectorAll('.route').forEach(x=>{x.classList.remove('selected');x.setAttribute('aria-pressed','false')});b.classList.add('selected');b.setAttribute('aria-pressed','true');selected=b.dataset.flight;render()});$('#minus').onclick=()=>{people=Math.max(1,people-1);render()};$('#plus').onclick=()=>{people=Math.min(19,people+1);render()};$('#confirm').onclick=()=>$('#success').classList.add('show');const toggle=$('.nav-toggle');toggle.onclick=()=>{const open=document.body.classList.toggle('nav-open');toggle.setAttribute('aria-expanded',open);toggle.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú')};const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1});document.querySelectorAll('.reveal').forEach(x=>io.observe(x));render()</script><script>
+(() => {
+  const PRICE_PER_KG = 450;
+  const routeValues = { pdp: 25, mdz: 42, regional: 32 };
+  const journey = document.querySelector('.journey');
+  const experience = document.querySelector('.experience');
+  experience.parentNode.insertBefore(journey, experience);
+
+  const flightCodes = { HA101: 'pdp', HA204: 'mdz', HA330: 'regional' };
+  const form = document.querySelector('#flight-lookup');
+  const input = document.querySelector('#flight-code');
+  const feedback = document.querySelector('#lookup-feedback');
+
+  const choice = document.createElement('div');
+  choice.className = 'compensation-choice';
+  choice.innerHTML = `
+    <strong class="choice-title">Elegir otra cantidad</strong>
+    <span class="hint">Opcional. Si no ingresás nada, compensás la estimación completa del vuelo.</span>
+    <div class="custom-kg show" id="custom-kg-wrap">
+      <div class="kg-input"><input id="custom-kg-input" type="number" min="1" max="10000" step="1" placeholder="Ej. 10" aria-label="Kilogramos que querés compensar"><span>kg de CO₂</span></div>
+      <p class="custom-help" id="custom-help">Ingresá una cantidad para calcular el aporte.</p>
+    </div>`;
+  document.querySelector('.passengers').insertAdjacentElement('afterend', choice);
+
+  const customInput = document.querySelector('#custom-kg-input');
+  const customHelp = document.querySelector('#custom-help');
+
+  function selectedFlightKg() {
+    const key = document.querySelector('.route.selected')?.dataset.flight || 'pdp';
+    const passengers = Number(document.querySelector('#people').textContent) || 1;
+    return routeValues[key] * passengers;
+  }
+
+  function updateCompensationChoice() {
+    const fullKg = selectedFlightKg();
+    const hasCustomValue = customInput.value.trim() !== '';
+    if (!hasCustomValue) {
+      const routeName = document.querySelector('.route.selected .route-copy strong').textContent;
+      const passengers = Number(document.querySelector('#people').textContent) || 1;
+      document.querySelector('#kg').textContent = fullKg.toLocaleString('es-AR');
+      document.querySelector('#amount').textContent = (fullKg * PRICE_PER_KG).toLocaleString('es-AR');
+      document.querySelector('#summary').textContent = `Estimación para ${passengers} ${passengers === 1 ? 'persona' : 'personas'} en el vuelo ${routeName}.`;
+      document.querySelector('#preview-kg').textContent = fullKg.toLocaleString('es-AR');
+      document.documentElement.style.setProperty('--path', Math.min(.88, (30 + fullKg * .75) / 100));
+      customHelp.textContent = `Impacto completo estimado: ${fullKg.toLocaleString('es-AR')} kg · ${(fullKg * PRICE_PER_KG).toLocaleString('es-AR')}`;
+      return;
+    }
+
+    const customKg = Math.max(1, Math.min(10000, Math.round(Number(customInput.value) || 1)));
+    customInput.value = customKg;
+    document.querySelector('#kg').textContent = customKg.toLocaleString('es-AR');
+    document.querySelector('#amount').textContent = (customKg * PRICE_PER_KG).toLocaleString('es-AR');
+    document.querySelector('#summary').textContent = `Elegiste compensar ${customKg.toLocaleString('es-AR')} kg de los ${fullKg.toLocaleString('es-AR')} kg estimados para esta reserva.`;
+    document.querySelector('#preview-kg').textContent = customKg.toLocaleString('es-AR');
+    customHelp.textContent = `Aporte para ${customKg.toLocaleString('es-AR')} kg: ${(customKg * PRICE_PER_KG).toLocaleString('es-AR')}`;
+    document.documentElement.style.setProperty('--path', Math.min(.88, (30 + customKg * .75) / 100));
+  }
+
+  customInput.addEventListener('input', updateCompensationChoice);
+  document.querySelectorAll('.route,#minus,#plus').forEach(control => control.addEventListener('click', updateCompensationChoice));
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const code = input.value.trim().toUpperCase().replace(/\s/g, '');
+    const key = flightCodes[code];
+    feedback.className = 'lookup-feedback';
+
+    if (!code) {
+      feedback.textContent = 'Ingresá un código para buscar tu vuelo.';
+      feedback.classList.add('error');
+      return;
+    }
+    if (!key) {
+      feedback.textContent = 'No encontramos ese código en esta demostración. Probá HA101, HA204 o HA330, o elegí una ruta manualmente.';
+      feedback.classList.add('error');
+      return;
+    }
+
+    document.querySelector(`[data-flight="${key}"]`).click();
+    feedback.textContent = `Vuelo ${code} encontrado. Completamos la ruta automáticamente.`;
+    feedback.classList.add('ok');
+    document.querySelector('.result').scrollIntoView({
+      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'center'
+    });
+  });
+
+  const steps = [...document.querySelectorAll('.journey .step')];
+  const stepsTrack = document.querySelector('.journey .steps');
+  const stageLabel = document.querySelector('#journey-stage');
+  const stageNames = ['Elegís tu vuelo', 'Conocés la estimación', 'Elegís participar', 'Seguís tu impacto'];
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let frame = 0;
+
+  function updateJourney() {
+    frame = 0;
+    const rect = stepsTrack.getBoundingClientRect();
+    const viewportPoint = innerHeight * .62;
+    const progress = Math.max(0, Math.min(1, (viewportPoint - rect.top) / Math.max(1, rect.height)));
+    const activeIndex = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+    const travel = Math.max(0, stepsTrack.clientWidth - 28) * progress;
+    stepsTrack.style.setProperty('--plane-x', `${travel}px`);
+    steps.forEach((step, index) => step.classList.toggle('passed', index <= activeIndex));
+    stageLabel.textContent = stageNames[activeIndex];
+  }
+
+  function requestJourneyUpdate() {
+    if (frame) return;
+    frame = requestAnimationFrame(updateJourney);
+  }
+
+  if (!reduceMotion) {
+    addEventListener('scroll', requestJourneyUpdate, { passive: true });
+    addEventListener('resize', requestJourneyUpdate, { passive: true });
+  } else {
+    steps.forEach(step => step.classList.add('passed'));
+    stageLabel.textContent = stageNames.at(-1);
+  }
+  updateJourney();
+})();
+
+</script></body></html>

@@ -93,10 +93,12 @@
   const dots = pin.querySelectorAll('.hero-progress span');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if(reduceMotion || !sceneA || !sceneB){
+  if(!sceneA){
     document.documentElement.classList.add('no-pin');
     return;
   }
+
+  const hasSecondScene = Boolean(sceneB);
 
   function smoothstep(edge0, edge1, x){
     const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)));
@@ -112,13 +114,33 @@
     // media query). Si no limpiamos los estilos inline que dejó el modo
     // pinneado, scene-b puede quedar con opacity:0 pisando ese fallback.
     if(mobileQuery.matches){
-      [sceneA, sceneB].forEach(s => { s.style.opacity = ''; s.style.transform = ''; s.style.pointerEvents = ''; });
+      [sceneA, sceneB].filter(Boolean).forEach(s => {
+        s.style.opacity = '';
+        s.style.transform = '';
+        s.style.pointerEvents = '';
+      });
       return;
     }
     const total = pin.offsetHeight - window.innerHeight;
     if(total <= 0) return;
     const scrolled = -pin.getBoundingClientRect().top;
     const p = Math.min(1, Math.max(0, scrolled / total));
+
+    // La portada actual tiene una única escena. Se mantiene completa durante
+    // la mayor parte del recorrido y se desvanece al final, evitando que el
+    // título se deslice parcialmente por detrás de la navegación fija.
+    if(!hasSecondScene){
+      const outSingle = reduceMotion
+        ? (p >= 0.68 ? 1 : 0)
+        : smoothstep(0.68, 0.94, p);
+      sceneA.style.opacity = String(1 - outSingle);
+      sceneA.style.transform = reduceMotion
+        ? 'none'
+        : `translateY(${-12 * outSingle}px)`;
+      sceneA.style.pointerEvents = outSingle > 0.6 ? 'none' : 'auto';
+      document.dispatchEvent(new CustomEvent('reforestall:heroprogress', { detail: { p } }));
+      return;
+    }
 
     const outA = smoothstep(0.30, 0.52, p);
     const inB = smoothstep(0.44, 0.68, p);

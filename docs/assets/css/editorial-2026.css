@@ -1,0 +1,1872 @@
+/* Reforestall — dirección editorial compartida 2026 */
+
+:root {
+  --forest-950: #10291d;
+  --forest-900: #183c2b;
+  --forest-800: #24513b;
+  --forest-700: #35664c;
+  --moss: #78927b;
+  --moss-light: #b7c9b7;
+  --amber: #e4a72f;
+  --amber-light: #f0bf55;
+  --paper: #f5f2e9;
+  --paper-dim: #e8eee8;
+  --ink: #17231c;
+  --ink-dim: rgba(23, 35, 28, 0.66);
+  --line-dark: rgba(245, 242, 233, 0.18);
+  --line-light: rgba(23, 35, 28, 0.14);
+  --font-display: 'Archivo Black', 'Archivo', sans-serif;
+  --font-body: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* =========================================================
+   Prioridad final: identidad visual específica por sección
+========================================================= */
+
+.compensate-header {
+  min-height: 360px;
+  padding: 82px 0 72px;
+  background:
+    linear-gradient(106deg, rgba(255, 255, 255, 0.025) 0 42%, transparent 42%),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(245, 242, 233, 0.035) 31px 32px),
+    linear-gradient(135deg, #10291d, #1c4934);
+}
+
+.compensate-header::before {
+  inset: 50% 6vw auto auto;
+  display: block;
+  width: auto;
+  height: auto;
+  content: "CO₂";
+  z-index: -1;
+  transform: translateY(-50%);
+  opacity: 1;
+  color: rgba(245, 242, 233, 0.07);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-family: var(--font-display);
+  font-size: clamp(110px, 18vw, 260px);
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+}
+
+.compensate-header::after {
+  position: absolute;
+  right: 7vw;
+  bottom: 58px;
+  display: block;
+  width: min(30vw, 360px);
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, var(--amber) 0 32%, rgba(245, 242, 233, 0.22) 32% 100%);
+}
+
+.compensate-header p,
+.compensate-header .header-facts {
+  display: none;
+}
+
+.calculator-section .wrap {
+  max-width: 1060px;
+}
+
+.compensation-panel {
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.76fr);
+  border-radius: 34px;
+  box-shadow: 0 24px 58px rgba(16, 41, 29, 0.1);
+}
+
+.calculator-controls,
+.calculator-result {
+  padding: 30px;
+}
+
+.calculator-controls h3 {
+  font-size: clamp(26px, 2.6vw, 34px);
+}
+
+.amount-preset {
+  min-height: 76px;
+  padding: 15px 20px;
+  border-radius: 26px;
+}
+
+.custom-input-box,
+.payment-details,
+.payment-details input {
+  border-radius: 22px;
+}
+
+.calculator-result {
+  background:
+    linear-gradient(145deg, rgba(228, 167, 47, 0.08) 0 22%, transparent 22%),
+    repeating-linear-gradient(0deg, transparent 0 47px, rgba(245, 242, 233, 0.035) 47px 48px),
+    var(--forest-900);
+}
+
+.result-heading {
+  margin: 0;
+  text-align: left;
+  font-size: 21px;
+}
+
+.tree-progress {
+  min-height: 128px;
+  margin: 22px 0 16px;
+  overflow: hidden;
+  border: 1px solid rgba(245, 242, 233, 0.2);
+  border-left: 0;
+  border-radius: 30px 30px 8px 30px;
+  background:
+    linear-gradient(90deg, var(--amber) 0 7px, transparent 7px),
+    linear-gradient(100deg, rgba(228, 167, 47, 0.18) 0 24%, transparent 24%),
+    rgba(5, 27, 18, 0.24);
+}
+
+.tree-progress-content {
+  position: static;
+  width: 100%;
+  padding: 21px 25px;
+  transform: none;
+  text-align: left;
+}
+
+.tree-main-label,
+.tree-equivalence {
+  text-align: left;
+}
+
+.result-rows {
+  overflow: hidden;
+  border: 1px solid rgba(245, 242, 233, 0.11);
+  border-radius: 22px;
+}
+
+.result-row {
+  padding-inline: 16px;
+}
+
+.closing-section {
+  background: linear-gradient(135deg, #10291d, #163b2a);
+}
+
+.closing-section::before {
+  position: absolute;
+  inset: auto 0 0;
+  display: block;
+  width: 100%;
+  height: 46%;
+  content: "";
+  transform: none;
+  opacity: 0.3;
+  border: 0;
+  border-radius: 0;
+  background: var(--forest-700);
+  clip-path: polygon(0 78%, 12% 61%, 24% 70%, 37% 36%, 49% 58%, 63% 24%, 77% 52%, 89% 30%, 100% 48%, 100% 100%, 0 100%);
+}
+
+.closing-section::after {
+  position: absolute;
+  inset: auto 0 0;
+  display: block;
+  width: 100%;
+  height: 35%;
+  content: "";
+  transform: none;
+  opacity: 0.32;
+  border-radius: 0;
+  background: #0a2117;
+  clip-path: polygon(0 58%, 15% 74%, 29% 42%, 42% 72%, 58% 40%, 70% 66%, 84% 34%, 100% 62%, 100% 100%, 0 100%);
+}
+
+.participations-header {
+  background:
+    linear-gradient(120deg, transparent 0 55%, rgba(228, 167, 47, 0.08) 55% 55.3%, transparent 55.3%),
+    linear-gradient(35deg, transparent 0 68%, rgba(245, 242, 233, 0.055) 68% 68.2%, transparent 68.2%),
+    linear-gradient(145deg, #10291d, #204c37);
+}
+
+.participations-header::before {
+  inset: 76px 7vw auto auto;
+  display: block;
+  width: min(37vw, 460px);
+  height: 240px;
+  content: "";
+  opacity: 0.72;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(var(--amber) 0 0) 8% 76% / 76px 3px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.25) 0 0) 33% 47% / 126px 2px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.17) 0 0) 73% 24% / 104px 2px no-repeat,
+    linear-gradient(90deg, rgba(245, 242, 233, 0.2) 0 0) 28% 48% / 2px 29% no-repeat,
+    linear-gradient(90deg, rgba(245, 242, 233, 0.15) 0 0) 69% 25% / 2px 24% no-repeat;
+}
+
+.participations-closing {
+  overflow: hidden;
+  background: linear-gradient(135deg, #edf0e8, var(--paper));
+}
+
+.participations-closing::before {
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: block;
+  width: 42%;
+  height: 100%;
+  content: "";
+  opacity: 0.72;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(var(--amber) 0 0) 14% 28% / 72px 3px no-repeat,
+    linear-gradient(var(--forest-700) 0 0) 42% 51% / 104px 2px no-repeat,
+    linear-gradient(var(--moss) 0 0) 72% 72% / 82px 2px no-repeat,
+    linear-gradient(90deg, rgba(23, 35, 28, 0.18) 0 0) 35% 28% / 2px 23% no-repeat,
+    linear-gradient(90deg, rgba(23, 35, 28, 0.13) 0 0) 67% 51% / 2px 21% no-repeat;
+}
+
+.participations-closing::after {
+  display: none;
+  content: none;
+}
+
+.participations-closing-content {
+  max-width: 720px;
+  margin-left: 0;
+  text-align: left;
+}
+
+.impact-header {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 48px, rgba(245, 242, 233, 0.035) 48px 49px),
+    linear-gradient(145deg, #10291d, #173e2c);
+}
+
+.impact-header::before {
+  inset: 70px 7vw auto auto;
+  display: block;
+  width: min(36vw, 450px);
+  height: 250px;
+  content: "";
+  opacity: 0.72;
+  border: 1px solid rgba(245, 242, 233, 0.12);
+  border-radius: 0;
+  background:
+    linear-gradient(var(--amber) 0 0) 28px 34px / 42% 8px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.2) 0 0) 28px 72px / 76% 2px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.13) 0 0) 28px 108px / 58% 2px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.13) 0 0) 28px 144px / 70% 2px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.13) 0 0) 28px 180px / 45% 2px no-repeat;
+}
+
+.impact-header::after {
+  position: absolute;
+  right: calc(7vw + 22px);
+  top: 88px;
+  display: block;
+  content: "REGISTRO DE IMPACTO";
+  color: rgba(245, 242, 233, 0.5);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 900px) {
+  .compensation-panel {
+    grid-template-columns: 1fr;
+    max-width: 680px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 650px) {
+  .compensate-header::before {
+    right: -5vw;
+    font-size: 120px;
+  }
+
+  .participations-header::before,
+  .impact-header::before {
+    right: -90px;
+    width: 270px;
+    opacity: 0.28;
+  }
+
+  .impact-header::after {
+    display: none;
+  }
+
+  .compensation-panel {
+    border-radius: 26px;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--paper);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+}
+
+.site-nav {
+  background: rgba(245, 242, 233, 0.94);
+  border-bottom-color: var(--line-light);
+}
+
+.nav-brand {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.nav-brand .dot {
+  border-radius: 0;
+  background: none;
+  transform: none;
+}
+
+.btn,
+button,
+input,
+textarea {
+  font-family: var(--font-body);
+}
+
+.btn-solid {
+  color: var(--forest-950);
+  background: var(--amber);
+}
+
+.btn-solid:hover {
+  background: var(--amber-light);
+}
+
+/* Encabezados interiores */
+.compensate-header,
+.participations-header,
+.impact-header {
+  min-height: 510px;
+  padding: 112px 0 92px;
+  color: var(--paper);
+  background: var(--forest-950);
+}
+
+.header-grid-line,
+.header-orbit,
+.header-grid,
+.header-point {
+  display: none;
+}
+
+.compensate-header::before,
+.compensate-header::after,
+.participations-header::before,
+.participations-header::after,
+.impact-header::before,
+.impact-header::after {
+  display: none;
+  content: none;
+}
+
+.compensate-header-content,
+.participations-header-content,
+.impact-header-content {
+  max-width: 900px;
+}
+
+.compensate-header h1,
+.participations-header h1,
+.impact-header h1 {
+  max-width: 880px;
+  font-size: clamp(48px, 6.2vw, 88px);
+  line-height: 0.96;
+  color: #fff;
+}
+
+.compensate-header p,
+.participations-header p,
+.impact-header p {
+  max-width: 650px;
+  margin-top: 28px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(245, 242, 233, 0.7);
+}
+
+.header-facts {
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line-dark);
+}
+
+.header-fact {
+  color: var(--amber-light);
+  background: transparent;
+  border: 0;
+}
+
+/* Compensar */
+.selection-intro,
+.participations-intro {
+  padding: 78px 0;
+  background: var(--paper);
+}
+
+.selection-intro-content,
+.participations-intro-content {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.selection-intro h2,
+.participations-intro h2 {
+  font-size: clamp(36px, 4.8vw, 64px);
+  line-height: 1;
+}
+
+.calculator-section {
+  background: var(--paper-dim);
+}
+
+.compensation-panel {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line-light);
+  border-radius: 0;
+  box-shadow: 0 28px 70px rgba(16, 41, 29, 0.1);
+}
+
+.calculator-controls {
+  background: #fff;
+}
+
+.calculator-result {
+  color: var(--paper);
+  background: var(--forest-900);
+}
+
+.amount-preset,
+.custom-input-box,
+.payment-details {
+  border-radius: 0;
+  border-color: var(--line-light);
+}
+
+.amount-preset.active {
+  color: var(--forest-950);
+  background: var(--amber);
+  border-color: var(--amber);
+}
+
+.compensate-button {
+  color: var(--forest-950);
+  background: var(--amber);
+  border-radius: 999px;
+}
+
+.contribution-section {
+  background: var(--paper);
+}
+
+.contribution-route,
+.route-stage {
+  border-radius: 0;
+}
+
+.closing-section {
+  background: var(--forest-950);
+}
+
+/* Empresas */
+.page-header {
+  min-height: 680px;
+}
+
+.page-header-scrim {
+  background: linear-gradient(90deg, rgba(8, 27, 18, 0.94), rgba(8, 27, 18, 0.55) 48%, rgba(8, 27, 18, 0.12));
+}
+
+.page-header .wrap {
+  padding-top: 118px;
+  padding-bottom: 92px;
+}
+
+.header-label,
+.benefits-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.page-header h1 {
+  max-width: 900px;
+  font-size: clamp(48px, 6vw, 86px);
+  line-height: 0.96;
+  color: #fff;
+}
+
+.page-header p {
+  max-width: 650px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.company-benefits {
+  background: var(--paper);
+}
+
+.benefits-heading h2,
+.integration-heading h2,
+.contact-intro h2 {
+  line-height: 0.98;
+}
+
+.benefit-card {
+  border-radius: 0;
+  border-color: var(--line-light);
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: none;
+}
+
+.benefit-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(23, 35, 28, 0.3);
+}
+
+.benefit-icon {
+  color: var(--forest-700);
+  background: var(--paper-dim);
+}
+
+.benefit-tag {
+  color: var(--forest-700);
+}
+
+.integration-section {
+  background: var(--paper-dim);
+}
+
+.integration-step {
+  border-radius: 0;
+  border-color: var(--line-light);
+  background: transparent;
+}
+
+.integration-number {
+  color: var(--amber);
+}
+
+.contact-panel {
+  border-radius: 0;
+  background: var(--forest-950);
+}
+
+.contact-form input,
+.contact-form textarea {
+  border-radius: 0;
+}
+
+/* Participaciones */
+.participants-section {
+  background: var(--paper-dim);
+}
+
+.participant-featured,
+.participant-next {
+  overflow: hidden;
+  border-radius: 0;
+  border-color: var(--line-light);
+  box-shadow: none;
+}
+
+.participant-content,
+.participant-next-content {
+  background: #fff;
+}
+
+.participant-link,
+.participant-location {
+  color: var(--forest-700);
+}
+
+.participations-closing {
+  background: var(--forest-950);
+}
+
+/* Mi impacto */
+.access-section,
+.dashboard-section {
+  background: var(--paper-dim);
+}
+
+.access-intro h2,
+.dashboard-welcome h2,
+.contributions-heading h2 {
+  line-height: 0.98;
+}
+
+.access-card,
+.summary-panel,
+.contribution-card,
+.trace-panel,
+.token-modal-card {
+  border-radius: 0;
+  border-color: var(--line-light);
+  box-shadow: none;
+}
+
+.access-card-primary,
+.summary-main {
+  color: var(--paper);
+  background: var(--forest-900);
+}
+
+.auth-tab.active,
+.access-button,
+.token-button {
+  color: var(--forest-950);
+  background: var(--amber);
+}
+
+.access-form input,
+.password-reset-form input,
+.token-info input {
+  border-radius: 0;
+}
+
+.summary-number,
+.contribution-value {
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+}
+
+@media (max-width: 900px) {
+  .compensate-header,
+  .participations-header,
+  .impact-header {
+    min-height: auto;
+    padding: 88px 0 72px;
+  }
+
+  .page-header {
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 650px) {
+  .compensate-header h1,
+  .participations-header h1,
+  .impact-header h1,
+  .page-header h1 {
+    font-size: clamp(42px, 12vw, 58px);
+  }
+
+  .compensate-header p,
+  .participations-header p,
+  .impact-header p,
+  .page-header p {
+    font-size: 16px;
+  }
+
+  .selection-intro,
+  .participations-intro {
+    padding: 62px 0;
+  }
+}
+
+/* =========================================================
+   Identidad propia por página — revisión final
+========================================================= */
+
+/* Quiero compensar: lenguaje de medición y captura */
+.compensate-header {
+  min-height: 360px;
+  padding: 82px 0 72px;
+  background:
+    linear-gradient(106deg, rgba(255, 255, 255, 0.025) 0 42%, transparent 42%),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(245, 242, 233, 0.035) 31px 32px),
+    linear-gradient(135deg, #10291d, #1c4934);
+}
+
+.compensate-header::before {
+  inset: 50% 6vw auto auto;
+  width: auto;
+  height: auto;
+  content: "CO₂";
+  transform: translateY(-50%);
+  opacity: 1;
+  color: rgba(245, 242, 233, 0.07);
+  background: none;
+  font-family: var(--font-display);
+  font-size: clamp(110px, 18vw, 260px);
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+}
+
+.compensate-header::after {
+  position: absolute;
+  right: 7vw;
+  bottom: 58px;
+  display: block;
+  width: min(30vw, 360px);
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, var(--amber) 0 32%, rgba(245, 242, 233, 0.22) 32% 100%);
+}
+
+.compensate-header-content {
+  max-width: 700px;
+}
+
+.compensate-header h1 {
+  max-width: 660px;
+}
+
+.compensate-header p,
+.compensate-header .header-facts {
+  display: none;
+}
+
+.selection-intro {
+  padding: 70px 0 34px;
+}
+
+.selection-intro h2 {
+  max-width: 720px;
+  font-size: clamp(32px, 3.8vw, 50px);
+}
+
+.calculator-section .wrap {
+  max-width: 1060px;
+}
+
+.compensation-panel {
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.76fr);
+  border-radius: 34px;
+  box-shadow: 0 24px 58px rgba(16, 41, 29, 0.1);
+}
+
+.calculator-controls,
+.calculator-result {
+  padding: 30px;
+}
+
+.calculator-controls h3 {
+  max-width: 460px;
+  font-size: clamp(26px, 2.6vw, 34px);
+}
+
+.calculator-controls-intro {
+  margin-top: 12px;
+}
+
+.amount-presets {
+  gap: 10px;
+}
+
+.amount-preset {
+  min-height: 76px;
+  padding: 15px 20px;
+  border-radius: 26px;
+}
+
+.amount-preset strong {
+  font-size: 24px;
+}
+
+.custom-input-box,
+.payment-details,
+.payment-details input {
+  border-radius: 22px;
+}
+
+.calculator-result {
+  background:
+    linear-gradient(145deg, rgba(228, 167, 47, 0.08) 0 22%, transparent 22%),
+    repeating-linear-gradient(0deg, transparent 0 47px, rgba(245, 242, 233, 0.035) 47px 48px),
+    var(--forest-900);
+}
+
+.result-heading {
+  max-width: 330px;
+  font-size: 21px;
+}
+
+.tree-progress {
+  min-height: 128px;
+  margin: 22px 0 16px;
+  overflow: hidden;
+  border: 1px solid rgba(245, 242, 233, 0.2);
+  border-left: 0;
+  border-radius: 30px 30px 8px 30px;
+  background:
+    linear-gradient(90deg, var(--amber) 0 7px, transparent 7px),
+    linear-gradient(100deg, rgba(228, 167, 47, 0.18) 0 24%, transparent 24%),
+    rgba(5, 27, 18, 0.24);
+}
+
+.tree-progress-content {
+  padding: 21px 25px;
+}
+
+.tree-symbol {
+  font-size: 24px;
+}
+
+.tree-main-value {
+  font-size: clamp(40px, 4vw, 54px);
+}
+
+.result-rows {
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(245, 242, 233, 0.11);
+}
+
+.result-row {
+  padding-inline: 16px;
+}
+
+.closing-section {
+  background: linear-gradient(135deg, #10291d, #163b2a);
+}
+
+.closing-section::before {
+  position: absolute;
+  inset: auto 0 0;
+  display: block;
+  width: 100%;
+  height: 46%;
+  content: "";
+  opacity: 0.3;
+  background: var(--forest-700);
+  clip-path: polygon(0 78%, 12% 61%, 24% 70%, 37% 36%, 49% 58%, 63% 24%, 77% 52%, 89% 30%, 100% 48%, 100% 100%, 0 100%);
+}
+
+.closing-section::after {
+  position: absolute;
+  inset: auto 0 0;
+  display: block;
+  width: 100%;
+  height: 35%;
+  content: "";
+  opacity: 0.32;
+  background: #0a2117;
+  clip-path: polygon(0 58%, 15% 74%, 29% 42%, 42% 72%, 58% 40%, 70% 66%, 84% 34%, 100% 62%, 100% 100%, 0 100%);
+}
+
+/* Participaciones: destinos conectados */
+.participations-header {
+  background:
+    linear-gradient(120deg, transparent 0 55%, rgba(228, 167, 47, 0.08) 55% 55.3%, transparent 55.3%),
+    linear-gradient(35deg, transparent 0 68%, rgba(245, 242, 233, 0.055) 68% 68.2%, transparent 68.2%),
+    linear-gradient(145deg, #10291d, #204c37);
+}
+
+.participations-header::before {
+  inset: 76px 7vw auto auto;
+  width: min(37vw, 460px);
+  height: 240px;
+  content: "";
+  opacity: 0.72;
+  border: 0;
+  background:
+    linear-gradient(var(--amber) 0 0) 8% 76% / 76px 3px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.25) 0 0) 33% 47% / 126px 2px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.17) 0 0) 73% 24% / 104px 2px no-repeat,
+    linear-gradient(90deg, rgba(245, 242, 233, 0.2) 0 0) 28% 48% / 2px 29% no-repeat,
+    linear-gradient(90deg, rgba(245, 242, 233, 0.15) 0 0) 69% 25% / 2px 24% no-repeat;
+}
+
+.participations-closing {
+  overflow: hidden;
+  background: linear-gradient(135deg, #edf0e8, var(--paper));
+}
+
+.participations-closing::before {
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: block;
+  width: 42%;
+  height: 100%;
+  content: "";
+  opacity: 0.72;
+  background:
+    linear-gradient(var(--amber) 0 0) 14% 28% / 72px 3px no-repeat,
+    linear-gradient(var(--forest-700) 0 0) 42% 51% / 104px 2px no-repeat,
+    linear-gradient(var(--moss) 0 0) 72% 72% / 82px 2px no-repeat,
+    linear-gradient(90deg, rgba(23, 35, 28, 0.18) 0 0) 35% 28% / 2px 23% no-repeat,
+    linear-gradient(90deg, rgba(23, 35, 28, 0.13) 0 0) 67% 51% / 2px 21% no-repeat;
+}
+
+.participations-closing::after {
+  display: none;
+  content: none;
+}
+
+.participations-closing-content {
+  max-width: 720px;
+  margin-left: 0;
+  text-align: left;
+}
+
+/* Mi impacto: registro, datos y trazabilidad */
+.impact-header {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 48px, rgba(245, 242, 233, 0.035) 48px 49px),
+    linear-gradient(145deg, #10291d, #173e2c);
+}
+
+.impact-header::before {
+  inset: 70px 7vw auto auto;
+  width: min(36vw, 450px);
+  height: 250px;
+  content: "";
+  opacity: 0.72;
+  border: 1px solid rgba(245, 242, 233, 0.12);
+  background:
+    linear-gradient(var(--amber) 0 0) 28px 34px / 42% 8px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.2) 0 0) 28px 72px / 76% 2px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.13) 0 0) 28px 108px / 58% 2px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.13) 0 0) 28px 144px / 70% 2px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.13) 0 0) 28px 180px / 45% 2px no-repeat;
+}
+
+.impact-header::after {
+  position: absolute;
+  right: calc(7vw + 22px);
+  top: 88px;
+  display: block;
+  content: "REGISTRO DE IMPACTO";
+  color: rgba(245, 242, 233, 0.5);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 900px) {
+  .compensation-panel {
+    grid-template-columns: 1fr;
+    max-width: 680px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 650px) {
+  .compensate-header,
+  .participations-header,
+  .impact-header {
+    min-height: 330px;
+  }
+
+  .compensate-header::before {
+    right: -5vw;
+    font-size: 120px;
+  }
+
+  .compensate-header::after {
+    right: 20px;
+    width: 150px;
+  }
+
+  .participations-header::before,
+  .impact-header::before {
+    right: -90px;
+    width: 270px;
+    opacity: 0.28;
+  }
+
+  .impact-header::after {
+    display: none;
+  }
+
+  .compensation-panel {
+    border-radius: 26px;
+  }
+
+  .amount-preset {
+    border-radius: 22px;
+  }
+
+  .participations-closing::before {
+    width: 100%;
+    opacity: 0.25;
+  }
+}
+
+/* =========================================================
+   Ajustes editoriales — revisión visual septiembre 2026
+========================================================= */
+
+/* Escala más contenida y fondos inspirados en parcelas, rutas y trazabilidad */
+.compensate-header,
+.participations-header,
+.impact-header {
+  position: relative;
+  min-height: 430px;
+  padding: 88px 0 76px;
+  isolation: isolate;
+  background-color: var(--forest-950);
+  background-image:
+    linear-gradient(115deg, transparent 0 58%, rgba(228, 167, 47, 0.08) 58% 58.25%, transparent 58.25%),
+    repeating-linear-gradient(90deg, transparent 0 124px, rgba(245, 242, 233, 0.035) 124px 125px),
+    linear-gradient(145deg, var(--forest-950), #173d2b);
+}
+
+.compensate-header::before,
+.participations-header::before,
+.impact-header::before {
+  position: absolute;
+  inset: auto 5vw 42px auto;
+  display: block;
+  width: min(36vw, 470px);
+  height: 132px;
+  content: "";
+  z-index: -1;
+  opacity: 0.7;
+  border: 0;
+  border-radius: 0;
+  transform: none;
+  background:
+    linear-gradient(var(--amber) 0 0) 0 100% / 24% 2px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.2) 0 0) 30% 70% / 38% 2px no-repeat,
+    linear-gradient(rgba(245, 242, 233, 0.12) 0 0) 74% 35% / 26% 2px no-repeat,
+    linear-gradient(90deg, rgba(245, 242, 233, 0.2) 0 0) 24% 70% / 2px 30% no-repeat,
+    linear-gradient(90deg, rgba(245, 242, 233, 0.12) 0 0) 68% 35% / 2px 36% no-repeat;
+}
+
+.compensate-header::after,
+.participations-header::after,
+.impact-header::after {
+  display: none;
+  content: none;
+}
+
+.compensate-header h1,
+.participations-header h1,
+.impact-header h1 {
+  max-width: 760px;
+  font-size: clamp(44px, 5.2vw, 70px);
+  line-height: 0.98;
+}
+
+.compensate-header p,
+.participations-header p,
+.impact-header p {
+  margin-top: 22px;
+  font-size: 17px;
+  color: rgba(245, 242, 233, 0.78);
+}
+
+/* Compensar: calculadora compacta, legible y sin medidor circular */
+.calculator-section .wrap {
+  max-width: 1160px;
+}
+
+.compensation-panel {
+  grid-template-columns: minmax(0, 1fr) minmax(390px, 0.78fr);
+}
+
+.calculator-controls,
+.calculator-result {
+  padding: 38px;
+}
+
+.calculator-controls,
+.calculator-controls h3 {
+  color: var(--ink);
+}
+
+.calculator-controls-intro,
+.custom-amount label,
+.custom-help {
+  color: var(--ink-dim);
+}
+
+.amount-label {
+  margin-top: 28px;
+  color: var(--forest-700);
+}
+
+.amount-preset {
+  min-height: 82px;
+  color: var(--ink);
+  background: var(--paper);
+  border-color: var(--line-light);
+}
+
+.amount-preset span {
+  color: var(--ink-dim);
+}
+
+.custom-amount {
+  margin-top: 23px;
+  padding-top: 22px;
+  border-top-color: var(--line-light);
+}
+
+.custom-input-box {
+  background: #fff;
+  border-color: var(--line-light);
+}
+
+.custom-input-box input {
+  color: var(--ink);
+}
+
+.custom-input-box span {
+  color: var(--ink-dim);
+}
+
+.calculator-result {
+  justify-content: flex-start;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 74px, rgba(245, 242, 233, 0.035) 74px 75px),
+    var(--forest-900);
+}
+
+.result-heading {
+  margin: 0;
+  text-align: left;
+  font-size: 22px;
+}
+
+.tree-progress {
+  min-height: 142px;
+  margin: 26px 0 18px;
+  border: 1px solid rgba(245, 242, 233, 0.18);
+  border-left: 6px solid var(--amber);
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, rgba(228, 167, 47, 0.18) 0 18%, transparent 18%),
+    repeating-linear-gradient(0deg, transparent 0 34px, rgba(245, 242, 233, 0.05) 34px 35px);
+}
+
+.tree-progress::before,
+.tree-progress::after {
+  display: none;
+  content: none;
+}
+
+.tree-progress-content {
+  position: static;
+  width: 100%;
+  padding: 24px 28px;
+  transform: none;
+  text-align: left;
+}
+
+.tree-symbol {
+  display: inline-block;
+  margin-right: 12px;
+  font-size: 28px;
+  vertical-align: middle;
+}
+
+.tree-main-value {
+  display: inline-block;
+  font-size: clamp(42px, 4vw, 58px);
+  vertical-align: middle;
+}
+
+.tree-main-label {
+  max-width: none;
+  margin-top: 8px;
+  text-align: left;
+}
+
+.tree-equivalence {
+  text-align: left;
+  font-size: 14px;
+}
+
+.result-price-area {
+  padding: 24px 0 18px;
+}
+
+.closing-section {
+  background:
+    linear-gradient(125deg, transparent 0 64%, rgba(228, 167, 47, 0.1) 64% 64.3%, transparent 64.3%),
+    repeating-linear-gradient(90deg, transparent 0 150px, rgba(245, 242, 233, 0.035) 150px 151px),
+    var(--forest-950);
+}
+
+.closing-section::before,
+.closing-section::after {
+  display: none;
+  content: none;
+}
+
+/* Empresas: título breve y recorrido conectado */
+.page-header h1 {
+  max-width: 720px;
+  font-size: clamp(44px, 5vw, 70px);
+  line-height: 0.98;
+}
+
+.integration-section {
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, transparent 0 7%, rgba(23, 35, 28, 0.04) 7% 7.1%, transparent 7.1%),
+    var(--paper-dim);
+}
+
+.integration-heading {
+  max-width: 880px;
+}
+
+.integration-heading h2 {
+  max-width: 760px;
+  color: var(--ink);
+  font-size: clamp(34px, 4vw, 54px);
+}
+
+.integration-heading p {
+  color: var(--ink-dim);
+  font-size: 16px;
+}
+
+.integration-grid {
+  position: relative;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line-light);
+  border-bottom: 1px solid var(--line-light);
+}
+
+.integration-step {
+  position: relative;
+  min-height: 285px;
+  padding: 30px 26px;
+  color: var(--ink);
+  border: 0;
+  border-right: 1px solid var(--line-light);
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.integration-step:last-child {
+  border-right: 0;
+}
+
+.integration-step::after {
+  position: absolute;
+  top: 43px;
+  right: -8px;
+  z-index: 2;
+  content: "→";
+  color: var(--forest-700);
+  font-size: 18px;
+  background: var(--paper-dim);
+}
+
+.integration-step:last-child::after {
+  content: "✓";
+  right: 24px;
+}
+
+.integration-number {
+  width: auto;
+  height: auto;
+  margin-bottom: 44px;
+  color: var(--forest-700);
+  background: transparent;
+  border-radius: 0;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+.integration-number::before {
+  content: "ETAPA ";
+}
+
+.integration-step h3 {
+  color: var(--ink);
+  font-size: 21px;
+}
+
+.integration-step p {
+  color: var(--ink-dim);
+  font-size: 14px;
+}
+
+/* Participaciones: textos secundarios con más presencia y cierre territorial */
+.participations-intro p,
+.participant-content p,
+.participant-next-content p,
+.participant-detail span,
+.participations-closing p {
+  color: rgba(23, 35, 28, 0.72);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.participations-closing {
+  color: var(--ink);
+  background:
+    linear-gradient(120deg, rgba(120, 146, 123, 0.14) 0 32%, transparent 32%),
+    repeating-linear-gradient(90deg, transparent 0 118px, rgba(23, 35, 28, 0.045) 118px 119px),
+    var(--paper);
+  border-top: 1px solid var(--line-light);
+}
+
+.participations-closing::before,
+.participations-closing::after {
+  display: none;
+  content: none;
+}
+
+.participations-closing h2 {
+  color: var(--forest-950);
+}
+
+.participations-closing-content {
+  padding-left: 28px;
+  border-left: 6px solid var(--amber);
+}
+
+/* Mi impacto: acceso más compacto y equilibrado */
+.access-section {
+  padding: 68px 0 82px;
+}
+
+.access-intro {
+  margin-bottom: 36px;
+}
+
+.access-grid {
+  align-items: start;
+  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+  gap: 16px;
+  max-width: 1080px;
+}
+
+.access-card {
+  min-height: 0;
+  padding: 28px;
+}
+
+.access-card-primary::after {
+  display: none;
+  content: none;
+}
+
+.access-card-primary {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 92px, rgba(245, 242, 233, 0.035) 92px 93px),
+    var(--forest-900);
+}
+
+.access-card-secondary {
+  background: #fff;
+}
+
+.access-card h3 {
+  font-size: clamp(22px, 2.3vw, 28px);
+}
+
+.access-card > p {
+  font-size: 14px;
+}
+
+.auth-tabs {
+  max-width: 360px;
+  border-radius: 0;
+}
+
+.auth-tab {
+  border-radius: 0;
+}
+
+.field-row {
+  grid-template-columns: 1fr;
+}
+
+.token-button,
+.access-button {
+  width: fit-content;
+  min-width: 138px;
+}
+
+@media (max-width: 900px) {
+  .compensation-panel,
+  .access-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .integration-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .integration-step:nth-child(2) {
+    border-right: 0;
+  }
+
+  .integration-step:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line-light);
+  }
+}
+
+@media (max-width: 650px) {
+  .compensate-header,
+  .participations-header,
+  .impact-header {
+    padding: 70px 0 62px;
+  }
+
+  .compensate-header h1,
+  .participations-header h1,
+  .impact-header h1,
+  .page-header h1 {
+    font-size: clamp(38px, 11vw, 50px);
+  }
+
+  .compensate-header::before,
+  .participations-header::before,
+  .impact-header::before {
+    opacity: 0.35;
+  }
+
+  .calculator-controls,
+  .calculator-result,
+  .access-card {
+    padding: 24px 20px;
+  }
+
+  .compensation-panel {
+    display: block;
+  }
+
+  .integration-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .integration-step,
+  .integration-step:nth-child(2) {
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line-light);
+  }
+
+  .integration-step:last-child {
+    border-bottom: 0;
+  }
+
+  .integration-step::after {
+    top: auto;
+    right: 22px;
+    bottom: -10px;
+    transform: rotate(90deg);
+  }
+
+  .integration-step:last-child::after {
+    right: 22px;
+    bottom: 22px;
+    transform: none;
+  }
+
+  .integration-number {
+    margin-bottom: 24px;
+  }
+
+  .access-grid {
+    display: grid;
+  }
+}
+
+/* FINAL OVERRIDES — deben permanecer al cierre de la hoja */
+.compensate-header {
+  min-height: 360px;
+  padding: 82px 0 72px;
+  background: repeating-linear-gradient(0deg, transparent 0 31px, rgba(245,242,233,.035) 31px 32px), linear-gradient(135deg,#10291d,#1c4934);
+}
+.compensate-header::before {
+  inset: 50% 6vw auto auto;
+  display: block;
+  width: auto;
+  height: auto;
+  content: "CO₂";
+  transform: translateY(-50%);
+  opacity: 1;
+  color: rgba(245,242,233,.07);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-family: var(--font-display);
+  font-size: clamp(110px,18vw,260px);
+  line-height: .8;
+}
+.compensate-header::after {
+  position: absolute;
+  right: 7vw;
+  bottom: 58px;
+  display: block;
+  width: min(30vw,360px);
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg,var(--amber) 0 32%,rgba(245,242,233,.22) 32%);
+}
+.compensate-header p,.compensate-header .header-facts { display:none; }
+.calculator-section .wrap { max-width:1060px; }
+.compensation-panel {
+  grid-template-columns:minmax(0,1fr) minmax(360px,.76fr);
+  border-radius:34px;
+  box-shadow:0 24px 58px rgba(16,41,29,.1);
+}
+.calculator-controls,.calculator-result { padding:30px; }
+.calculator-controls h3 { font-size:clamp(26px,2.6vw,34px); }
+.amount-preset { min-height:76px; padding:15px 20px; border-radius:26px; }
+.custom-input-box,.payment-details,.payment-details input { border-radius:22px; }
+.calculator-result { background:linear-gradient(145deg,rgba(228,167,47,.08) 0 22%,transparent 22%),repeating-linear-gradient(0deg,transparent 0 47px,rgba(245,242,233,.035) 47px 48px),var(--forest-900); }
+.result-heading { margin:0; text-align:left; font-size:21px; }
+.tree-progress { min-height:128px; margin:22px 0 16px; overflow:hidden; border:1px solid rgba(245,242,233,.2); border-left:0; border-radius:30px 30px 8px 30px; background:linear-gradient(90deg,var(--amber) 0 7px,transparent 7px),linear-gradient(100deg,rgba(228,167,47,.18) 0 24%,transparent 24%),rgba(5,27,18,.24); }
+.tree-progress-content { position:static; width:100%; padding:21px 25px; transform:none; text-align:left; }
+.tree-main-label,.tree-equivalence { text-align:left; }
+.result-rows { overflow:hidden; border:1px solid rgba(245,242,233,.11); border-radius:22px; }
+.result-row { padding-inline:16px; }
+.closing-section { background:linear-gradient(135deg,#10291d,#163b2a); }
+.closing-section::before { position:absolute; inset:auto 0 0; display:block; width:100%; height:46%; content:""; transform:none; opacity:.3; border:0; border-radius:0; background:var(--forest-700); clip-path:polygon(0 78%,12% 61%,24% 70%,37% 36%,49% 58%,63% 24%,77% 52%,89% 30%,100% 48%,100% 100%,0 100%); }
+.closing-section::after { position:absolute; inset:auto 0 0; display:block; width:100%; height:35%; content:""; transform:none; opacity:.32; border-radius:0; background:#0a2117; clip-path:polygon(0 58%,15% 74%,29% 42%,42% 72%,58% 40%,70% 66%,84% 34%,100% 62%,100% 100%,0 100%); }
+
+.participations-header { background:linear-gradient(120deg,transparent 0 55%,rgba(228,167,47,.08) 55% 55.3%,transparent 55.3%),linear-gradient(35deg,transparent 0 68%,rgba(245,242,233,.055) 68% 68.2%,transparent 68.2%),linear-gradient(145deg,#10291d,#204c37); }
+.participations-header::before { inset:76px 7vw auto auto; display:block; width:min(37vw,460px); height:240px; content:""; opacity:.72; border:0; border-radius:0; background:linear-gradient(var(--amber) 0 0) 8% 76%/76px 3px no-repeat,linear-gradient(rgba(245,242,233,.25) 0 0) 33% 47%/126px 2px no-repeat,linear-gradient(rgba(245,242,233,.17) 0 0) 73% 24%/104px 2px no-repeat,linear-gradient(90deg,rgba(245,242,233,.2) 0 0) 28% 48%/2px 29% no-repeat,linear-gradient(90deg,rgba(245,242,233,.15) 0 0) 69% 25%/2px 24% no-repeat; }
+.participations-closing { overflow:hidden; background:linear-gradient(135deg,#edf0e8,var(--paper)); }
+.participations-closing::before { position:absolute; inset:0 0 0 auto; display:block; width:42%; height:100%; content:""; opacity:.72; border:0; border-radius:0; background:linear-gradient(var(--amber) 0 0) 14% 28%/72px 3px no-repeat,linear-gradient(var(--forest-700) 0 0) 42% 51%/104px 2px no-repeat,linear-gradient(var(--moss) 0 0) 72% 72%/82px 2px no-repeat,linear-gradient(90deg,rgba(23,35,28,.18) 0 0) 35% 28%/2px 23% no-repeat,linear-gradient(90deg,rgba(23,35,28,.13) 0 0) 67% 51%/2px 21% no-repeat; }
+.participations-closing::after { display:none; content:none; }
+.participations-closing-content { max-width:720px; margin-left:0; text-align:left; }
+
+.impact-header { background:repeating-linear-gradient(90deg,transparent 0 48px,rgba(245,242,233,.035) 48px 49px),linear-gradient(145deg,#10291d,#173e2c); }
+.impact-header::before { inset:70px 7vw auto auto; display:block; width:min(36vw,450px); height:250px; content:""; opacity:.72; border:1px solid rgba(245,242,233,.12); border-radius:0; background:linear-gradient(var(--amber) 0 0) 28px 34px/42% 8px no-repeat,linear-gradient(rgba(245,242,233,.2) 0 0) 28px 72px/76% 2px no-repeat,linear-gradient(rgba(245,242,233,.13) 0 0) 28px 108px/58% 2px no-repeat,linear-gradient(rgba(245,242,233,.13) 0 0) 28px 144px/70% 2px no-repeat,linear-gradient(rgba(245,242,233,.13) 0 0) 28px 180px/45% 2px no-repeat; }
+.impact-header::after { position:absolute; right:calc(7vw + 22px); top:88px; bottom:auto; left:auto; z-index:1; display:block; width:auto; height:auto; content:"REGISTRO DE IMPACTO"; color:rgba(245,242,233,.5); border:0; border-radius:0; background:none; font-size:10px; font-weight:700; letter-spacing:.12em; }
+@media (max-width:900px){.compensation-panel{grid-template-columns:1fr;max-width:680px;margin-inline:auto}}
+@media (max-width:650px){.compensate-header::before{right:-5vw;font-size:120px}.participations-header::before,.impact-header::before{right:-90px;width:270px;opacity:.28}.impact-header::after{display:none}.compensation-panel{border-radius:26px}}
+
+/* Refinamiento solicitado: fotografía contextual y calculadora reducida */
+.compensate-header {
+  min-height: 390px;
+  background-image:
+    linear-gradient(90deg, rgba(7,31,21,.96) 0%, rgba(7,31,21,.86) 48%, rgba(7,31,21,.36) 100%),
+    url("../../images/reforestall-hero-regeneracion.jpg");
+  background-position: center 58%;
+  background-size: cover;
+}
+.compensate-header::before {
+  inset: auto 6vw 55px auto;
+  width: min(31vw,390px);
+  height: 72px;
+  content: "";
+  transform:none;
+  opacity:1;
+  background:
+    linear-gradient(var(--amber) 0 0) 0 14px/34% 3px no-repeat,
+    linear-gradient(rgba(245,242,233,.42) 0 0) 0 38px/72% 2px no-repeat,
+    linear-gradient(rgba(245,242,233,.22) 0 0) 0 61px/100% 2px no-repeat;
+}
+.compensate-header::after { display:none; content:none; }
+
+.calculator-section .wrap { max-width:960px; }
+.compensation-panel { grid-template-columns:minmax(0,1fr) minmax(330px,.7fr); }
+.calculator-controls,.calculator-result { padding:26px; }
+.calculator-controls h3 { font-size:clamp(24px,2.35vw,31px); }
+.calculator-controls-intro { font-size:13.5px; }
+.amount-label { margin-top:22px; }
+.amount-preset { min-height:68px; padding:13px 18px; border-radius:22px; }
+.amount-preset strong { font-size:22px; }
+.amount-preset span { margin-top:5px; font-size:10.5px; }
+.custom-amount { margin-top:19px; padding-top:18px; }
+.custom-input-box input { padding:14px 17px; font-size:25px; }
+
+.result-heading { font-size:19px; }
+.tree-progress {
+  --tree-fill: 8.33%;
+  position:relative;
+  min-height:108px;
+  margin:18px 0 14px;
+  overflow:hidden;
+  border:1px solid rgba(245,242,233,.17);
+  border-radius:24px;
+  background:rgba(5,27,18,.25);
+}
+.tree-progress::before {
+  position:absolute;
+  inset:auto auto 0 0;
+  display:block;
+  width:var(--tree-fill);
+  min-width:8px;
+  height:7px;
+  content:"";
+  background:var(--amber);
+}
+.tree-progress::after {
+  position:absolute;
+  right:18px;
+  top:18px;
+  display:block;
+  content:"CAPACIDAD ESTIMADA";
+  color:rgba(245,242,233,.42);
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:.12em;
+}
+.tree-progress-content { display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto; column-gap:12px; align-items:center; padding:22px; }
+.tree-symbol { grid-row:1/3; margin:0; font-size:25px; }
+.tree-main-value { font-size:clamp(34px,3.4vw,45px); line-height:1; }
+.tree-main-label { margin-top:3px; font-size:10px; }
+.tree-equivalence { margin-bottom:14px; font-size:12.5px; }
+.result-row { padding-block:12px; font-size:11.5px; }
+.result-price-area { padding:19px 0 14px; }
+.result-price { font-size:clamp(38px,4vw,52px); }
+.payment-details { gap:8px; }
+.payment-details input { padding:13px 15px; }
+
+.participations-header {
+  min-height:480px;
+  background-image:
+    linear-gradient(90deg,rgba(7,31,21,.95) 0%,rgba(7,31,21,.82) 48%,rgba(7,31,21,.25) 100%),
+    url("../../images/compensacion-voluntaria.jpg");
+  background-position:center 55%;
+  background-size:cover;
+}
+.participations-header::before {
+  inset:auto 7vw 64px auto;
+  width:min(34vw,420px);
+  height:92px;
+  opacity:1;
+  background:
+    linear-gradient(var(--amber) 0 0) 0 12px/20% 3px no-repeat,
+    linear-gradient(rgba(245,242,233,.36) 0 0) 20% 45px/43% 2px no-repeat,
+    linear-gradient(rgba(245,242,233,.2) 0 0) 63% 76px/37% 2px no-repeat,
+    linear-gradient(90deg,rgba(245,242,233,.28) 0 0) 20% 12px/2px 35px no-repeat,
+    linear-gradient(90deg,rgba(245,242,233,.18) 0 0) 63% 45px/2px 33px no-repeat;
+}
+.participations-closing {
+  padding:76px 0;
+  color:var(--paper);
+  background:linear-gradient(110deg,#10291d,#214d38);
+}
+.participations-closing::before {
+  inset:0 0 0 auto;
+  width:34%;
+  opacity:.48;
+  background:
+    linear-gradient(135deg,transparent 0 38%,rgba(228,167,47,.32) 38% 39%,transparent 39%),
+    repeating-linear-gradient(90deg,transparent 0 54px,rgba(245,242,233,.07) 54px 55px);
+}
+.participations-closing-content { max-width:900px; padding-left:0; border-left:0; }
+.participations-closing h2 { max-width:760px; color:var(--paper); font-size:clamp(34px,4vw,50px); }
+.participations-closing p { max-width:660px; margin:18px 0 0; color:rgba(245,242,233,.72); }
+
+@media (max-width:900px){.compensation-panel{grid-template-columns:1fr;max-width:650px}.calculator-section .wrap{max-width:720px}}
+@media (max-width:650px){.compensate-header::before,.participations-header::before{right:20px;width:180px;opacity:.6}.calculator-controls,.calculator-result{padding:22px 18px}.participations-closing{padding:62px 0}.participations-closing::before{width:70%;opacity:.22}}
+
+/* Indicador lineal: muestra avance sin convertirlo en una tarjeta decorativa */
+.calculator-section .wrap { max-width:900px; }
+.compensation-panel { grid-template-columns:minmax(0,1fr) minmax(300px,.66fr); }
+.tree-progress {
+  position:relative;
+  min-height:92px;
+  margin:16px 0 15px;
+  overflow:visible;
+  border:0;
+  border-radius:0;
+  background:transparent;
+}
+.tree-progress::before {
+  position:absolute;
+  inset:auto auto 0 0;
+  display:block;
+  width:var(--tree-fill);
+  min-width:8px;
+  height:6px;
+  content:"";
+  z-index:2;
+  background:var(--amber);
+}
+.tree-progress::after {
+  position:absolute;
+  inset:auto 0 0 0;
+  display:block;
+  width:100%;
+  height:6px;
+  content:"";
+  z-index:1;
+  background:rgba(245,242,233,.16);
+}
+.tree-progress-content { padding:10px 0 24px; }
+.tree-symbol { font-size:22px; }
+.tree-main-value { font-size:clamp(32px,3.1vw,41px); }
+.tree-main-label { max-width:190px; color:rgba(245,242,233,.58); }
+@media (max-width:900px){.calculator-section .wrap{max-width:650px}.compensation-panel{grid-template-columns:1fr}}
+
+/* Composición final: calculadora panorámica e identidades visuales propias */
+.compensate-header {
+  background-image:
+    linear-gradient(90deg,rgba(7,31,21,.96) 0%,rgba(7,31,21,.82) 48%,rgba(7,31,21,.2) 100%),
+    url("../../images/compensacion-voluntaria.jpg");
+  background-position:center 52%;
+  background-size:cover;
+}
+.compensate-header::before,
+.compensate-header::after { display:none; content:none; }
+
+.participations-header {
+  background-image:
+    linear-gradient(90deg,rgba(7,31,21,.96) 0%,rgba(7,31,21,.78) 48%,rgba(7,31,21,.12) 100%),
+    url("../../images/participaciones-destinos.png");
+  background-position:center 48%;
+  background-size:cover;
+}
+.participations-header::before,
+.participations-header::after { display:none; content:none; }
+
+.impact-header {
+  background-image:
+    linear-gradient(90deg,rgba(7,31,21,.96) 0%,rgba(7,31,21,.8) 48%,rgba(7,31,21,.16) 100%),
+    url("../../images/mi-impacto-trazabilidad.png");
+  background-position:center 52%;
+  background-size:cover;
+}
+.impact-header::before,
+.impact-header::after { display:none; content:none; }
+
+@media (min-width:901px) {
+  .calculator-section { padding-block:46px; }
+  .calculator-section .wrap { max-width:1240px; }
+  .compensation-panel {
+    grid-template-columns:minmax(0,1.18fr) minmax(410px,.82fr);
+    max-width:none;
+  }
+  .calculator-controls { padding:32px 36px 30px; }
+  .calculator-result { padding:30px 32px 26px; }
+  .calculator-controls h2 { max-width:650px; font-size:clamp(31px,3vw,45px); }
+  .calculator-intro { margin-top:9px; }
+  .amount-presets {
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:9px;
+    margin-top:21px;
+  }
+  .amount-option { min-height:86px; padding:16px 15px; }
+  .custom-amount { margin-top:16px; padding-top:15px; }
+  .custom-input-box { min-height:66px; }
+  .calculator-result h3 { max-width:none; font-size:24px; }
+  .tree-progress { min-height:78px; margin:9px 0 10px; }
+  .tree-progress-content { padding:6px 0 20px; }
+  .tree-equivalence { max-width:none; margin:0 0 10px; text-align:left; }
+  .result-rows {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    margin-top:8px;
+  }
+  .result-row {
+    min-width:0;
+    padding:10px 12px;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:4px;
+    border-top:0;
+    border-right:1px solid rgba(244,241,230,.1);
+  }
+  .result-row:last-child { border-right:0; }
+  .result-row strong { text-align:left; }
+  .result-price-area { margin-top:13px; padding:12px 0 8px; }
+  .result-price { margin-top:5px; font-size:clamp(38px,3.8vw,50px); }
+  .result-price-note { margin-top:4px; }
+  .payment-details {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    margin-top:11px;
+  }
+  .payment-details input { min-width:0; padding:11px 13px; }
+  .compensate-button { margin-top:10px; padding-block:12px; }
+  .demo-note { margin-top:8px; padding:8px 10px; font-size:9.5px; line-height:1.35; }
+}
+
+@media (max-width:900px) {
+  .compensate-header,
+  .participations-header,
+  .impact-header { background-position:62% center; }
+  .compensation-panel { max-width:650px; }
+}
+
+/* Heroes fotográficos completos, con la misma presencia que Inicio y Empresas */
+@media (min-width:901px) {
+  .compensate-header,
+  .participations-header,
+  .impact-header {
+    display:flex;
+    align-items:center;
+    min-height:clamp(650px,calc(100svh - 88px),820px);
+    padding:110px 0 92px;
+    background-repeat:no-repeat;
+    background-size:cover;
+  }
+
+  .compensate-header { background-position:center center; }
+  .participations-header { background-position:center center; }
+  .impact-header { background-position:center center; }
+}
+
+@media (max-width:900px) {
+  .compensate-header,
+  .participations-header,
+  .impact-header {
+    display:flex;
+    align-items:flex-end;
+    min-height:clamp(570px,78svh,720px);
+    padding:88px 0 58px;
+    background-size:cover;
+  }
+
+  .compensate-header { background-position:64% center; }
+  .participations-header { background-position:64% center; }
+  .impact-header { background-position:66% center; }
+}
+
+/* Ajustes finales de marca y densidad */
+.compensate-header p {
+  display:block;
+  max-width:600px;
+  margin-top:22px;
+  color:rgba(245,242,233,.72);
+  font-size:17px;
+  line-height:1.55;
+}
+
+@media (min-width:901px) {
+  .calculator-section .wrap { max-width:1120px; }
+  .compensation-panel { grid-template-columns:minmax(0,1.15fr) minmax(400px,.85fr); }
+  .calculator-controls { padding:27px 30px 26px; }
+  .calculator-result { padding:25px 28px 22px; }
+  .calculator-controls h2 { font-size:clamp(29px,2.7vw,40px); }
+  .amount-presets { margin-top:17px; }
+  .amount-option { min-height:76px; padding:13px 14px; }
+  .custom-amount { margin-top:13px; padding-top:13px; }
+  .custom-input-box { min-height:59px; }
+  .tree-progress { min-height:70px; margin:7px 0 8px; }
+  .tree-progress-content { padding:3px 0 17px; }
+  .result-row { padding:8px 10px; }
+  .result-price-area { margin-top:10px; padding:9px 0 6px; }
+  .payment-details { margin-top:9px; }
+  .compensate-button { margin-top:8px; }
+  .demo-note { margin-top:7px; padding:7px 9px; }
+}
+
+@media (max-width:650px) {
+  .nav-brand .dot { flex-basis:31px; width:31px; height:21px; }
+  .nav-brand .dot::before,
+  .nav-brand .dot::after { width:12px; height:21px; }
+  .nav-brand .dot::before { left:2px; }
+  .nav-brand .dot::after { left:17px; }
+  .compensate-header p { font-size:15px; }
+}

@@ -1,6 +1,6 @@
 import { corsHeaders, jsonResponse } from "../_shared/http.ts";
 
-const PRICE_PER_KG = 100;
+const PRICE_PER_KG = 450;
 const MAX_KG_PER_PAYMENT = 100_000;
 
 type PaymentRequest = {

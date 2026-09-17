@@ -120,7 +120,7 @@ Deno.serve(async (request: Request) => {
     const externalReference = String(payment.external_reference || "");
     const kg = Number(payment.metadata?.kg_co2);
     const amount = Number(payment.transaction_amount);
-    const expectedAmount = kg * 100;
+    const expectedAmount = kg * 450;
     const isTestPayment =
       payment.metadata?.modo_prueba === true ||
       payment.metadata?.modo_prueba === "true";

@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap"
     rel="stylesheet"
   >
 
   <link
     rel="stylesheet"
-    href="assets/css/styles.css"
+    href="assets/css/styles.css?v=20260917g"
   >
 
 
@@ -947,6 +947,8 @@
 
   </style>
 
+  <link rel="stylesheet" href="assets/css/editorial-2026.css?v=20260917f">
+
 </head>
 
 
@@ -1052,23 +1054,12 @@
       <div class="compensate-header-content">
 
         <h1>
-          Elegí cuánto querés devolverle al ambiente
+          Elegí cuánto querés compensar
         </h1>
 
         <p>
-          No hace falta compensar una actividad específica ni completar
-          un árbol entero. Podés elegir libremente una cantidad,
-          conocer qué representa y sumarte al proyecto desde ahí.
+          Convertí una decisión simple en un aporte trazable que vuelve al territorio
         </p>
-
-
-        <div class="header-facts">
-
-          <span class="header-fact">
-            1 kg de CO₂ = $100
-          </span>
-
-        </div>
 
       </div>
 
@@ -1237,7 +1228,7 @@
         <div class="calculator-result">
 
           <h3 class="result-heading">
-            Así se traduce tu elección dentro del proyecto
+            Tu aporte dentro del proyecto
           </h3>
 
 
@@ -1286,11 +1277,11 @@
             <div class="result-row">
 
               <span>
-                Certificado emitido
+                Token emitido
               </span>
 
               <strong id="tokens-output">
-                1 certificado
+                1 token
               </strong>
 
             </div>
@@ -1339,7 +1330,7 @@
             </strong>
 
             <span class="result-price-note">
-              Valor demostrativo de $100 por kilogramo
+              Valor demostrativo de $450 por kilogramo
             </span>
 
           </div>
@@ -1645,7 +1636,7 @@
        CONFIGURACIÓN
     ========================================================= */
 
-    const PRICE_PER_KG = 100;
+    const PRICE_PER_KG = 450;
     const TREE_CAPACITY_KG = 600;
 
 
@@ -1777,9 +1768,14 @@
         progressDegrees + "deg"
       );
 
+      treeProgress.style.setProperty(
+        "--tree-fill",
+        Math.min(currentTreePercentage, 100) + "%"
+      );
+
 
       tokensOutput.textContent =
-        "1 certificado";
+        "1 token";
 
 
       priceOutput.textContent =

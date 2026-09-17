@@ -22,17 +22,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap"
     rel="stylesheet"
   >
 
   <link
     rel="stylesheet"
-    href="assets/css/styles.css"
+    href="assets/css/styles.css?v=20260917g"
   >
 
 
   <style>
+
+    body {
+      overflow-x: hidden;
+    }
 
     /* =========================================================
        HERO CON SCROLL
@@ -897,6 +901,165 @@
 
 
     /* =========================================================
+       RECORRIDO INTERACTIVO — ACTIVIDAD A REGENERACIÓN
+    ========================================================= */
+
+    .impact-flow {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      max-width: 1120px;
+      margin: 0 auto 30px;
+      border-block: 1px solid rgba(39, 62, 28, 0.16);
+    }
+
+    .impact-flow::after {
+      display: none;
+    }
+
+    .flow-card {
+      position: relative;
+      min-height: 245px;
+      padding: 29px 27px;
+      overflow: hidden;
+
+      color: var(--ink);
+      text-align: left;
+
+      background: rgba(255, 255, 255, 0.62);
+      border: 0;
+      border-right: 1px solid rgba(39, 62, 28, 0.13);
+      cursor: pointer;
+
+      transition:
+        color 0.3s var(--ease-out),
+        background-color 0.3s var(--ease-out);
+    }
+
+    .flow-card:last-child {
+      border-right: 0;
+    }
+
+    .flow-card-arrow {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--moss);
+    }
+
+    .flow-card strong {
+      display: block;
+      max-width: 210px;
+      margin-top: 46px;
+
+      font-family: var(--font-display);
+      font-size: clamp(21px, 2.2vw, 27px);
+      font-weight: 500;
+      line-height: 1.08;
+
+      transition: margin 0.3s var(--ease-out);
+    }
+
+    .flow-card p {
+      max-height: 0;
+      margin: 0;
+      overflow: hidden;
+
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.58;
+      color: rgba(244, 241, 230, 0.82);
+
+      opacity: 0;
+      transform: translateY(8px);
+      transition: 0.3s var(--ease-out);
+    }
+
+    .flow-card:hover,
+    .flow-card.is-open {
+      color: var(--paper);
+      background: var(--forest-950);
+    }
+
+    .flow-card:hover .flow-card-arrow,
+    .flow-card.is-open .flow-card-arrow {
+      color: var(--amber-light);
+    }
+
+    .flow-card:hover strong,
+    .flow-card.is-open strong {
+      margin-top: 20px;
+    }
+
+    .flow-card:hover p,
+    .flow-card.is-open p {
+      max-height: 100px;
+      margin-top: 18px;
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero-price {
+      position: absolute;
+      right: 0;
+      bottom: 46px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4px 12px;
+      align-items: end;
+      width: min(300px, 32vw);
+      padding: 18px 20px;
+      background: rgba(20, 47, 31, 0.86);
+      border-top: 1px solid rgba(244, 241, 230, 0.38);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-price b {
+      grid-row: 1 / 3;
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 500;
+      color: var(--amber-light);
+    }
+
+    .hero-price span,
+    .hero-price small {
+      font-size: 11px;
+      line-height: 1.35;
+      color: rgba(244, 241, 230, 0.7);
+    }
+
+    .hero-price small {
+      color: rgba(244, 241, 230, 0.48);
+    }
+
+    .concept-card {
+      min-height: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background:
+        linear-gradient(180deg, rgba(15, 31, 22, 0.14), rgba(15, 31, 22, 0.97) 72%),
+        url("images/monitoreo-20-anos.jpg") center / cover;
+      border-radius: 0;
+    }
+
+    .concept-card::after {
+      display: none;
+    }
+
+    .statband {
+      background:
+        linear-gradient(90deg, rgba(13, 31, 20, 0.95), rgba(13, 31, 20, 0.67)),
+        url("images/vivero-nativo-patagonia.jpg") center / cover;
+    }
+
+
+    /* =========================================================
        BANDA DE PLANTINES
     ========================================================= */
 
@@ -1271,6 +1434,10 @@
       transform: scale(1.05);
     }
 
+    .participate-card:nth-child(2) .participate-card-bg img {
+      object-position: 68% center;
+    }
+
     .participate-card-overlay {
       position: absolute;
       inset: 0;
@@ -1283,6 +1450,12 @@
           rgba(12, 18, 8, 0.38) 45%,
           rgba(12, 18, 8, 0.95) 100%
         );
+    }
+
+    .participate-card:nth-child(2) .participate-card-overlay {
+      background:
+        linear-gradient(90deg, rgba(8, 25, 17, 0.62) 0%, rgba(8, 25, 17, 0.18) 72%),
+        linear-gradient(180deg, rgba(8, 25, 17, 0.08) 8%, rgba(8, 25, 17, 0.45) 46%, rgba(8, 25, 17, 0.98) 100%);
     }
 
     .participate-card::after {
@@ -1470,6 +1643,18 @@
         transform: translateY(-4px);
       }
 
+      .impact-flow {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .flow-card:nth-child(2) {
+        border-right: 0;
+      }
+
+      .flow-card:nth-child(-n + 2) {
+        border-bottom: 1px solid rgba(39, 62, 28, 0.13);
+      }
+
       .nurseries-heading {
         grid-template-columns: 1fr;
         gap: 18px;
@@ -1521,6 +1706,37 @@
 
       .impact-cycle {
         grid-template-columns: 1fr;
+      }
+
+      .impact-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-flow::after {
+        display: none;
+      }
+
+      .flow-card,
+      .flow-card:nth-child(2) {
+        min-height: 190px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(39, 62, 28, 0.13);
+      }
+
+      .flow-card:last-child {
+        border-bottom: 0;
+      }
+
+      .flow-card-arrow {
+        transform: rotate(90deg);
+      }
+
+      .hero-price {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: 100%;
+        margin-top: 30px;
       }
 
       .cycle-center {
@@ -1590,6 +1806,286 @@
 
       .concept-card {
         padding: 32px 25px;
+      }
+
+    }
+
+
+    /* =========================================================
+       DIRECCIÓN EDITORIAL 2026
+    ========================================================= */
+
+    :root {
+      --forest-950: #10291d;
+      --forest-900: #183c2b;
+      --forest-800: #24513b;
+      --forest-700: #35664c;
+      --moss: #78927b;
+      --moss-light: #b7c9b7;
+      --amber: #e4a72f;
+      --amber-light: #f0bf55;
+      --paper: #f5f2e9;
+      --paper-dim: #e8eee8;
+      --ink: #17231c;
+      --ink-dim: rgba(23, 35, 28, 0.66);
+      --line-dark: rgba(245, 242, 233, 0.18);
+      --line-light: rgba(23, 35, 28, 0.14);
+      --font-display: 'Archivo Black', 'Archivo', sans-serif;
+      --font-body: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      letter-spacing: -0.045em;
+    }
+
+    .site-nav {
+      background: rgba(245, 242, 233, 0.92);
+    }
+
+    .nav-brand {
+      font-family: var(--font-display);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+    }
+
+    .nav-brand .dot {
+      border-radius: 1px;
+      background: var(--amber);
+      transform: skew(-12deg);
+    }
+
+    #hero-pin {
+      height: 185vh;
+    }
+
+    .hero-scrim {
+      background:
+        linear-gradient(90deg, rgba(9, 28, 19, 0.92) 0%, rgba(9, 28, 19, 0.7) 38%, rgba(9, 28, 19, 0.18) 72%, rgba(9, 28, 19, 0.05) 100%),
+        linear-gradient(0deg, rgba(9, 28, 19, 0.28), transparent 55%);
+    }
+
+    .hero-copy-wrap {
+      align-items: flex-start;
+      max-width: 1180px;
+      margin-top: 0;
+      padding: 72px 32px 52px;
+      background: transparent;
+      border-radius: 0;
+    }
+
+    .hero-scenes {
+      max-width: 720px;
+    }
+
+    .hero-copy h1 {
+      max-width: 710px;
+      font-size: clamp(54px, 6.6vw, 96px);
+      line-height: 0.94;
+      color: #fff;
+    }
+
+    .hero-copy h1 em {
+      color: inherit;
+      font-style: normal;
+    }
+
+    .hero-copy .lede {
+      max-width: 570px;
+      margin-top: 28px;
+      font-size: 18px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .hero-price {
+      position: static;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      width: auto;
+      margin-top: 30px;
+      padding: 20px 0 0;
+      background: transparent;
+      border-top: 1px solid rgba(255, 255, 255, 0.34);
+      backdrop-filter: none;
+    }
+
+    .hero-price b {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 400;
+      color: #fff;
+    }
+
+    .hero-price span {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .hero-price small {
+      margin-left: 8px;
+      padding-left: 18px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.54);
+      border-left: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .proof-strip {
+      padding: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line-light);
+    }
+
+    .proof-strip .wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding-top: 28px;
+      padding-bottom: 28px;
+    }
+
+    .proof-item {
+      padding: 8px 34px;
+      border-right: 1px solid var(--line-light);
+    }
+
+    .proof-item:first-child {
+      padding-left: 0;
+    }
+
+    .proof-item:last-child {
+      border-right: 0;
+    }
+
+    .proof-item strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(27px, 3vw, 42px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--forest-900);
+    }
+
+    .proof-item span {
+      display: block;
+      margin-top: 7px;
+      font-size: 13px;
+      color: var(--ink-dim);
+    }
+
+    .intro-section {
+      background: var(--paper);
+    }
+
+    .intro-copy h2,
+    .cycle-heading h2,
+    .nurseries-heading h2,
+    .participate-heading h2 {
+      line-height: 0.98;
+    }
+
+    .impact-cycle-section {
+      background: var(--paper-dim);
+    }
+
+    .impact-flow {
+      background: rgba(255, 255, 255, 0.35);
+      border-color: rgba(23, 35, 28, 0.16);
+    }
+
+    .flow-card {
+      min-height: 255px;
+      background: transparent;
+      border-color: rgba(23, 35, 28, 0.14);
+    }
+
+    .flow-card strong {
+      font-size: clamp(21px, 2vw, 27px);
+      line-height: 1.02;
+    }
+
+    .flow-card:hover,
+    .flow-card.is-open {
+      background: var(--forest-900);
+    }
+
+    .impact-flow::after {
+      color: var(--forest-700);
+      border-color: rgba(23, 35, 28, 0.25);
+    }
+
+    .nurseries-section {
+      background: var(--paper);
+    }
+
+    .nursery-card,
+    .concept-card,
+    .participate-card {
+      border-radius: 0;
+    }
+
+    @media (max-width: 650px) {
+      #hero-pin {
+        height: auto;
+        min-height: calc(100svh - 72px);
+      }
+
+      .hero-pin-frame,
+      .hero-copy-wrap {
+        min-height: calc(100svh - 72px);
+      }
+
+      .hero-copy-wrap {
+        padding: 58px 20px 34px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(44px, 13vw, 64px);
+      }
+
+      .hero-copy .lede {
+        font-size: 16px;
+      }
+
+      .hero-price {
+        flex-wrap: wrap;
+      }
+
+      .hero-price small {
+        flex-basis: 100%;
+        margin-left: 0;
+        padding-left: 0;
+        border-left: 0;
+      }
+
+      .proof-strip .wrap {
+        grid-template-columns: 1fr;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      .proof-item,
+      .proof-item:first-child {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        padding: 18px 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--line-light);
+      }
+
+      .proof-item:last-child {
+        border-bottom: 0;
+      }
+
+      .proof-item span {
+        margin-top: 0;
       }
 
     }
@@ -1705,8 +2201,8 @@
 
         <img
           id="hero-photo-img"
-          src="images/hero-bosque.jpg"
-          alt="Plantación de árboles nativos junto a un campo de cultivo"
+          src="images/reforestall-hero-regeneracion.jpg"
+          alt="Equipo de restauración plantando un árbol nativo en la Patagonia"
         >
 
         <div
@@ -1730,8 +2226,8 @@
           <div class="hero-copy hero-scene scene-a">
 
             <h1>
-              Cada kilo, a un
-              <em>árbol real</em>
+              Convertí tu impacto en
+              <em>regeneración</em>
             </h1>
 
             <p class="lede">
@@ -1772,101 +2268,13 @@
 
             </div>
 
-
-            <div class="hero-stats">
-
-              <div class="hero-stat">
-
-                <b>
-                  2
-                </b>
-
-                <span>
-                  viveros forestales activos
-                </span>
-
-              </div>
-
-
-              <div class="hero-stat">
-
-                <b>
-                  800.000+
-                </b>
-
-                <span>
-                  plantines nativos disponibles
-                </span>
-
-              </div>
-
+            <div class="hero-price">
+              <b>$450</b>
+              <span>por cada kg de CO₂ compensado</span>
+              <small>Un certificado único por operación</small>
             </div>
 
           </div>
-
-
-          <!-- ESCENA 2 -->
-
-          <div class="hero-scene scene-b">
-
-            <p class="equation">
-
-              <strong class="eq-kg">
-                1 kg
-              </strong>
-
-              de CO₂
-
-              <span class="eq-sign">
-                =
-              </span>
-
-              <strong class="eq-token">
-                $100
-              </strong>.
-
-            </p>
-
-
-            <p class="equation-note">
-              Cada kilogramo compensado tiene un valor de $100 y se asigna
-              a capacidad de captura disponible. Cada operación recibe un
-              certificado único por la cantidad total registrada.
-            </p>
-
-
-            <a
-              href="compensar.html"
-              class="eq-link"
-            >
-
-              Quiero compensar
-
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6"/>
-              </svg>
-
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <div class="hero-progress">
-
-          <span
-            class="on"
-            data-scene="a"
-          ></span>
-
-          <span data-scene="b"></span>
 
         </div>
 
@@ -1875,6 +2283,30 @@
     </div>
 
   </header>
+
+
+  <section class="proof-strip" aria-label="Reforestall en números">
+
+    <div class="wrap">
+
+      <div class="proof-item">
+        <strong>800.000+</strong>
+        <span>plantines nativos disponibles</span>
+      </div>
+
+      <div class="proof-item">
+        <strong>2 viveros</strong>
+        <span>producción y trabajo en territorio</span>
+      </div>
+
+      <div class="proof-item">
+        <strong>20 años</strong>
+        <span>de cuidado y seguimiento previsto</span>
+      </div>
+
+    </div>
+
+  </section>
 
 
   <!-- =======================================================
@@ -1946,7 +2378,7 @@
             </span>
 
             <span>
-              durante 20 años
+              seguimiento a largo plazo
             </span>
 
           </div>
@@ -1982,144 +2414,42 @@
         </span>
 
         <h2>
-          La actividad económica puede generar más naturaleza
+          Un ciclo que vuelve al territorio
         </h2>
 
         <p>
-          Una actividad produce emisiones. La compensación transforma
-          una parte de esa huella en recursos para los viveros,
-          empleo local y nueva capacidad de captura.
+          Cada aporte conecta una actividad medible con viveros,
+          trabajo local y nueva capacidad de captura
         </p>
 
       </div>
 
 
-      <div class="impact-cycle reveal">
+      <div class="impact-flow reveal" aria-label="Ciclo de regeneración de Reforestall">
 
+        <button class="flow-card is-open" type="button">
+          <span class="flow-card-arrow" aria-hidden="true">→</span>
+          <strong>Generás un impacto</strong>
+          <p>El transporte, el turismo, la industria y otras actividades generan una huella medible</p>
+        </button>
 
-        <div class="cycle-ring"></div>
+        <button class="flow-card" type="button">
+          <span class="flow-card-arrow" aria-hidden="true">→</span>
+          <strong>Compensás lo que generaste</strong>
+          <p>Elegís los kilogramos y aportás $450 por cada kg de CO₂ compensado</p>
+        </button>
 
+        <button class="flow-card" type="button">
+          <span class="flow-card-arrow" aria-hidden="true">→</span>
+          <strong>Activás trabajo local</strong>
+          <p>Los viveros y equipos del territorio producen, cuidan y preparan los plantines</p>
+        </button>
 
-        <!-- CENTRO -->
-
-        <div class="cycle-center">
-
-          <div class="cycle-center-icon">
-            🌳
-          </div>
-
-          <span>
-            El ciclo Reforestall
-          </span>
-
-          <strong>
-            Economía que regenera
-          </strong>
-
-          <p>
-            Cada participación ayuda a sostener el siguiente árbol.
-          </p>
-
-        </div>
-
-
-        <!-- ACTIVIDAD -->
-
-        <article class="cycle-node cycle-node-emission">
-
-          <div class="cycle-node-icon">
-            CO₂
-          </div>
-
-          <strong>
-            Actividad y emisiones
-          </strong>
-
-          <p>
-            El transporte, el turismo, la industria y otras actividades
-            generan una huella medible.
-          </p>
-
-        </article>
-
-
-        <!-- COMPENSACIÓN -->
-
-        <article class="cycle-node cycle-node-token">
-
-          <div class="cycle-node-icon">
-            1 kg
-          </div>
-
-          <strong>
-            Compensación trazable
-          </strong>
-
-          <p>
-            Cada operación genera un certificado por la cantidad total
-            compensada, registrada una sola vez.
-          </p>
-
-        </article>
-
-
-        <!-- TRABAJO -->
-
-        <article class="cycle-node cycle-node-work">
-
-          <div class="cycle-node-icon">
-            🤝
-          </div>
-
-          <strong>
-            Más trabajo local
-          </strong>
-
-          <p>
-            Los aportes sostienen la producción,
-            el cuidado y la plantación.
-          </p>
-
-        </article>
-
-
-        <!-- NATURALEZA -->
-
-        <article class="cycle-node cycle-node-nature">
-
-          <div class="cycle-node-icon">
-            🌱
-          </div>
-
-          <strong>
-            Más naturaleza
-          </strong>
-
-          <p>
-            Los nuevos árboles generan restauración,
-            biodiversidad y capacidad de captura.
-          </p>
-
-        </article>
-
-
-        <!-- FLECHAS -->
-
-        <span class="cycle-direction direction-1">
-          →
-        </span>
-
-        <span class="cycle-direction direction-2">
-          →
-        </span>
-
-        <span class="cycle-direction direction-3">
-          →
-        </span>
-
-        <span class="cycle-direction direction-4">
-          →
-        </span>
+        <button class="flow-card" type="button">
+          <span class="flow-card-arrow" aria-hidden="true">↺</span>
+          <strong>El territorio se regenera</strong>
+          <p>La restauración suma biodiversidad, capacidad de captura y comienza un nuevo ciclo</p>
+        </button>
 
       </div>
 
@@ -2165,44 +2495,10 @@
 
 
   <!-- =======================================================
-       PLANTINES
-  ======================================================== -->
-
-  <section
-    class="on-dark statband"
-    id="red-hoy"
-  >
-
-    <div class="wrap reveal">
-
-      <div
-        class="statband-num"
-        data-count-to="800000"
-        data-suffix="+"
-      >
-        0
-      </div>
-
-      <p class="statband-claim">
-        plantines nativos en camino a convertirse
-        en árboles reales y rastreables.
-      </p>
-
-      <p class="statband-support">
-        Producidos desde una red que conecta viveros,
-        trabajo local y restauración territorial.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- =======================================================
        VIVEROS
   ======================================================== -->
 
-  <section class="nurseries-section">
+  <section class="nurseries-section" id="red-hoy">
 
     <div class="wrap">
 
@@ -2212,21 +2508,19 @@
         <div>
 
           <span class="cycle-eyebrow">
-            La red ya está en marcha
+            Antes de plantar
           </span>
 
           <h2>
-            Dos viveros forestales detrás de cada árbol
+            Cada árbol empieza mucho antes del bosque
           </h2>
 
         </div>
 
 
         <p>
-          La trazabilidad comienza antes de plantar.
-          Cada árbol atraviesa un proceso de recolección de semillas,
-          germinación, producción y cuidado llevado adelante
-          por personas y organizaciones del territorio.
+          Semillas, viveros y personas del territorio hacen posible
+          que cada plantín llegue preparado a su destino
         </p>
 
       </div>
@@ -2240,8 +2534,8 @@
         <article class="nursery-card">
 
           <img
-            src="images/vivero-pinos.jpg"
-            alt="Plantines creciendo en el vivero forestal de Sáenz Peña, Chaco"
+            src="images/vivero-nativo-patagonia.jpg"
+            alt="Equipo local cuidando plantines nativos en un vivero patagónico"
           >
 
           <div class="nursery-content">
@@ -2273,8 +2567,8 @@
         <article class="nursery-card">
 
           <img
-            src="images/hero-bosque.jpg"
-            alt="Restauración de monte nativo en Villa Guillermina, Santa Fe"
+            src="images/viveros-trabajo-local.jpg"
+            alt="Equipo local trabajando con plantines nativos en un vivero forestal"
           >
 
           <div class="nursery-content">
@@ -2303,50 +2597,6 @@
 
       </div>
 
-
-      <div class="nursery-summary reveal-stagger">
-
-
-        <div class="nursery-summary-item">
-
-          <strong>
-            2 viveros
-          </strong>
-
-          <span>
-            que ya forman parte de la red de Reforestall.
-          </span>
-
-        </div>
-
-
-        <div class="nursery-summary-item">
-
-          <strong>
-            20 años
-          </strong>
-
-          <span>
-            de cuidado previsto para cada árbol plantado.
-          </span>
-
-        </div>
-
-
-        <div class="nursery-summary-item">
-
-          <strong>
-            600 kg
-          </strong>
-
-          <span>
-            de capacidad estimada por árbol; cada lote de 50 árboles
-            respalda 30.000 kg de CO₂.
-          </span>
-
-        </div>
-
-      </div>
 
     </div>
 
@@ -2391,8 +2641,8 @@
           <div class="participate-card-bg">
 
             <img
-              src="images/hero-bosque.jpg"
-              alt="Bosque y árboles vinculados a compensaciones ambientales"
+              src="images/compensacion-voluntaria.jpg"
+              alt="Persona observando un área de bosque nativo en regeneración"
             >
 
           </div>
@@ -2450,8 +2700,8 @@
           <div class="participate-card-bg">
 
             <img
-              src="images/vivero-pinos.jpg"
-              alt="Plantines creciendo en un vivero forestal"
+              src="images/integracion-empresas.jpg"
+              alt="Equipo coordinando una operación empresarial integrada con el territorio"
             >
 
           </div>
@@ -2619,7 +2869,18 @@
   </footer>
 
 
-  <script src="assets/js/main.js"></script>
+  <script>
+    document.querySelectorAll('.flow-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.flow-card').forEach((item) => {
+          item.classList.remove('is-open');
+        });
+        card.classList.add('is-open');
+      });
+    });
+  </script>
+
+  <script src="assets/js/main.js?v=20260916-hero-fix"></script>
 
 </body>
 
